@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="description" content="系统架构设计师论文备考知识地图：消费金融脱敏项目版，含写作方法、八大押题和 Mermaid 思维导图。" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>系统架构设计师论文知识地图</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <strong>架构师论文地图</strong>
+          <span>2026 · 消费金融版</span>
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="搜索知识点…" autocomplete="off" />
+        <kbd>/</kbd>
+      </div>
+
+      <nav id="toc" class="toc" aria-label="文章目录"></nav>
+
+      <div class="sidebar-footer">
+        <a href="https://github.com/WhoJave/system-architect-thesis-map" target="_blank" rel="noreferrer">GitHub</a>
+        <button id="themeToggle" type="button" aria-label="切换主题">◐</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="打开目录">☰</button>
+        <div class="hero-copy">
+          <p class="eyebrow">System Architect Essay · Knowledge Map</p>
+          <h1>系统架构设计师论文<br />深度拆解与全知识点思维导图</h1>
+          <p class="hero-desc">一个真实项目 + 一套写作算法 + 八棵技术树。</p>
+          <div class="hero-tags">
+            <span>消费金融脱敏</span>
+            <span>全局架构师视角</span>
+            <span>Mermaid 思维导图</span>
+            <span>Work 训练路径</span>
+          </div>
+        </div>
+        <div class="progress-card">
+          <div class="progress-title">推荐训练路径</div>
+          <ol>
+            <li>项目底座</li>
+            <li>写作机制</li>
+            <li>八大押题</li>
+            <li>迁移能力</li>
+            <li>考场模拟</li>
+          </ol>
+        </div>
+      </header>
+
+      <section class="quick-grid" aria-label="快速概览">
+        <article><b>30%</b><span>切合题意</span></article>
+        <article><b>20%</b><span>应用深度</span></article>
+        <article><b>20%</b><span>实践性</span></article>
+        <article><b>15%</b><span>表达能力</span></article>
+        <article><b>15%</b><span>综合分析</span></article>
+      </section>
+
+      <div id="searchStatus" class="search-status" hidden></div>
+      <article id="content" class="markdown-body">
+        <div class="loading">正在加载知识地图…</div>
+      </article>
+
+      <footer class="page-footer">
+        <span>System Architect Thesis Map</span>
+        <span>内容按消费金融项目脱敏整理 · 适合个人备考复习</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
