@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#07101d" />
+  <meta name="description" content="系统架构设计师论文理论与实践交互记忆实验室：理论五步法、实践证据链、场景演练和主动回忆。" />
+  <title>理论 × 实践｜交互记忆实验室</title>
+  <link rel="stylesheet" href="./interactive.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="./">← 返回论文知识地图</a>
+    <div class="top-title">理论 × 实践 · 交互记忆实验室</div>
+    <button id="themeBtn" class="icon-btn" type="button" aria-label="切换主题">◐</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">ACTIVE RECALL · ARCHITECT ESSAY</p>
+        <h1>不要背段落，<br><span>把写作变成两条肌肉记忆。</span></h1>
+        <p class="lead">理论回答“你懂不懂”，实践回答“你会不会”。下面所有交互都围绕两条链反复强化。</p>
+      </div>
+      <div class="hero-memory">
+        <div class="memory-row theory-color"><b>理论</b><span>定义 → 组成 → 机制 → 边界 → 适配</span></div>
+        <div class="memory-row practice-color"><b>实践</b><span>问题 → 原因 → 方案 → 实施 → 异常 → 效果</span></div>
+      </div>
+    </section>
+
+    <section class="module" id="theoryLab">
+      <div class="section-head">
+        <div>
+          <span class="index-badge">01</span>
+          <h2>理论五步拆解实验室</h2>
+          <p>选一个母题，再依次点亮 5 个节点。目标不是背答案，而是形成固定的思考顺序。</p>
+        </div>
+        <select id="theoryTopic" class="select"></select>
+      </div>
+
+      <div class="theory-track" id="theoryTrack"></div>
+      <div class="theory-stage" id="theoryStage"></div>
+
+      <div class="recall-box">
+        <div>
+          <strong>遮住答案，先自己说：</strong>
+          <span id="theoryPrompt">“这个技术是什么？”</span>
+        </div>
+        <button id="theoryReveal" class="primary-btn" type="button">显示记忆钩子</button>
+      </div>
+    </section>
+
+    <section class="module" id="practiceLab">
+      <div class="section-head">
+        <div>
+          <span class="index-badge">02</span>
+          <h2>实践证据链 · 故障现场</h2>
+          <p>把实践段当作一次事故复盘。你不是在罗列组件，而是在“破案”。</p>
+        </div>
+        <select id="scenarioSelect" class="select"></select>
+      </div>
+
+      <div class="case-board">
+        <div class="case-header">
+          <div class="case-dot"></div>
+          <div>
+            <small>INCIDENT CASE</small>
+            <h3 id="caseTitle"></h3>
+          </div>
+          <div class="case-progress"><span id="caseProgressBar"></span></div>
+        </div>
+        <div class="evidence-chain" id="evidenceChain"></div>
+        <article class="case-card" id="caseCard"></article>
+        <div class="case-actions">
+          <button id="prevEvidence" class="ghost-btn" type="button">← 上一步</button>
+          <button id="nextEvidence" class="primary-btn" type="button">下一步 →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="module" id="assemblerLab">
+      <div class="section-head">
+        <div>
+          <span class="index-badge">03</span>
+          <h2>实践段组装器</h2>
+          <p>先选零件，再观察一段完整论述如何被“组装”出来。适合训练从提纲到段落。</p>
+        </div>
+      </div>
+
+      <div class="assembler-grid">
+        <div class="controls-card">
+          <label>业务场景<select id="asmScene" class="select full"></select></label>
+          <label>架构问题<select id="asmProblem" class="select full"></select></label>
+          <label>主要方案<select id="asmSolution" class="select full"></select></label>
+          <label>异常治理<select id="asmGuard" class="select full"></select></label>
+          <button id="assembleBtn" class="primary-btn full-btn" type="button">生成实践段骨架</button>
+        </div>
+        <div class="output-card">
+          <div class="output-label">ASSEMBLED PARAGRAPH</div>
+          <p id="assembledText">选择左侧选项后，点击“生成实践段骨架”。</p>
+          <button id="copyAssembled" class="ghost-btn" type="button">复制文本</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="module" id="quizLab">
+      <div class="section-head">
+        <div>
+          <span class="index-badge">04</span>
+          <h2>60 秒主动回忆</h2>
+          <p>真正形成长期记忆靠的是“想出来”，不是“再看一遍”。</p>
+        </div>
+        <div class="score-pill">得分 <b id="score">0</b>/<span id="total">0</span></div>
+      </div>
+
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-tag" id="quizTag">理论</div>
+        <h3 id="quizQuestion"></h3>
+        <div id="quizOptions" class="quiz-options"></div>
+        <div id="quizExplain" class="quiz-explain" hidden></div>
+        <button id="nextQuiz" class="primary-btn" type="button" disabled>下一题</button>
+      </div>
+    </section>
+
+    <section class="module memory-palace">
+      <div class="section-head">
+        <div>
+          <span class="index-badge">05</span>
+          <h2>最后只记两幅画</h2>
+          <p>考场卡壳时，不回忆长句，只回忆这两个视觉隐喻。</p>
+        </div>
+      </div>
+      <div class="palace-grid">
+        <article class="palace-card">
+          <div class="palace-icon">🏗️</div>
+          <h3>理论 = 参观一栋楼</h3>
+          <p><b>它是什么</b> → 有<b>哪些楼层</b> → 人流<b>怎么运转</b> → 哪些地方<b>不能去</b> → 为什么<b>适合这个地块</b>。</p>
+          <div class="formula theory-color">定义 → 组成 → 机制 → 边界 → 适配</div>
+        </article>
+        <article class="palace-card">
+          <div class="palace-icon">🕵️</div>
+          <h3>实践 = 办一宗案子</h3>
+          <p><b>发生什么</b> → <b>为什么</b> → 决定<b>怎么办</b> → <b>具体执行</b> → 万一失败<b>如何兜底</b> → 最后<b>结案效果</b>。</p>
+          <div class="formula practice-color">问题 → 原因 → 方案 → 实施 → 异常 → 效果</div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>System Architect Thesis Map · Interactive Memory Lab</footer>
+  <script src="./interactive.js"></script>
+</body>
+</html>
