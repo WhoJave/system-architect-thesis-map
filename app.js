@@ -1,197 +1,36 @@
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-
-const contentEl = document.getElementById("content");
-const tocEl = document.getElementById("toc");
-const searchInput = document.getElementById("searchInput");
-const searchStatus = document.getElementById("searchStatus");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
-const menuBtn = document.getElementById("menuBtn");
-const themeToggle = document.getElementById("themeToggle");
-
-const slugify = (text) =>
-  text.toLowerCase()
-    .trim()
-    .replace(/[\s/]+/g, "-")
-    .replace(/[^一-龥a-z0-9_-]/g, "")
-    .replace(/-+/g, "-");
-
-function setTheme(mode) {
-  document.documentElement.classList.toggle("light", mode === "light");
-  localStorage.setItem("thesis-theme", mode);
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: mode === "light" ? "default" : "neutral",
-    securityLevel: "loose",
-    mindmap: { padding: 18 },
-    flowchart: { curve: "basis" }
-  });
+const content=document.getElementById('content');
+const sidebar=document.getElementById('sidebar');
+const overlay=document.getElementById('overlay');
+const menu=document.getElementById('menuBtn');
+const input=document.getElementById('searchInput');
+const status=document.getElementById('searchStatus');
+let mermaid;
+const diagrams=[];
+function theme(mode){document.documentElement.classList.toggle('light',mode==='light');try{localStorage.setItem('thesis-theme',mode);}catch{}}
+try{theme(localStorage.getItem('thesis-theme')||'dark');}catch{theme('dark');}
+function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('show');menu.setAttribute('aria-expanded','false');}
+menu.addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show');menu.setAttribute('aria-expanded','true');});
+overlay.addEventListener('click',closeMenu);
+sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.getElementById('themeToggle').addEventListener('click',()=>{theme(document.documentElement.classList.contains('light')?'dark':'light');if(mermaid)renderDiagrams();});
+async function renderDiagrams(){
+ mermaid.initialize({startOnLoad:false,theme:document.documentElement.classList.contains('light')?'default':'neutral',securityLevel:'strict'});
+ for(const {node,source} of diagrams){node.removeAttribute('data-processed');node.textContent=source;try{await mermaid.run({nodes:[node]});}catch{node.textContent=source;node.classList.add('diagram-fallback');}}
 }
-
-setTheme(localStorage.getItem("thesis-theme") || "dark");
-
-themeToggle.addEventListener("click", async () => {
-  const next = document.documentElement.classList.contains("light") ? "dark" : "light";
-  setTheme(next);
-  await renderMermaid();
+if(content){
+ const toc=document.getElementById('toc');
+ content.querySelectorAll('h1,h2,h3').forEach(h=>{if(h.tagName==='H3'&&!h.textContent.includes('图'))return;const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;a.className='level-'+h.tagName.slice(1);a.addEventListener('click',closeMenu);toc.append(a);});
+ // Static article and navigation stay available if the diagram CDN cannot load.
+ content.querySelectorAll('pre > code.language-mermaid').forEach(code=>{const wrap=document.createElement('div');wrap.className='mermaid-wrap';const node=document.createElement('div');node.className='mermaid';node.textContent=code.textContent;wrap.append(node);code.parentElement.replaceWith(wrap);diagrams.push({node,source:node.textContent});});
+ if(diagrams.length)import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs').then(m=>{mermaid=m.default;renderDiagrams();}).catch(()=>{diagrams.forEach(({node})=>node.classList.add('diagram-fallback'));});
+}
+input.addEventListener('input',()=>{
+ const q=input.value.trim().toLowerCase();
+ if(!content){let hits=0;document.querySelectorAll('.resource-link').forEach(a=>{a.hidden=!!q&&!a.textContent.toLowerCase().includes(q);if(!a.hidden)hits++;});document.querySelectorAll('.resource-group').forEach(g=>g.hidden=![...g.querySelectorAll('.resource-link')].some(a=>!a.hidden));status.hidden=!q;status.textContent=`找到 ${hits} 个学习入口`;return;}
+ content.querySelectorAll('mark.search-hit').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));content.normalize();status.hidden=!q;if(!q)return;
+ const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('.mermaid-wrap,script,style,pre,code')?NodeFilter.FILTER_REJECT:n.nodeValue.toLowerCase().includes(q)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(n=>{const i=n.nodeValue.toLowerCase().indexOf(q);const frag=document.createDocumentFragment();frag.append(n.nodeValue.slice(0,i));const mark=document.createElement('mark');mark.className='search-hit';mark.textContent=n.nodeValue.slice(i,i+q.length);frag.append(mark,n.nodeValue.slice(i+q.length));n.replaceWith(frag);});status.textContent=`找到 ${nodes.length} 处匹配`;content.querySelector('mark')?.scrollIntoView({block:'center'});
 });
-
-menuBtn.addEventListener("click", () => {
-  sidebar.classList.add("open");
-  overlay.classList.add("show");
-});
-overlay.addEventListener("click", closeMenu);
-
-function closeMenu() {
-  sidebar.classList.remove("open");
-  overlay.classList.remove("show");
-}
-
-function normalizeMermaidBlocks() {
-  const codeBlocks = [...contentEl.querySelectorAll("pre > code.language-mermaid")];
-  codeBlocks.forEach(code => {
-    const wrap = document.createElement("div");
-    wrap.className = "mermaid-wrap";
-    const div = document.createElement("div");
-    div.className = "mermaid";
-    div.textContent = code.textContent;
-    wrap.appendChild(div);
-    code.parentElement.replaceWith(wrap);
-  });
-}
-
-async function renderMermaid() {
-  const nodes = [...contentEl.querySelectorAll(".mermaid")];
-  nodes.forEach(n => n.removeAttribute("data-processed"));
-  if (nodes.length) {
-    try {
-      await mermaid.run({ nodes });
-    } catch (e) {
-      console.error("Mermaid render failed:", e);
-    }
-  }
-}
-
-function buildToc() {
-  const headings = [...contentEl.querySelectorAll("h1, h2, h3")];
-  const used = new Map();
-
-  headings.forEach(h => {
-    let id = slugify(h.textContent) || "section";
-    const n = used.get(id) || 0;
-    used.set(id, n + 1);
-    if (n) id += "-" + (n + 1);
-    h.id = id;
-  });
-
-  tocEl.innerHTML = headings
-    .filter(h => h.tagName !== "H3" || h.textContent.includes("思维导图"))
-    .map(h => {
-      const level = h.tagName === "H1" ? 1 : h.tagName === "H2" ? 2 : 3;
-      return `<a class="level-${level}" href="#${h.id}">${h.textContent}</a>`;
-    })
-    .join("");
-
-  tocEl.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
-
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-    if (!visible) return;
-    tocEl.querySelectorAll("a").forEach(a => a.classList.remove("active"));
-    const active = tocEl.querySelector(`a[href="#${visible.target.id}"]`);
-    active?.classList.add("active");
-  }, { rootMargin: "-15% 0px -75% 0px", threshold: 0 });
-
-  headings.forEach(h => observer.observe(h));
-}
-
-function clearHighlights() {
-  contentEl.querySelectorAll("mark.search-hit").forEach(mark => {
-    mark.replaceWith(document.createTextNode(mark.textContent));
-  });
-  contentEl.normalize();
-}
-
-function highlight(term) {
-  clearHighlights();
-  searchStatus.hidden = true;
-  const q = term.trim();
-  if (!q) return;
-
-  const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, {
-    acceptNode(node) {
-      const parent = node.parentElement;
-      if (!parent || ["SCRIPT", "STYLE", "CODE", "PRE", "SVG"].includes(parent.tagName)) {
-        return NodeFilter.FILTER_REJECT;
-      }
-      return node.nodeValue.toLowerCase().includes(q.toLowerCase())
-        ? NodeFilter.FILTER_ACCEPT
-        : NodeFilter.FILTER_REJECT;
-    }
-  });
-
-  const hits = [];
-  let node;
-  while ((node = walker.nextNode())) hits.push(node);
-
-  hits.slice(0, 80).forEach(textNode => {
-    const text = textNode.nodeValue;
-    const lower = text.toLowerCase();
-    const idx = lower.indexOf(q.toLowerCase());
-    if (idx < 0) return;
-
-    const frag = document.createDocumentFragment();
-    frag.append(text.slice(0, idx));
-    const mark = document.createElement("mark");
-    mark.className = "search-hit";
-    mark.textContent = text.slice(idx, idx + q.length);
-    frag.append(mark);
-    frag.append(text.slice(idx + q.length));
-    textNode.replaceWith(frag);
-  });
-
-  searchStatus.hidden = false;
-  searchStatus.textContent = hits.length
-    ? `找到 ${hits.length} 处匹配“${q}”`
-    : `没有找到“${q}”`;
-
-  const first = contentEl.querySelector("mark.search-hit");
-  first?.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-searchInput.addEventListener("input", e => highlight(e.target.value));
-document.addEventListener("keydown", e => {
-  if (e.key === "/" && document.activeElement !== searchInput) {
-    e.preventDefault();
-    searchInput.focus();
-  }
-  if (e.key === "Escape") {
-    searchInput.value = "";
-    highlight("");
-    closeMenu();
-  }
-});
-
-async function init() {
-  try {
-    const response = await fetch("./content.md", { cache: "no-store" });
-    if (!response.ok) throw new Error("无法读取 content.md");
-    const md = await response.text();
-
-    marked.setOptions({ gfm: true, breaks: false });
-    contentEl.innerHTML = marked.parse(md);
-
-    normalizeMermaidBlocks();
-    buildToc();
-    await renderMermaid();
-  } catch (error) {
-    contentEl.innerHTML = `
-      <h2>页面加载失败</h2>
-      <p>请确认站点通过 HTTP Server 或 GitHub Pages 访问，而不是直接打开本地 HTML 文件。</p>
-      <pre>${String(error)}</pre>`;
-  }
-}
-
-init();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();if(e.key==='/'&&!e.target.closest('input,textarea')){e.preventDefault();input.focus();}});
+// Preserve incoming links to the original long-page chapter anchors.
+if(!content&&location.hash)location.replace('./knowledge-map.html'+location.hash);

@@ -61,3 +61,13 @@ mark.search-hit{background:rgba(255,207,112,.3);color:inherit;border-radius:3px;
   .markdown-body{margin:0 14px;padding:24px 20px 70px;border-radius:18px}.search-status{margin:0 14px 14px}.page-footer{margin:20px 20px 40px;display:block}
 }
 @media (max-width:560px){.hero h1{font-size:34px}.hero-desc{font-size:16px}.quick-grid{grid-template-columns:1fr 1fr}.markdown-body{font-size:15px}.mermaid-wrap .mermaid{min-width:520px}.resource-link{align-items:flex-start;flex-direction:column;gap:2px}.resource-link small{text-align:left}}
+/* Independent learning pages */
+.brand{text-decoration:none;color:var(--text)}
+.sidebar-hub{max-height:none;flex:0 1 auto;min-height:120px}
+.sidebar-hub a[aria-current="page"]{background:var(--panel);color:var(--accent);font-weight:700}
+.sidebar-footer{margin-top:auto;flex-shrink:0}
+.reader-pagination{display:flex;justify-content:space-between;gap:16px;max-width:var(--content);margin:24px auto;padding:0 20px}
+.diagram-fallback{white-space:pre-wrap;font-family:monospace;color:#172033}
+[hidden]{display:none!important}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
