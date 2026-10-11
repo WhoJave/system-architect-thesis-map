@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "essay",
+      "title": "论文学习主线",
+      "description": "从写作方法到完整成文",
+      "items": [
+        {
+          "id": "writing-method",
+          "title": "论文写作方法",
+          "url": "writing-method.html",
+          "description": "评分、审题、结构与证据链"
+        },
+        {
+          "id": "project-foundation",
+          "title": "消费金融项目底座",
+          "url": "project-foundation.html",
+          "description": "业务闭环与架构师职责"
+        },
+        {
+          "id": "architecture-topics",
+          "title": "八大押题知识树",
+          "url": "architecture-topics.html",
+          "description": "RAG、Agent、缓存、MQ、DDD 等"
+        },
+        {
+          "id": "universal-template",
+          "title": "万能模板与速记",
+          "url": "universal-template.html",
+          "description": "摘要、背景、理论、实践与结尾"
+        },
+        {
+          "id": "training-plan",
+          "title": "训练计划与记忆策略",
+          "url": "training-plan.html",
+          "description": "五阶段训练与考场模拟"
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "title": "交互训练与记忆",
+      "description": "主动回忆、故障演练与模板记忆",
+      "items": [
+        {
+          "id": "lab",
+          "title": "理论 × 实践实验室",
+          "url": "theory-practice.html",
+          "description": "拆解、演练与自测"
+        },
+        {
+          "id": "study",
+          "title": "论文备考学习方案",
+          "url": "resources/thesis-study-plan.html",
+          "description": "学习路线与阶段任务"
+        },
+        {
+          "id": "memory",
+          "title": "论文模板记忆方案",
+          "url": "resources/thesis-template-memory.html",
+          "description": "动态图解与记忆强化"
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "title": "消费金融架构",
+      "description": "业务全流程与服务协作",
+      "items": [
+        {
+          "id": "finance-flow",
+          "title": "信贷全流程图解",
+          "url": "resources/consumer-finance-flow.html",
+          "description": "贷前、贷中与贷后"
+        },
+        {
+          "id": "microservices",
+          "title": "微服务交互图",
+          "url": "resources/consumer-finance-microservices.html",
+          "description": "服务、事件与数据流"
+        }
+      ]
+    },
+    {
+      "id": "systems",
+      "title": "扩展知识体系",
+      "description": "大数据、质量工程与运行平台",
+      "items": [
+        {
+          "id": "big-data",
+          "title": "大数据架构知识地图",
+          "url": "resources/big-data-architecture.html",
+          "description": "数据湖、湖仓、Lambda / Kappa、ClickHouse"
+        },
+        {
+          "id": "testing",
+          "title": "软件测试体系",
+          "url": "resources/software-testing.html",
+          "description": "质量工程与自动化测试"
+        },
+        {
+          "id": "cloud",
+          "title": "云原生学习站 ↗",
+          "url": "https://onepiece.fun/Cloud-Native-Learn/#00-overview",
+          "description": "云原生全景"
+        }
+      ]
+    }
+  ]
+}

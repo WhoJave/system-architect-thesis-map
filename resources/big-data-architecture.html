@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>从零到全貌：大数据架构交互式知识地图</title>
+<style>
+:root{
+  --bg:#0b1020;--panel:#121a2f;--panel2:#18233f;--text:#eef4ff;--muted:#9fb0cf;
+  --line:#263658;--accent:#76a7ff;--accent2:#6de0c3;--warn:#ffd166;--danger:#ff7b8b;
+  --good:#78e08f;--shadow:0 12px 40px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#08101f 0%,#0b1020 32%,#0d1324 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.7}
+a{color:inherit}
+button,input{font:inherit}
+.layout{display:grid;grid-template-columns:300px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;overflow:auto;padding:22px 18px;border-right:1px solid var(--line);background:rgba(9,15,30,.94);backdrop-filter:blur(16px)}
+.brand{padding:8px 10px 16px}
+.brand h1{font-size:20px;margin:0 0 6px}
+.brand p{color:var(--muted);font-size:13px;margin:0}
+.search{width:100%;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:#0e1730;color:var(--text);outline:none;margin:10px 0 16px}
+.nav-title{font-size:11px;letter-spacing:.12em;color:#6f84aa;margin:16px 10px 8px;text-transform:uppercase}
+nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:9px;text-decoration:none;color:#bac8e3;font-size:14px}
+nav a:hover,nav a.active{background:#172540;color:#fff}
+main{padding:28px 36px 80px;max-width:1500px;width:100%}
+.hero{background:radial-gradient(circle at top right,rgba(118,167,255,.18),transparent 35%),linear-gradient(135deg,#131d35,#10172b);border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:var(--shadow)}
+.hero h2{font-size:38px;line-height:1.18;margin:0 0 12px}
+.hero p{max-width:950px;color:#bac8e3;font-size:17px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.badge{padding:6px 10px;border:1px solid #35507d;border-radius:999px;color:#dce8ff;background:#10203d;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:linear-gradient(180deg,var(--panel),#10182c);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 26px rgba(0,0,0,.16)}
+.card h3{margin-top:0}
+.kpi{font-size:24px;font-weight:700;color:var(--accent2)}
+section{margin-top:30px}
+.section-title{display:flex;align-items:center;gap:12px;margin:8px 0 14px}
+.section-title .num{width:36px;height:36px;border-radius:10px;background:#18345c;display:grid;place-items:center;color:#9fc4ff;font-weight:700}
+.section-title h2{margin:0;font-size:26px}
+details{border:1px solid var(--line);border-radius:16px;background:#10192d;margin:12px 0;overflow:hidden}
+summary{cursor:pointer;padding:15px 18px;font-weight:700;background:#131f38;list-style:none}
+summary::-webkit-details-marker{display:none}
+details .content{padding:16px 18px}
+details[open] summary{border-bottom:1px solid var(--line)}
+.code{background:#09111f;border:1px solid #203253;border-radius:14px;padding:14px 16px;overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#d8e6ff}
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.node{padding:10px 14px;border:1px solid #34507d;background:#13223f;border-radius:12px;font-weight:600}
+.arrow{color:#6d82aa}
+.note{padding:14px 16px;border-left:4px solid var(--accent);background:#10203a;border-radius:10px;margin:14px 0}
+.tip{border-left-color:var(--accent2);background:#0f2728}
+.warn{border-left-color:var(--warn);background:#2a2411}
+.danger{border-left-color:var(--danger);background:#2b151d}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#172641}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:7px 10px;border-radius:9px;background:#162641;border:1px solid #2e4772;color:#dbe7ff;font-size:13px}
+.arch{padding:18px;border:1px dashed #34507d;border-radius:18px;background:#0d172a}
+.arch-row{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.arch-row:last-child{border-bottom:none}
+.arch-label{font-weight:700;color:#9bc5ff}
+.arch-items{display:flex;flex-wrap:wrap;gap:8px}
+.togglebar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.btn{border:1px solid #35527f;background:#13233f;color:#e8f1ff;padding:9px 12px;border-radius:10px;cursor:pointer}
+.btn:hover{background:#1b3154}
+.hidden{display:none!important}
+.memory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.memory .m{background:#0e182b;border:1px solid var(--line);padding:15px;border-radius:14px}
+.memory b{color:#9fc4ff}
+.quiz{padding:14px;border:1px solid #2e466f;border-radius:14px;background:#0e1b31}
+.quiz button{margin:6px 6px 0 0}
+.answer{display:none;margin-top:10px;color:#b7e7d7}
+hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+footer{color:#7e91b2;text-align:center;padding-top:28px}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}aside{position:relative;height:auto}.grid{grid-template-columns:1fr 1fr}main{padding:22px}}
+@media(max-width:720px){.grid,.memory{grid-template-columns:1fr}.hero h2{font-size:30px}.arch-row{grid-template-columns:1fr}}
+mark{background:#5b4f1c;color:#fff1a8;border-radius:3px;padding:0 2px}
+</style>
+<link rel="stylesheet" href="../resource-nav.css"></head>
+<body><!-- resource-nav:start --><nav class="site-resource-nav" aria-label="站点导航"><a href="../index.html">← 返回学习主页</a><details><summary>切换学习主题</summary><div><strong>论文学习主线</strong><a href="../writing-method.html">论文写作方法</a><a href="../project-foundation.html">消费金融项目底座</a><a href="../architecture-topics.html">八大押题知识树</a><a href="../universal-template.html">万能模板与速记</a><a href="../training-plan.html">训练计划与记忆策略</a><strong>交互训练与记忆</strong><a href="../theory-practice.html">理论 × 实践实验室</a><a href="../resources/thesis-study-plan.html">论文备考学习方案</a><a href="../resources/thesis-template-memory.html">论文模板记忆方案</a><strong>消费金融架构</strong><a href="../resources/consumer-finance-flow.html">信贷全流程图解</a><a href="../resources/consumer-finance-microservices.html">微服务交互图</a><strong>扩展知识体系</strong><a href="../resources/big-data-architecture.html" aria-current="page">大数据架构知识地图</a><a href="../resources/software-testing.html">软件测试体系</a><a href="https://onepiece.fun/Cloud-Native-Learn/#00-overview" target="_blank" rel="noopener noreferrer">云原生学习站 ↗</a></div></details></nav><!-- resource-nav:end -->
+<div class="layout">
+<aside>
+  <div class="brand">
+    <h1>大数据架构 · 全貌地图</h1>
+    <p>面向前端开发者的架构师级认知路径</p>
+  </div>
+  <input id="search" class="search" placeholder="搜索 Kafka / Iceberg / Shuffle..." />
+  <div class="nav-title">主线</div>
+  <nav id="nav">
+    <a href="#overview">0. 全貌与第一性原理</a>
+    <a href="#oltp">1. OLTP vs OLAP</a>
+    <a href="#pipeline">2. 数据链路与 Kafka</a>
+    <a href="#stream">3. Flink / 流处理</a>
+    <a href="#distributed">4. 分布式计算</a>
+    <a href="#warehouse">5. 数仓建模</a>
+    <a href="#lake">6. Data Lake / Lakehouse</a>
+    <a href="#olapdb">7. ClickHouse / Doris / StarRocks</a>
+    <a href="#query">8. Trino / Spark / 查询优化</a>
+    <a href="#architecture">9. Lambda / Kappa / Streaming Lakehouse</a>
+    <a href="#governance">10. 治理 / 安全 / 质量</a>
+    <a href="#ha">11. 高可用 / 容灾</a>
+    <a href="#cost">12. 成本与性能</a>
+    <a href="#ai">13. AI Data Platform</a>
+    <a href="#selection">14. 架构选型方法</a>
+    <a href="#map">15. 技术定位总表</a>
+    <a href="#quiz">16. 记忆与自测</a>
+  </nav>
+</aside>
+
+<main id="content">
+<section id="overview" class="hero">
+  <h2>从零到全貌：大数据架构</h2>
+  <p>把大数据理解成一套“数据从哪里来 → 怎么进来 → 怎么流动 → 怎么计算 → 怎么存 → 怎么组织 → 怎么查 → 怎么治理 → 谁来使用”的系统工程。重点不是背框架，而是建立一套能自己推导架构的心智模型。</p>
+  <div class="badges">
+    <span class="badge">Kafka</span><span class="badge">Flink</span><span class="badge">Spark</span><span class="badge">ClickHouse</span>
+    <span class="badge">Trino</span><span class="badge">Parquet</span><span class="badge">Iceberg</span><span class="badge">Lakehouse</span>
+    <span class="badge">Lambda / Kappa</span><span class="badge">Data Governance</span><span class="badge">AI Data Platform</span>
+  </div>
+</section>
+
+<section>
+  <div class="grid">
+    <div class="card"><div class="kpi">8 层</div><h3>看任何大数据系统</h3><p>数据源 → 采集 → 消息 → 计算 → 存储 → 表管理 → 分析 → 应用。</p></div>
+    <div class="card"><div class="kpi">5 原则</div><h3>性能优化</h3><p>少读、少传、少算、提前算、并行算。</p></div>
+    <div class="card"><div class="kpi">6 问</div><h3>架构选型</h3><p>数据量、速度、延迟、生命周期、一致性、访问模式。</p></div>
+  </div>
+</section>
+
+<section>
+<div class="section-title"><div class="num">0</div><h2>第一性原理：为什么会有这些技术</h2></div>
+<div class="memory">
+  <div class="m"><b>数据太多</b><br>单机装不下 → Distributed Storage</div>
+  <div class="m"><b>单机算不动</b><br>→ Distributed Compute</div>
+  <div class="m"><b>数据来得太快</b><br>→ Kafka + Streaming</div>
+  <div class="m"><b>机器会坏</b><br>→ Replication + Checkpoint</div>
+  <div class="m"><b>网络很贵</b><br>→ 少 Shuffle + Data Locality</div>
+  <div class="m"><b>磁盘慢</b><br>→ Columnar + Compression + Pruning</div>
+  <div class="m"><b>查询重复</b><br>→ Pre-Aggregation + Materialized View</div>
+  <div class="m"><b>冷热数据价值不同</b><br>→ Tiered Storage</div>
+  <div class="m"><b>一个引擎无法解决全部 Workload</b><br>→ Specialized Engines</div>
+  <div class="m"><b>数据越来越多没人知道是什么</b><br>→ Governance / Catalog / Lineage</div>
+</div>
+</section>
+
+<section id="oltp">
+<div class="section-title"><div class="num">1</div><h2>OLTP vs OLAP：大数据世界的第一把钥匙</h2></div>
+<details open><summary>OLTP：业务交易系统</summary><div class="content">
+<p>典型：MySQL、PostgreSQL、Oracle。服务“查一个用户余额、创建订单、扣款、更新订单状态”。特点是单条/少量数据、高并发、低延迟、增删改查、强事务。</p>
+<div class="code">SELECT * FROM user WHERE id = 123;</div>
+<div class="note">可以记：<b>OLTP = 业务真相（Source of Truth）</b>。</div>
+</div></details>
+<details><summary>OLAP：分析系统</summary><div class="content">
+<p>典型：ClickHouse、Doris、StarRocks、BigQuery、Snowflake、Redshift。服务“扫描几千万、几亿、几十亿行后做聚合”。</p>
+<div class="code">SELECT city, channel, count(*), avg(amount)
+FROM loan_application
+WHERE apply_time >= '2026-01-01'
+GROUP BY city, channel;</div>
+<div class="note tip">可以记：<b>OLAP = 大范围扫描 + 聚合分析</b>。</div>
+</div></details>
+<table>
+<tr><th>维度</th><th>OLTP</th><th>OLAP</th></tr>
+<tr><td>典型任务</td><td>交易、余额、订单、状态更新</td><td>报表、趋势、聚合、行为分析</td></tr>
+<tr><td>访问</td><td>点查 / 小事务</td><td>扫描大量行 / 少量返回</td></tr>
+<tr><td>存储</td><td>行式 + B+Tree 常见</td><td>列式 + 排序 + 向量化常见</td></tr>
+<tr><td>一致性</td><td>通常更强</td><td>很多场景可接受最终一致</td></tr>
+</table>
+</section>
+
+<section id="pipeline">
+<div class="section-title"><div class="num">2</div><h2>数据链路与 Kafka</h2></div>
+<div class="arch">
+<div class="arch-row"><div class="arch-label">数据源</div><div class="arch-items"><span class="chip">App/Web 埋点</span><span class="chip">MySQL</span><span class="chip">Server Logs</span><span class="chip">IoT</span><span class="chip">第三方数据</span></div></div>
+<div class="arch-row"><div class="arch-label">采集</div><div class="arch-items"><span class="chip">SDK/API</span><span class="chip">CDC</span><span class="chip">Filebeat / FluentBit</span></div></div>
+<div class="arch-row"><div class="arch-label">消息</div><div class="arch-items"><span class="chip">Kafka</span><span class="chip">Pulsar</span></div></div>
+</div>
+
+<details open><summary>为什么前端行为数据不直接写 MySQL</summary><div class="content">
+<p>一个用户一次 App 使用可以产生几十到几百条曝光、点击、停留、滑动、错误、设备事件。千万级用户很容易变成数十亿事件。直接把这些事件逐条 INSERT 到业务 MySQL，会让交易系统承担本不该承担的高吞吐分析数据压力。</p>
+<div class="flow"><span class="node">iOS/Web</span><span class="arrow">→</span><span class="node">埋点网关</span><span class="arrow">→</span><span class="node">Kafka</span></div>
+</div></details>
+
+<details><summary>Kafka 的核心：可持久化、可回放、高吞吐的数据流日志</summary><div class="content">
+<p><b>Topic</b> 可以理解成数据频道，比如 user_behavior、loan_event、payment_event、risk_event、server_log。</p>
+<p><b>Partition</b> 是 Topic 内的分片，每个分区本质是一条有顺序的日志。横向扩展吞吐量依靠分区。</p>
+<div class="note">Kafka 只保证<b>单个 Partition 内有序</b>，不保证 Topic 全局有序。</div>
+<p>同一用户如果需要保持顺序，通常把 user_id 作为 Key：</p>
+<div class="code">partition = hash(user_id) % partition_count</div>
+<p><b>Offset</b> 是消息在 Partition 中的位置。消费者记住“我读到哪里了”。</p>
+<p><b>Consumer Group</b> 让多个消费者并行消费不同 Partition。同一 Consumer Group 内，一个 Partition 同一时间只交给一个 Consumer。</p>
+<div class="warn note">Partition 数太少 → 并行度上不去；分区远多于消费者虽然可行，但会增加元数据与调度成本。</div>
+</div></details>
+
+<details><summary>Replication / Leader / Follower / acks</summary><div class="content">
+<p>Kafka Partition 通常有多个副本。Leader 处理读写，Follower 复制 Leader。Leader 挂掉后可以选新的 Leader。</p>
+<table><tr><th>acks</th><th>含义</th><th>权衡</th></tr>
+<tr><td>0</td><td>Producer 发出就算成功</td><td>最快，风险最大</td></tr>
+<tr><td>1</td><td>Leader 写成功即返回</td><td>可能在复制前丢失</td></tr>
+<tr><td>all</td><td>等待足够副本确认</td><td>更安全，延迟更高</td></tr></table>
+</div></details>
+
+<details><summary>Retention / Replay / Log Compaction</summary><div class="content">
+<p>Kafka 消费完并不等于消息立刻删除。可以按时间保留 7 天、30 天甚至更久，因此可以 Replay 重放历史数据。</p>
+<p><b>Log Compaction</b> 则是按 Key 保留较新值，例如 user123 的城市从深圳变上海，压缩后只保留新状态，适合状态主题、配置、CDC 类数据。</p>
+</div></details>
+
+<details><summary>CDC：数据库变化怎么进入大数据平台</summary><div class="content">
+<p>CDC = Change Data Capture。通过 MySQL Binlog 等捕获 INSERT / UPDATE / DELETE，而不是每隔几分钟全表 SELECT。</p>
+<div class="flow"><span class="node">MySQL</span><span class="arrow">→</span><span class="node">Debezium / Flink CDC</span><span class="arrow">→</span><span class="node">Kafka</span></div>
+<p>CDC 常携带 before、after、operation、timestamp，可用于重建数据库变化历史。</p>
+</div></details>
+
+<details><summary>Schema Registry / Avro / Protobuf / JSON</summary><div class="content">
+<p>Producer 与 Consumer 需要约定消息结构。Schema Registry 管理 Schema 版本与兼容性。JSON 好读但体积较大、解析慢、类型较弱；Avro / Protobuf 更适合高吞吐内部数据交换。</p>
+</div></details>
+</section>
+
+<section id="stream">
+<div class="section-title"><div class="num">3</div><h2>Flink 与流处理</h2></div>
+<details open><summary>Stream / Window / Event Time / Watermark</summary><div class="content">
+<p>Flink 面对的是理论上“无限”的事件流，所以必须用 Window 把无限流切成有限范围。</p>
+<table><tr><th>窗口</th><th>含义</th><th>场景</th></tr>
+<tr><td>Tumbling</td><td>不重叠，例如 10:00-10:05、10:05-10:10</td><td>每 5 分钟统计</td></tr>
+<tr><td>Sliding</td><td>窗口重叠，例如每 1 分钟算过去 5 分钟</td><td>监控、风控趋势</td></tr>
+<tr><td>Session</td><td>根据用户无活动间隔切分</td><td>用户行为会话</td></tr></table>
+<p><b>Event Time</b> = 事件真实发生时间；<b>Processing Time</b> = Flink 实际处理时间。</p>
+<p><b>Watermark</b> 可以理解成“Flink 对事件时间已经推进到哪里”的判断。它允许系统容忍一定乱序与迟到。</p>
+<div class="note">Watermark = eventTime - 10 秒，意味着系统愿意等待约 10 秒的迟到数据。</div>
+</div></details>
+
+<details><summary>State：为什么 Flink 不只是“流式 Map”</summary><div class="content">
+<p>例如规则“一个用户 10 分钟内申请超过 5 次就标记异常”，Flink 必须记住每个用户过去发生了什么，这就是 State。</p>
+<div class="code">user123 = 4
+user456 = 8</div>
+<p>State 支持累计、去重、Session、Join、复杂事件分析、实时风控。State Backend 可以使用内存或更适合大状态的本地/嵌入式存储方案。</p>
+</div></details>
+
+<details><summary>Checkpoint / Savepoint / Barrier</summary><div class="content">
+<p><b>Checkpoint</b> 定期保存 Kafka Offset + Operator State，用于故障自动恢复。</p>
+<p><b>Savepoint</b> 更偏人工触发，用于升级、迁移、变更并行度。</p>
+<p><b>Checkpoint Barrier</b> 是随数据流传播的特殊标记，用来形成一致状态快照。多输入 Operator 会涉及 Barrier Alignment。</p>
+<div class="warn note">某一路很慢会导致 Barrier 对齐等待、Checkpoint 变慢，并进一步产生 Backpressure。</div>
+</div></details>
+
+<details><summary>At-most-once / At-least-once / Exactly-once</summary><div class="content">
+<table><tr><th>语义</th><th>特点</th></tr>
+<tr><td>At-most-once</td><td>可能丢，但不会重复</td></tr>
+<tr><td>At-least-once</td><td>不丢，但可能重复</td></tr>
+<tr><td>Exactly-once</td><td>业务效果等价于只处理一次</td></tr></table>
+<p>真正的 Exactly Once 不是“网络绝不重复发送”，而是 Source、State、Sink 共同协作，让最终结果等价于一次。Sink 需要事务或幂等能力。</p>
+</div></details>
+
+<details><summary>KeyBy / Shuffle / Parallelism</summary><div class="content">
+<p>keyBy(user_id) 会确保相同 key 进入同一个下游 Subtask，本质是一次数据重新分区，也就是 Shuffle。</p>
+<div class="code">subtask = hash(user_id) % parallelism</div>
+<p>并行度决定有多少 Subtask 同时工作，也决定状态如何分片。</p>
+</div></details>
+
+<details><summary>Backpressure：下游处理不过来怎么办</summary><div class="content">
+<p>如果 Kafka 每秒产生 100 万条，而 Flink 只能处理 80 万条，积压会越来越多。流系统通过背压让“下游慢 → 上游也慢一点”，避免内存无限增长直至 OOM。</p>
+</div></details>
+
+<details><summary>Stream Join / State TTL / CEP / 去重</summary><div class="content">
+<p>订单流和支付流不是同时到达的，因此 Stream Join 需要 State 暂存。State 不能无限增长，所以需要 Window / Watermark / TTL。</p>
+<p>CEP（Complex Event Processing）可表达“5 分钟内登录失败 3 次 → 换设备 → 立即申请借款”这类事件序列。</p>
+<p>事件去重常通过 event_id + State 实现，在一定 TTL 内记住已经看过的 ID。</p>
+</div></details>
+</section>
+
+<section id="distributed">
+<div class="section-title"><div class="num">4</div><h2>分布式计算：Partition → Shuffle → DAG → Task</h2></div>
+<details open><summary>Map / Reduce / Shuffle</summary><div class="content">
+<p>把 5TB 数据切成 100 份，每台 Worker 先本地计算，再把相同 Key 的结果重新分配到同一节点汇总。</p>
+<div class="flow"><span class="node">Partition</span><span class="arrow">→</span><span class="node">Local Map</span><span class="arrow">→</span><span class="node">Shuffle</span><span class="arrow">→</span><span class="node">Reduce</span></div>
+<div class="danger note"><b>Shuffle 是大数据系统最昂贵的操作之一</b>：涉及内存、序列化、网络、磁盘、反序列化与重新计算。</div>
+</div></details>
+
+<details><summary>Join 为什么贵 / Broadcast Join</summary><div class="content">
+<p>两个大表按 user_id Join 时，必须把相同 user_id 的数据送到同一 Worker，通常触发大规模 Shuffle。</p>
+<p>如果一边很小，例如 10MB 城市维度表，可以广播到每个 Worker，避免让 10TB 大表 Shuffle。</p>
+</div></details>
+
+<details><summary>DAG / Job / Stage / Task</summary><div class="content">
+<p>DAG 是计算执行蓝图：读取 → 过滤 → 投影 → Shuffle → 聚合 → 输出。</p>
+<p>以 Spark 为例：</p>
+<div class="code">Job
+ └─ Stage
+     └─ Task</div>
+<p>Shuffle 常成为 Stage 边界。一个 Stage 内通常有多个 Task 对不同 Partition 并行处理。</p>
+</div></details>
+
+<details><summary>并行度与 Partition 数</summary><div class="content">
+<p>Partition 太少，机器再多也用不上；Partition 太多，则产生大量 Task、调度开销与小文件。目标是“足够并行，但不过度碎片化”。</p>
+</div></details>
+
+<details><summary>Data Skew：数据倾斜</summary><div class="content">
+<p>如果 60% 数据都是 null，GROUP BY user_id 后所有 null 会挤到一个分区，导致某个 Task OOM 或极慢。</p>
+<p>常见解决：</p>
+<div class="chips"><span class="chip">过滤异常 Key</span><span class="chip">Salting 加盐</span><span class="chip">Broadcast 小表</span><span class="chip">局部聚合</span></div>
+</div></details>
+
+<details><summary>RDD / Lineage / 容错</summary><div class="content">
+<p>Spark 的 RDD = Resilient Distributed Dataset。Resilient 的关键之一在于 Lineage：记录数据是如何算出来的，某个分区丢失后可以按依赖链重新计算，而不必复制所有中间结果。</p>
+</div></details>
+</section>
+
+<section id="warehouse">
+<div class="section-title"><div class="num">5</div><h2>数据仓库：事实、维度、分层与建模</h2></div>
+
+<details open><summary>事实表 / 维度表 / 星型模型</summary><div class="content">
+<p><b>事实表</b>记录“发生了什么”：订单、借款、支付、金额、次数。<b>维度表</b>记录“从哪个角度看”：用户、城市、渠道、产品、设备、时间。</p>
+<p>星型模型以事实表为中心，周围连接多个维度表。雪花模型则把维度继续规范化拆分，Join 更多。</p>
+</div></details>
+
+<details><summary>宽表与反范式</summary><div class="content">
+<p>分析系统通常读多写少，因此常用“用存储换计算”的策略，把用户、渠道、设备、产品等属性提前 Join 进宽表，减少运行时 Join 和 Shuffle。</p>
+</div></details>
+
+<details><summary>ODS / DWD / DWS / ADS</summary><div class="content">
+<table><tr><th>层</th><th>作用</th><th>类比</th></tr>
+<tr><td>ODS</td><td>尽量保留原始数据</td><td>原料</td></tr>
+<tr><td>DWD</td><td>清洗、去重、标准化、明细化</td><td>处理好的食材</td></tr>
+<tr><td>DWS</td><td>用户日、渠道日、产品日等汇总</td><td>半成品</td></tr>
+<tr><td>ADS</td><td>直接面向报表/应用</td><td>做好的菜</td></tr></table>
+<div class="note tip">数仓分层的本质：把重复计算提前做，让下游少 Join、少 Group By、少 Shuffle。</div>
+</div></details>
+
+<details><summary>Bronze / Silver / Gold</summary><div class="content">
+<p>这是另一套常见表达：Bronze ≈ ODS，Silver ≈ DWD，Gold ≈ DWS / ADS。本质仍然是“原始 → 清洗 → 面向业务的高级数据”。</p>
+</div></details>
+
+<details><summary>粒度 Grain</summary><div class="content">
+<p>事实表设计第一问不是字段，而是“一行到底代表什么”：一笔订单？一个用户一天？一次登录？</p>
+<div class="danger note">粒度不一致会导致 Join 后重复放大，比如一笔订单 Join 两条支付记录后，订单金额被重复 SUM 两次。</div>
+</div></details>
+
+<details><summary>事务事实 / 周期快照 / 累积快照</summary><div class="content">
+<table><tr><th>类型</th><th>含义</th><th>例子</th></tr>
+<tr><td>事务事实</td><td>事件发生一次记录一次</td><td>一笔借款、一次支付</td></tr>
+<tr><td>周期快照</td><td>固定周期拍一次状态</td><td>每日余额、逾期天数</td></tr>
+<tr><td>累积快照</td><td>跟踪完整生命周期</td><td>申请→审批→授信→借款→结清</td></tr></table>
+</div></details>
+
+<details><summary>SCD：慢变化维</summary><div class="content">
+<p>SCD Type 1：直接覆盖，不保留历史。SCD Type 2：保留历史版本，常用 valid_from / valid_to / is_current。代理键 Surrogate Key 可用于表示同一业务 ID 的不同历史版本。</p>
+</div></details>
+
+<details><summary>Kimball / Inmon / Data Vault</summary><div class="content">
+<p>Kimball 强调事实表 + 维度表；Inmon 更强调企业统一数仓再到 Data Mart；Data Vault 强调历史、来源、变化与可扩展性，常见 Hub / Link / Satellite。</p>
+</div></details>
+
+<details><summary>Data Mart / 主题域</summary><div class="content">
+<p>大型企业通常按用户域、授信域、借款域、还款域、风险域、营销域、渠道域、财务域组织数据。Data Mart 是面向风险、营销、财务等部门的专题数据集市。</p>
+</div></details>
+
+<details><summary>ETL / ELT / dbt / Airflow</summary><div class="content">
+<p>ETL = Extract → Transform → Load；ELT = Extract → Load → Transform。云时代因为存储便宜、算力弹性，ELT 越来越常见。</p>
+<p><b>dbt</b> 管理 SQL 模型、依赖、测试、文档与版本；<b>Airflow / Dagster / Prefect / DolphinScheduler</b> 管任务 DAG、依赖、重试、回填与告警。</p>
+</div></details>
+
+<details><summary>Backfill / Incremental / Idempotency</summary><div class="content">
+<p>Backfill = 修复逻辑后重算历史；Incremental = 只处理新增或变化部分；Idempotency = 任务执行一次与执行多次，最终结果一致。</p>
+</div></details>
+</section>
+
+<section id="lake">
+<div class="section-title"><div class="num">6</div><h2>Data Lake / Lakehouse / Parquet / Iceberg</h2></div>
+
+<details open><summary>Data Lake：为什么出现</summary><div class="content">
+<p>传统数仓擅长结构化数据，但企业还有 JSON、日志、图片、视频、音频、PDF、IoT、模型数据。数据湖的思想是：先把海量、多格式数据低成本存下来，典型底座是 S3/OSS/COS/GCS/HDFS。</p>
+<p>Data Lake 更偏 Schema-on-Read；传统数仓更偏 Schema-on-Write。</p>
+</div></details>
+
+<details><summary>Data Swamp：为什么裸数据湖会失控</summary><div class="content">
+<p>如果只管“往湖里扔”，很快会不知道数据是谁的、字段什么意思、是否重复、是否可靠、能不能删、当前版本是什么。于是 Data Lake 可能变成 Data Swamp。</p>
+</div></details>
+
+<details><summary>Lakehouse：湖的成本 + 仓的管理能力</summary><div class="content">
+<p>Lakehouse 希望同时拥有：</p>
+<div class="chips"><span class="chip">对象存储低成本</span><span class="chip">ACID</span><span class="chip">Schema</span><span class="chip">SQL</span><span class="chip">多引擎</span><span class="chip">版本</span><span class="chip">治理</span></div>
+<p>典型表格式：Iceberg、Delta Lake、Hudi。</p>
+</div></details>
+
+<details><summary>Parquet：为什么大数据喜欢列式文件</summary><div class="content">
+<p>Parquet = 列式文件格式。分析查询通常“很多行、少量列”，因此只读取需要列即可。</p>
+<p>内部结构：</p>
+<div class="code">Parquet File
+ ├─ Row Group
+ │   ├─ Column Chunk A
+ │   ├─ Column Chunk B
+ │   └─ Column Chunk C
+ ├─ Row Group
+ └─ Footer Metadata</div>
+<p>Footer 保存 Schema、Row Group 位置、min/max、null count、encoding、compression。查询引擎可跳过明显不匹配的 Row Group。</p>
+</div></details>
+
+<details><summary>Iceberg：Table Format 到底是什么</summary><div class="content">
+<p>Iceberg 不是数据库，它是在对象存储文件之上提供“表”的语义。</p>
+<div class="code">Table Metadata
+↓
+Snapshot
+↓
+Manifest List
+↓
+Manifest
+↓
+Parquet Data Files</div>
+<p>可提供 Snapshot、Time Travel、Schema Evolution、Partition Evolution、Atomic Commit、Incremental Scan 等能力。</p>
+<div class="note">类比：S3 = 硬盘；Parquet = 文件格式；Iceberg = 表管理系统 + Git 风格版本管理。</div>
+</div></details>
+
+<details><summary>Snapshot / Time Travel / Metadata</summary><div class="content">
+<p>Snapshot 代表某一时刻表的逻辑状态。新增 C.parquet 后产生新 Snapshot；删除 B.parquet 也只是切换当前逻辑版本，旧数据可暂时保留，因此支持 Time Travel 与回滚。</p>
+</div></details>
+
+<details><summary>Schema Evolution / Partition Evolution</summary><div class="content">
+<p>Schema Evolution 允许表字段演进；Partition Evolution 允许分区策略从 day 改 hour 等，并让新旧数据共存而无需大规模重写。</p>
+</div></details>
+
+<details><summary>Copy-on-Write vs Merge-on-Read</summary><div class="content">
+<table><tr><th>模式</th><th>做法</th><th>特点</th></tr>
+<tr><td>Copy-on-Write</td><td>更新时重写受影响文件</td><td>写成本高，读简单快</td></tr>
+<tr><td>Merge-on-Read</td><td>先写增量/删除信息，读取时合并</td><td>写快，读更复杂</td></tr></table>
+</div></details>
+
+<details><summary>Iceberg / Delta / Hudi</summary><div class="content">
+<table><tr><th>技术</th><th>直觉优势</th></tr>
+<tr><td>Iceberg</td><td>开放、多引擎、大规模分析型湖仓</td></tr>
+<tr><td>Delta Lake</td><td>与 Spark / Databricks 生态紧密，ACID、流批统一</td></tr>
+<tr><td>Hudi</td><td>增量更新、Upsert、CDC 场景传统优势明显</td></tr></table>
+<p>三者能力正在大量重叠，真实选型要看生态、工具链、团队与工作负载。</p>
+</div></details>
+
+<details><summary>Small File Problem / Compaction</summary><div class="content">
+<p>大量小文件会导致 List/Open/Metadata/Task 调度成本爆炸，因此需要 Compaction 合并成较少的大文件。但文件也不能大到无法并行。核心是平衡文件数、并行度和更新成本。</p>
+</div></details>
+
+<details><summary>Partition / Bucket</summary><div class="content">
+<p>Partition 更偏业务裁剪，例如 date=2026-09-27；Bucket 更偏 Hash 分布，例如 hash(user_id)%64。前者用于减少扫描，后者有助并行与 Join 数据布局。</p>
+</div></details>
+
+<details><summary>Storage / Table / Compute 三层分离</summary><div class="content">
+<div class="code">Storage Layer: S3 / OSS / GCS / HDFS
+↓
+Table Layer: Iceberg / Delta / Hudi
+↓
+Compute Layer: Spark / Flink / Trino</div>
+<p>这就是现代 Lakehouse 的关键：存算分离、开放表格式、多引擎访问。</p>
+</div></details>
+</section>
+
+<section id="olapdb">
+<div class="section-title"><div class="num">7</div><h2>ClickHouse / Doris / StarRocks / MPP OLAP</h2></div>
+
+<details open><summary>ClickHouse 的定位</summary><div class="content">
+<p>ClickHouse = 高性能列式 OLAP 数据库。擅长海量日志、用户行为、指标、事件流、时序与实时 BI。</p>
+<p>关键机制：列式存储、压缩、向量化执行、排序组织、数据跳过、MergeTree。</p>
+</div></details>
+
+<details><summary>MergeTree 与 ORDER BY</summary><div class="content">
+<p>ClickHouse 中 ORDER BY 不只是“查询结果排序”，更重要的是决定磁盘上的数据组织方式，从而影响跳读与聚合效率。</p>
+<div class="code">ENGINE = MergeTree
+ORDER BY (event, ts)</div>
+<p>ClickHouse 的 Primary Key 主要用于稀疏索引与数据跳过，并不等同 MySQL 的唯一主键约束。</p>
+</div></details>
+
+<details><summary>为什么叫 MergeTree / 为什么不喜欢逐行 INSERT</summary><div class="content">
+<p>数据写入会形成多个 Part，后台不断 Merge 成更大的 Part。逐行 INSERT 会产生大量小 Part，导致合并压力，因此更适合批量写入。</p>
+</div></details>
+
+<details><summary>MergeTree 家族</summary><div class="content">
+<table><tr><th>引擎</th><th>适合</th></tr>
+<tr><td>MergeTree</td><td>不可变事件、日志、埋点</td></tr>
+<tr><td>ReplacingMergeTree</td><td>版本替换 / 近似去重</td></tr>
+<tr><td>SummingMergeTree</td><td>数值预聚合</td></tr>
+<tr><td>AggregatingMergeTree</td><td>保存聚合状态</td></tr>
+<tr><td>CollapsingMergeTree</td><td>通过状态折叠表示变化</td></tr></table>
+</div></details>
+
+<details><summary>Materialized View / Pre-Aggregation</summary><div class="content">
+<p>把经常重复的聚合在写入时提前算好，例如把 10 亿原始事件聚合成“每分钟 × 渠道”的几万行。查询从扫 10 亿行变成扫几万行。</p>
+<div class="warn note">预聚合不是越多越好，组合维度爆炸会增加存储和维护复杂度。</div>
+</div></details>
+
+<details><summary>Doris / StarRocks</summary><div class="content">
+<p>Doris 与 StarRocks 同样属于 MPP OLAP，常用于实时数仓、复杂 Join、BI、高并发报表、用户画像等。与 ClickHouse 能力重叠较大，真实选型应结合数据模型、实时更新频率、Join 复杂度、并发、延迟、运维和团队经验做 Benchmark。</p>
+</div></details>
+
+<details><summary>MPP 是什么</summary><div class="content">
+<p>Massively Parallel Processing：每个节点处理自己的一部分数据，再进行局部聚合、Shuffle、最终汇总。底层思想与 Partition / Task / Shuffle 一脉相承。</p>
+</div></details>
+
+<details><summary>Shared-Nothing vs Shared-Data</summary><div class="content">
+<table><tr><th>架构</th><th>特点</th></tr>
+<tr><td>Shared-Nothing</td><td>节点自己存自己的数据、本地盘延迟低，但扩容可能需要数据重平衡</td></tr>
+<tr><td>Shared-Data</td><td>多个计算节点共享 S3/HDFS 等存储，计算弹性更强，需要缓存和网络优化</td></tr></table>
+</div></details>
+</section>
+
+<section id="query">
+<div class="section-title"><div class="num">8</div><h2>Trino / Spark / SQL 查询优化</h2></div>
+
+<details open><summary>Trino 是什么</summary><div class="content">
+<p>Trino = 分布式 SQL 查询引擎。它自己不一定保存数据，而是去 Iceberg、Hive、MySQL、PostgreSQL 等数据源查询。</p>
+<div class="note">类比：ClickHouse ≈ 高性能仓库 + 查询机器；Trino ≈ 跨多个仓库取货的超级查询团队。</div>
+</div></details>
+
+<details><summary>Spark 是什么</summary><div class="content">
+<p>Spark = 分布式大规模数据计算引擎，传统强项是 Batch、SQL、ETL、复杂 Join、历史重算、机器学习。现代 Spark 也支持 Structured Streaming。</p>
+</div></details>
+
+<details><summary>Predicate Pushdown / Column Pruning / Data Skipping</summary><div class="content">
+<p>只读取需要的列 = Column Pruning；把过滤条件尽量推到底层 = Predicate Pushdown；根据 min/max、索引、分区等直接跳过数据块 = Data Skipping。</p>
+</div></details>
+
+<details><summary>Local Aggregate / Broadcast Join / Bucket Join</summary><div class="content">
+<p>优化核心是减少网络和 Shuffle：本地先聚合后发送；小表 Broadcast；按相同 Hash 规则分桶可降低 Join 重分布成本。</p>
+</div></details>
+
+<details><summary>Vectorized Execution</summary><div class="content">
+<p>不是一行一行处理，而是一次处理一批值，更好利用 CPU Cache、SIMD、流水线。现代 OLAP 引擎普遍采用。</p>
+</div></details>
+
+<details><summary>CBO / Statistics / Cardinality</summary><div class="content">
+<p>Cost-Based Optimizer 根据表大小、行数、NDV、直方图、数据分布等选择 Join 顺序、算法、Shuffle 策略。统计信息错误会导致错误执行计划，例如误把十亿行表当成小表 Broadcast。</p>
+</div></details>
+
+<details><summary>Bloom Filter</summary><div class="content">
+<p>Bloom Filter 可以快速判断“某值肯定不存在”或“可能存在”，允许 False Positive，适合数据块跳过和快速存在性过滤。</p>
+</div></details>
+
+<details><summary>查询慢排查顺序</summary><div class="content">
+<div class="code">扫描数据量太大？
+→ 分区裁剪生效吗？
+→ 只读必要列了吗？
+→ Filter 下推了吗？
+→ Shuffle 太大吗？
+→ 数据倾斜吗？
+→ Join 策略对吗？
+→ Statistics 准确吗？
+→ 并行度合理吗？
+→ 能否预聚合？
+→ 是否应该换 Serving 引擎？</div>
+</div></details>
+</section>
+
+<section id="architecture">
+<div class="section-title"><div class="num">9</div><h2>Lambda / Kappa / Streaming Lakehouse / HTAP</h2></div>
+
+<details open><summary>Lambda Architecture</summary><div class="content">
+<p>Batch Layer 保证最终正确性，Speed Layer 提供实时结果。优点是兼顾实时与历史重算；缺点是两套逻辑、两套代码、两套运维，容易出现语义不一致。</p>
+</div></details>
+
+<details><summary>Kappa Architecture</summary><div class="content">
+<p>所有数据都当成流，历史数据通过 Replay 重算。优点是链路更统一，复杂度较低；但并非所有离线场景都适合纯流式处理。</p>
+</div></details>
+
+<details><summary>Streaming Lakehouse</summary><div class="content">
+<div class="flow"><span class="node">Kafka</span><span class="arrow">→</span><span class="node">Flink</span><span class="arrow">→</span><span class="node">Iceberg</span><span class="arrow">→</span><span class="node">Spark / Trino</span></div>
+<p>实时持续进入 Lakehouse，历史批分析也围绕同一份数据展开，减少传统 Lambda 两套数据与逻辑的割裂。</p>
+</div></details>
+
+<details><summary>HTAP</summary><div class="content">
+<p>HTAP = Hybrid Transactional / Analytical Processing，希望在一套逻辑系统中同时支持交易与分析。但 OLTP 喜欢小事务、随机读写、行存；OLAP 喜欢大扫描、列存、并行，因此很多 HTAP 实现底层仍是不同存储/执行路径。</p>
+</div></details>
+
+<details><summary>Data Mesh / Data Fabric</summary><div class="content">
+<p><b>Data Mesh</b> 更偏组织与治理：Domain Ownership、Data as a Product、Self-Service Platform、Federated Governance。</p>
+<p><b>Data Fabric</b> 更偏技术整合：发现、连接、治理与自动化数据流。二者在现实产品宣传中边界会模糊。</p>
+</div></details>
+
+<details><summary>Serverless Analytics</summary><div class="content">
+<p>只提交 SQL 或任务，由云平台自动申请计算资源、执行、释放。适合峰谷明显的数据工作负载，但也有冷启动、成本不可预测、Vendor Lock-in 与网络成本问题。</p>
+</div></details>
+</section>
+
+<section id="governance">
+<div class="section-title"><div class="num">10</div><h2>数据治理 / 安全 / 质量 / 可观测性</h2></div>
+
+<details open><summary>治理全景</summary><div class="content">
+<div class="chips"><span class="chip">Metadata</span><span class="chip">Catalog</span><span class="chip">Lineage</span><span class="chip">Quality</span><span class="chip">Security</span><span class="chip">Privacy</span><span class="chip">Ownership</span><span class="chip">SLA</span><span class="chip">Lifecycle</span><span class="chip">Cost</span></div>
+</div></details>
+
+<details><summary>Metadata / Catalog / Lineage</summary><div class="content">
+<p>Metadata = 描述数据的数据，例如表名、字段、类型、负责人、来源、更新时间。</p>
+<p>Data Catalog = 企业数据搜索引擎；Lineage = 数据从 MySQL → ODS → DWD → DWS → ADS → BI 的血缘关系，可用于影响分析与故障定位。</p>
+</div></details>
+
+<details><summary>Data Quality / Observability</summary><div class="content">
+<p>常见检查：Null Rate、Unique、Range、Row Count、Freshness、Consistency。数据可观测性常看 Freshness、Volume、Schema、Distribution、Lineage。</p>
+<div class="note">Job SUCCESS ≠ 数据正确。任务跑完但数据量少 80%，仍是事故。</div>
+</div></details>
+
+<details><summary>Owner / SLA / Lifecycle</summary><div class="content">
+<p>重要表应该有 Owner；例如 dws_daily_order 必须每天 07:00 前完成，这就是 Data SLA。不同数据也要有不同保留周期和自动归档/删除策略。</p>
+</div></details>
+
+<details><summary>RBAC / ABAC / 行列级权限 / Masking</summary><div class="content">
+<p>RBAC 按角色授权；ABAC 按属性授权；Row-Level Security 限制只能看本地区；Column-Level Security 限制敏感列；Masking 做脱敏。</p>
+</div></details>
+
+<details><summary>Tokenization / Encryption / Audit</summary><div class="content">
+<p>Tokenization 用 token 替换真实敏感标识并把映射单独保护；Encryption at Rest / in Transit 保护存储与传输；Audit 记录谁查了什么敏感数据、什么时候查、导出了多少。</p>
+</div></details>
+</section>
+
+<section id="ha">
+<div class="section-title"><div class="num">11</div><h2>高可用 / 容灾 / 备份</h2></div>
+<details open><summary>HA / RPO / RTO</summary><div class="content">
+<p>HA = 节点故障后系统继续运行。RPO = 最多允许丢多少数据；RTO = 最多允许多久恢复。</p>
+</div></details>
+<details><summary>Replica ≠ Backup</summary><div class="content">
+<p>副本解决机器坏了，但如果误 DELETE，错误可能同步到所有副本。Backup / Snapshot / Time Travel 用来处理逻辑误操作与历史恢复。</p>
+</div></details>
+<details><summary>为什么大数据系统默认机器会坏</summary><div class="content">
+<p>机器、磁盘、网络、进程故障都属于正常事件，所以系统需要通过多副本、Checkpoint、重试、幂等、Leader Election、快照等方式构建故障恢复能力。</p>
+</div></details>
+</section>
+
+<section id="cost">
+<div class="section-title"><div class="num">12</div><h2>性能与成本模型</h2></div>
+
+<details open><summary>性能五原则</summary><div class="content">
+<div class="grid">
+<div class="card"><h3>少读</h3><p>Partition Pruning / Column Pruning / Predicate Pushdown / Data Skipping</p></div>
+<div class="card"><h3>少传</h3><p>减少 Shuffle / Local Aggregate / Broadcast</p></div>
+<div class="card"><h3>少算</h3><p>过滤提前 / 缓存 / Incremental</p></div>
+<div class="card"><h3>提前算</h3><p>DWS / ADS / Materialized View / Pre-Aggregation</p></div>
+<div class="card"><h3>并行算</h3><p>Partition / Task / Worker / MPP</p></div>
+</div>
+</div></details>
+
+<details><summary>冷热分层</summary><div class="content">
+<p>热数据要求毫秒/秒级，可放 ClickHouse/Doris/StarRocks/Elasticsearch；冷数据很少访问，可放 S3 + Iceberg + Parquet，再由 Trino/Spark 查询。</p>
+</div></details>
+
+<details><summary>压缩</summary><div class="content">
+<p>Snappy、LZ4、ZSTD、Gzip 在压缩率与 CPU 成本间不同取舍。压缩不仅省磁盘，也省网络 IO 和对象存储读取成本。</p>
+</div></details>
+
+<details><summary>Clustering / Z-Order</summary><div class="content">
+<p>Compaction 解决小文件；Clustering / Sort Key / Z-Order 则根据常用过滤维度重新组织数据，提高多列数据跳过能力。</p>
+</div></details>
+
+<details><summary>成本六项</summary><div class="content">
+<div class="chips"><span class="chip">Compute</span><span class="chip">Storage</span><span class="chip">Network</span><span class="chip">Operations</span><span class="chip">License</span><span class="chip">People</span></div>
+<p>架构越复杂，人力成本越高。优秀架构不是组件最多，而是满足需求的最简单方案。</p>
+</div></details>
+</section>
+
+<section id="ai">
+<div class="section-title"><div class="num">13</div><h2>AI Data Platform / Feature Store / Vector DB</h2></div>
+
+<details open><summary>AI 为什么让 Lakehouse 更重要</summary><div class="content">
+<p>AI 需要结构化表、日志、PDF、网页、聊天、图片、音频、Embedding、Label、Feature。Lakehouse 能承载更丰富的数据形态，逐渐成为 AI 数据底座。</p>
+</div></details>
+
+<details><summary>Feature Store</summary><div class="content">
+<p>Feature 例如过去 30 天申请次数、过去 7 天设备数、历史最大逾期天数。Feature Store 用来减少训练和在线推理之间的 Training-Serving Skew。</p>
+<table><tr><th>类型</th><th>常见存储</th><th>用途</th></tr>
+<tr><td>Offline Feature Store</td><td>Iceberg / Parquet / Warehouse</td><td>训练</td></tr>
+<tr><td>Online Feature Store</td><td>Redis / KV / Cassandra 类</td><td>实时推理</td></tr></table>
+</div></details>
+
+<details><summary>Vector Database / RAG</summary><div class="content">
+<p>文档经过 Embedding Model 变成向量，存入 Milvus/Qdrant/Weaviate/Pinecone/pgvector 等，用于相似度检索。Lakehouse 保存原始文档和批量 Embedding，Vector DB 负责在线相似搜索。</p>
+<div class="flow"><span class="node">Lakehouse</span><span class="arrow">→</span><span class="node">Embedding Pipeline</span><span class="arrow">→</span><span class="node">Vector DB</span><span class="arrow">→</span><span class="node">RAG</span><span class="arrow">→</span><span class="node">LLM</span></div>
+</div></details>
+</section>
+
+<section id="selection">
+<div class="section-title"><div class="num">14</div><h2>架构师视角：如何从需求推导技术</h2></div>
+
+<details open><summary>拿到需求先问 6 件事</summary><div class="content">
+<ol>
+<li>数据量多大？每天新增多少？总量多少？单条多大？</li>
+<li>产生速度多快？峰值 QPS / event rate 是多少？</li>
+<li>结果延迟要求？10ms / 1s / 1min / 1h / T+1？</li>
+<li>保存多久？7 天、1 年、7 年？</li>
+<li>一致性要求？能否最终一致？</li>
+<li>访问模式？点查、Join、聚合、全文搜索、向量检索、时序？</li>
+</ol>
+</div></details>
+
+<details><summary>问题 → 技术映射</summary><div class="content">
+<table>
+<tr><th>问题</th><th>优先想到</th></tr>
+<tr><td>每秒百万事件</td><td>Kafka / Pulsar</td></tr>
+<tr><td>实时计算</td><td>Flink</td></tr>
+<tr><td>大规模离线 ETL</td><td>Spark</td></tr>
+<tr><td>5 年低成本历史</td><td>S3 + Parquet + Iceberg</td></tr>
+<tr><td>湖上 SQL</td><td>Trino</td></tr>
+<tr><td>亿级/百亿级低延迟聚合</td><td>ClickHouse / Doris / StarRocks</td></tr>
+<tr><td>全文检索</td><td>Elasticsearch</td></tr>
+<tr><td>极低延迟点查</td><td>MySQL / Redis / KV</td></tr>
+<tr><td>相似度检索</td><td>Vector DB</td></tr>
+</table>
+</div></details>
+
+<details><summary>什么时候用 Kafka + Flink + ClickHouse</summary><div class="content">
+<p>适合实时日志、实时行为分析、监控、报表、交易指标，要求秒级或更低延迟。</p>
+</div></details>
+
+<details><summary>什么时候用 Kafka + Flink + Iceberg</summary><div class="content">
+<p>适合实时进入数据湖、长期保存、后续批分析，即 Streaming Lakehouse。</p>
+</div></details>
+
+<details><summary>什么时候用 Spark + Iceberg</summary><div class="content">
+<p>适合复杂 Join、历史重算、ETL、机器学习，没有严格秒级实时要求。</p>
+</div></details>
+
+<details><summary>什么时候用 Trino + Iceberg</summary><div class="content">
+<p>数据已经在湖里，希望分析师直接 SQL 做 Ad Hoc 分析。</p>
+</div></details>
+
+<details><summary>什么时候不用大数据</summary><div class="content">
+<p>如果每天 100 万行、总数据 20GB，PostgreSQL + 定时任务 + BI 可能已经足够。不要为了“技术先进”堆 Kafka、Flink、Spark、Iceberg、Trino、ClickHouse。</p>
+</div></details>
+
+<details><summary>完整案例：金融平台</summary><div class="content">
+<p>假设：3000 万用户、500 万 DAU、20 亿行为事件/天、5000 万业务 DB 变化/天、历史保存 7 年、实时指标 &lt; 5 秒、BI &lt; 2 秒、历史分析 &lt; 1 分钟。</p>
+<div class="code">iOS/Web
+   ↓
+Event Gateway
+   ↓
+Kafka ← CDC ← MySQL
+   ↓
+Flink
+ ┌───────────────┐
+ ↓               ↓
+ClickHouse     Iceberg/S3
+ ↓               ├→ Spark
+Realtime BI      └→ Trino</div>
+<p>ClickHouse 存热数据，Iceberg/S3 存全量历史。实时与历史分析分别走更合适的 Serving/Compute 引擎。</p>
+</div></details>
+
+<details><summary>常见反模式</summary><div class="content">
+<ul>
+<li>什么都 Kafka。</li>
+<li>什么都实时。</li>
+<li>所有数据都 ClickHouse。</li>
+<li>所有数据都扔 Data Lake 不治理。</li>
+<li>没有 Data Owner。</li>
+<li>为了简历堆二十个组件。</li>
+</ul>
+</div></details>
+</section>
+
+<section id="map">
+<div class="section-title"><div class="num">15</div><h2>技术定位总表</h2></div>
+<table>
+<tr><th>类别</th><th>解决什么</th><th>典型技术</th></tr>
+<tr><td>OLTP</td><td>业务交易</td><td>MySQL / PostgreSQL / Oracle</td></tr>
+<tr><td>Cache / KV</td><td>极低延迟点查</td><td>Redis / KV</td></tr>
+<tr><td>CDC</td><td>捕获数据库变化</td><td>Debezium / Flink CDC</td></tr>
+<tr><td>Event Bus</td><td>高吞吐数据流动</td><td>Kafka / Pulsar</td></tr>
+<tr><td>Stream Compute</td><td>实时计算</td><td>Flink</td></tr>
+<tr><td>Batch Compute</td><td>大规模离线计算</td><td>Spark</td></tr>
+<tr><td>Object Storage</td><td>低成本海量存储</td><td>S3 / OSS / GCS / HDFS</td></tr>
+<tr><td>File Format</td><td>高效列式文件</td><td>Parquet / ORC</td></tr>
+<tr><td>Table Format</td><td>湖上表管理</td><td>Iceberg / Hudi / Delta</td></tr>
+<tr><td>Query Engine</td><td>直接查询湖与多数据源</td><td>Trino / Presto</td></tr>
+<tr><td>OLAP Serving</td><td>快速分析</td><td>ClickHouse / Doris / StarRocks</td></tr>
+<tr><td>Search</td><td>全文检索</td><td>Elasticsearch</td></tr>
+<tr><td>Workflow</td><td>任务调度</td><td>Airflow / Dagster / Prefect / DolphinScheduler</td></tr>
+<tr><td>Transformation</td><td>SQL 建模工程化</td><td>dbt</td></tr>
+<tr><td>Catalog</td><td>数据发现与治理</td><td>Data Catalog / Metadata Platform</td></tr>
+<tr><td>Vector</td><td>相似度搜索</td><td>Milvus / Qdrant / Weaviate / pgvector</td></tr>
+<tr><td>BI</td><td>数据展示</td><td>Superset / Tableau / Power BI</td></tr>
+</table>
+
+<div class="note tip">
+<b>最重要的四个维度不要混：</b><br>
+Lambda / Kappa：回答“数据怎么算”；<br>
+Warehouse / Lake / Lakehouse：回答“数据怎么存和组织”；<br>
+Spark / Flink：回答“谁执行计算”；<br>
+ClickHouse / Doris / StarRocks：回答“谁快速服务分析查询”。
+</div>
+</section>
+
+<section id="quiz">
+<div class="section-title"><div class="num">16</div><h2>记忆卡片与自测</h2></div>
+
+<div class="memory">
+<div class="m"><b>Kafka</b><br>高速传送带 + 可持久化日志</div>
+<div class="m"><b>Flink</b><br>实时分拣中心 + 有状态流处理</div>
+<div class="m"><b>Spark</b><br>大型离线加工厂</div>
+<div class="m"><b>S3</b><br>低成本巨型仓库</div>
+<div class="m"><b>Iceberg</b><br>仓库管理系统 + 表版本</div>
+<div class="m"><b>ClickHouse</b><br>高速 OLAP 查询柜台</div>
+<div class="m"><b>Trino</b><br>跨仓库 SQL 查询中心</div>
+<div class="m"><b>Data Warehouse</b><br>分类整理好的精品仓库</div>
+<div class="m"><b>Data Lake</b><br>超大型原始仓库</div>
+<div class="m"><b>Lakehouse</b><br>原始仓库 + 专业表管理能力</div>
+</div>
+
+<div class="quiz" style="margin-top:16px">
+<b>题 1：最近 30 天实时行为分析，要求 1 秒级返回；历史 5 年数据偶尔查。你会怎么分层？</b><br>
+<button class="btn" onclick="showAnswer(this)">显示答案</button>
+<div class="answer">热数据：ClickHouse / Doris / StarRocks；全量历史：S3 + Iceberg + Parquet；实时链路：Kafka + Flink；历史 Ad Hoc：Trino / Spark。</div>
+</div>
+
+<div class="quiz" style="margin-top:12px">
+<b>题 2：为什么有了 Iceberg 还需要 ClickHouse？</b><br>
+<button class="btn" onclick="showAnswer(this)">显示答案</button>
+<div class="answer">Iceberg 解决的是湖上表管理与开放数据底座；ClickHouse 解决的是低延迟 OLAP Serving。存储统一，不代表所有查询负载都要用同一个执行引擎。</div>
+</div>
+
+<div class="quiz" style="margin-top:12px">
+<b>题 3：GROUP BY 很慢，优先排查什么？</b><br>
+<button class="btn" onclick="showAnswer(this)">显示答案</button>
+<div class="answer">扫描量、分区裁剪、列裁剪、谓词下推、Shuffle、数据倾斜、统计信息、并行度、能否预聚合。</div>
+</div>
+
+<div class="quiz" style="margin-top:12px">
+<b>题 4：Lambda 和 Kappa 最大区别？</b><br>
+<button class="btn" onclick="showAnswer(this)">显示答案</button>
+<div class="answer">Lambda 同时维护 Batch + Speed 两条链路；Kappa 尽量只保留 Stream 主链路，历史数据通过 Replay 重算。</div>
+</div>
+</section>
+
+<footer>
+  单文件离线版 · 大数据架构从零到全貌 · 已覆盖本次对话中的全部主线与关键细节
+</footer>
+</main>
+</div>
+
+<script>
+const search = document.getElementById('search');
+const allSections = [...document.querySelectorAll('main section, main details, main .card, main .m')];
+
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  if (!q) {
+    document.querySelectorAll('.hidden').forEach(el => el.classList.remove('hidden'));
+    document.querySelectorAll('mark').forEach(m => m.replaceWith(m.textContent));
+    return;
+  }
+  document.querySelectorAll('mark').forEach(m => m.replaceWith(m.textContent));
+  allSections.forEach(el => {
+    const t = el.innerText.toLowerCase();
+    el.classList.toggle('hidden', !t.includes(q));
+  });
+  [...document.querySelectorAll('details')].forEach(d => {
+    if (!d.classList.contains('hidden') && d.innerText.toLowerCase().includes(q)) d.open = true;
+  });
+});
+
+function showAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  btn.textContent = ans.style.display === 'block' ? '隐藏答案' : '显示答案';
+}
+
+const links = [...document.querySelectorAll('nav a')];
+const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id = '#'+e.target.id;
+      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    }
+  })
+},{rootMargin:'-20% 0px -70% 0px',threshold:0});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
