@@ -1,0 +1,483 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>八大押题知识树｜架构师学习地图</title><meta name="description" content="RAG、Agent、缓存、MQ、弹性、DDD、一致性与微服务"><link rel="stylesheet" href="./styles.css"></head><body><div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="./index.html"><div class="brand-mark">A</div><div><strong>架构师学习地图</strong><span>论文 · 架构 · 交互训练</span></div></a><div class="search-wrap"><input id="searchInput" type="search" placeholder="搜索本页内容…" aria-label="搜索"></div><nav class="sidebar-hub" aria-label="学习导航"><a href="./index.html"  >学习主页</a><a href="./writing-method.html"  >论文写作方法</a><a href="./project-foundation.html"  >消费金融项目底座</a><a href="./architecture-topics.html" aria-current="page" >八大押题知识树</a><a href="./universal-template.html"  >万能模板与速记</a><a href="./training-plan.html"  >训练计划与记忆策略</a><a href="./theory-practice.html"  >理论 × 实践实验室</a><a href="./resources/thesis-study-plan.html"  >论文备考学习方案</a><a href="./resources/thesis-template-memory.html"  >论文模板记忆方案</a><a href="./resources/consumer-finance-flow.html"  >信贷全流程图解</a><a href="./resources/consumer-finance-microservices.html"  >微服务交互图</a><a href="./resources/software-testing.html"  >软件测试体系</a><a href="https://onepiece.fun/Cloud-Native-Learn/#00-overview"  target="_blank" rel="noopener noreferrer">云原生学习 ↗</a></nav><div class="sidebar-hub-title">本页目录</div><nav id="toc" class="toc" aria-label="本页目录"></nav><div class="sidebar-footer"><a href="https://github.com/WhoJave/system-architect-thesis-map">GitHub</a><button id="themeToggle" aria-label="切换主题">◐</button></div></aside><main class="main"><header class="hero"><button class="menu-btn" id="menuBtn" aria-label="打开导航" aria-expanded="false">☰</button><div><p class="eyebrow">System Architect · Learning Map</p><h1>八大押题知识树</h1><p class="hero-desc">RAG、Agent、缓存、MQ、弹性、DDD、一致性与微服务</p><a href="./index.html">← 返回学习主页</a></div></header><p id="searchStatus" class="search-status" hidden></p><article id="content" class="markdown-body"><h1 id="15-母题一rag">15. 母题一：RAG</h1>
+<h2 id="需要掌握">需要掌握</h2>
+<ul>
+<li>异构文档解析与清洗</li>
+<li>Chunk 切分</li>
+<li>Embedding / 向量化</li>
+<li>向量检索、关键词检索、混合检索</li>
+<li>Top-K</li>
+<li>Rerank</li>
+<li>上下文窗口控制</li>
+<li>引用与可追溯</li>
+<li>幻觉抑制</li>
+<li>权限隔离</li>
+<li>数据更新</li>
+</ul>
+<h2 id="消费金融落地点">消费金融落地点</h2>
+<ul>
+<li>产品制度</li>
+<li>运营规范</li>
+<li>客服知识</li>
+<li>流程手册</li>
+<li>内部制度问答</li>
+</ul>
+<h3 id="思维导图rag">思维导图：RAG</h3>
+<pre><code class="language-mermaid">mindmap
+  root((RAG))
+    知识入库
+      文档解析
+      清洗
+      元数据
+      权限
+    Chunk
+      标题切分
+      段落切分
+      语义切分
+      Overlap
+    检索
+      Vector
+      BM25
+      Hybrid
+      TopK
+    重排
+      Rerank
+      去重
+      相关性
+    生成
+      上下文拼接
+      Prompt
+      引用
+    治理
+      幻觉
+      权限
+      可追溯
+      更新
+</code></pre>
+<hr>
+<h1 id="16-母题二agent">16. 母题二：Agent</h1>
+<h2 id="需要掌握-2">需要掌握</h2>
+<ul>
+<li>任务规划</li>
+<li>ReAct / Plan-Execute</li>
+<li>工具注册与 Tool Calling</li>
+<li>参数 Schema</li>
+<li>权限控制</li>
+<li>超时</li>
+<li>重试</li>
+<li>幂等</li>
+<li>状态管理</li>
+<li>短期/长期记忆</li>
+<li>Human-in-the-loop</li>
+<li>审计</li>
+<li>防止死循环</li>
+</ul>
+<h2 id="消费金融落地点-2">消费金融落地点</h2>
+<p>建议写低风险内部流程，不让 Agent 自动做核心授信决策。</p>
+<p>例如：</p>
+<ul>
+<li>客服辅助</li>
+<li>运营工单</li>
+<li>内部知识查询</li>
+<li>报表生成</li>
+<li>流程辅助</li>
+</ul>
+<h3 id="思维导图agent">思维导图：Agent</h3>
+<pre><code class="language-mermaid">mindmap
+  root((Agent))
+    Goal
+      用户目标
+      任务边界
+    Planning
+      ReAct
+      Plan-Execute
+      Replan
+    Tools
+      工具注册
+      Schema
+      参数验证
+      权限
+    Execution
+      超时
+      重试
+      幂等
+    State
+      任务状态
+      会话历史
+      长期记忆
+    Safety
+      人工确认
+      可回滚
+      审计
+      调用上限
+</code></pre>
+<hr>
+<h1 id="17-母题三分布式缓存">17. 母题三：分布式缓存</h1>
+<h2 id="需要掌握-3">需要掌握</h2>
+<ul>
+<li>缓存客户端</li>
+<li>Redis 集群</li>
+<li>数据库权威源</li>
+<li>Cache-Aside</li>
+<li>Key 设计</li>
+<li>TTL</li>
+<li>淘汰</li>
+<li>穿透</li>
+<li>击穿</li>
+<li>雪崩</li>
+<li>热 Key</li>
+<li>大 Key</li>
+<li>缓存一致性</li>
+<li>高可用</li>
+<li>降级</li>
+</ul>
+<h2 id="消费金融适合缓存">消费金融适合缓存</h2>
+<ul>
+<li>产品配置</li>
+<li>公共字典</li>
+<li>渠道参数</li>
+<li>低频变化规则</li>
+</ul>
+<p>不应只依赖缓存判断：</p>
+<ul>
+<li>放款最终状态</li>
+<li>借据核心状态</li>
+<li>核心账务金额</li>
+</ul>
+<h3 id="思维导图分布式缓存">思维导图：分布式缓存</h3>
+<pre><code class="language-mermaid">mindmap
+  root((分布式缓存))
+    数据组织
+      Key规范
+      序列化
+      TTL
+    读写模式
+      Cache Aside
+      Miss回源
+      回填
+    一致性
+      DB权威
+      更新DB
+      删除缓存
+      失败补偿
+    风险
+      穿透
+      击穿
+      雪崩
+    热点治理
+      HotKey
+      BigKey
+      本地缓存
+    高可用
+      Cluster
+      故障转移
+      限流
+      降级
+</code></pre>
+<hr>
+<h1 id="18-母题四消息队列">18. 母题四：消息队列</h1>
+<h2 id="需要掌握-4">需要掌握</h2>
+<ul>
+<li>Producer</li>
+<li>Broker</li>
+<li>Topic/Queue</li>
+<li>Consumer</li>
+<li>异步处理</li>
+<li>应用解耦</li>
+<li>流量削峰</li>
+<li>路由</li>
+<li>可靠投递</li>
+<li>ACK</li>
+<li>重试</li>
+<li>死信</li>
+<li>重复消费</li>
+<li>幂等</li>
+<li>顺序</li>
+<li>积压</li>
+<li>补偿</li>
+</ul>
+<h2 id="消费金融落地点-3">消费金融落地点</h2>
+<p>适合异步：</p>
+<ul>
+<li>消息通知</li>
+<li>贷后任务</li>
+<li>对账后处理</li>
+<li>非核心状态传播</li>
+</ul>
+<p>核心交易不要“为了 MQ 而 MQ”。</p>
+<h3 id="思维导图消息队列">思维导图：消息队列</h3>
+<pre><code class="language-mermaid">mindmap
+  root((MQ))
+    架构
+      Producer
+      Broker
+      Topic
+      Consumer
+    价值
+      异步
+      解耦
+      削峰
+    可靠
+      持久化
+      ACK
+      Retry
+      DLQ
+    消费
+      幂等
+      重复
+      顺序
+    运维
+      积压
+      扩容消费者
+      告警
+    一致性
+      事务消息
+      Outbox
+      补偿
+</code></pre>
+<hr>
+<h1 id="19-母题五弹性伸缩">19. 母题五：弹性伸缩</h1>
+<h2 id="需要掌握-5">需要掌握</h2>
+<ul>
+<li>指标采集</li>
+<li>伸缩策略</li>
+<li>资源调度</li>
+<li>CPU / 内存 / QPS / 延迟 / 队列长度</li>
+<li>扩容阈值</li>
+<li>缩容阈值</li>
+<li>冷却时间</li>
+<li>防抖</li>
+<li>无状态化</li>
+<li>预热</li>
+<li>容量规划</li>
+<li>成本权衡</li>
+</ul>
+<h3 id="思维导图弹性伸缩">思维导图：弹性伸缩</h3>
+<pre><code class="language-mermaid">mindmap
+  root((弹性伸缩))
+    Observe
+      CPU
+      Memory
+      QPS
+      Latency
+      Queue
+    Decide
+      阈值
+      预测
+      组合指标
+    ScaleOut
+      新实例
+      注册
+      预热
+    ScaleIn
+      摘流
+      优雅下线
+      防止过快
+    Foundation
+      无状态
+      外置Session
+    Governance
+      Cooldown
+      防抖
+      成本
+</code></pre>
+<hr>
+<h1 id="20-母题六ddd">20. 母题六：DDD</h1>
+<h2 id="需要掌握-6">需要掌握</h2>
+<p>战略设计：</p>
+<ul>
+<li>Domain</li>
+<li>Subdomain</li>
+<li>Core / Supporting / Generic</li>
+<li>Bounded Context</li>
+<li>Ubiquitous Language</li>
+<li>Context Map</li>
+</ul>
+<p>战术设计：</p>
+<ul>
+<li>Entity</li>
+<li>Value Object</li>
+<li>Aggregate</li>
+<li>Aggregate Root</li>
+<li>Domain Service</li>
+<li>Domain Event</li>
+<li>Repository</li>
+</ul>
+<h2 id="消费金融领域示例">消费金融领域示例</h2>
+<ul>
+<li>客户域</li>
+<li>风控域</li>
+<li>授信域</li>
+<li>额度域</li>
+<li>借款域</li>
+<li>账务域</li>
+<li>还款域</li>
+<li>贷后域</li>
+</ul>
+<h3 id="思维导图ddd">思维导图：DDD</h3>
+<pre><code class="language-mermaid">mindmap
+  root((DDD))
+    战略设计
+      Domain
+      Subdomain
+        Core
+        Supporting
+        Generic
+      BoundedContext
+      UbiquitousLanguage
+      ContextMap
+    战术设计
+      Entity
+      ValueObject
+      Aggregate
+      AggregateRoot
+      DomainService
+      DomainEvent
+      Repository
+    消费金融
+      客户
+      风控
+      授信
+      借款
+      账务
+      贷后
+</code></pre>
+<hr>
+<h1 id="21-母题七分布式一致性">21. 母题七：分布式一致性</h1>
+<h2 id="需要掌握-7">需要掌握</h2>
+<ul>
+<li>一致性为什么出现问题</li>
+<li>网络超时</li>
+<li>服务故障</li>
+<li>消息重复</li>
+<li>并发</li>
+<li>强一致</li>
+<li>最终一致</li>
+<li>CAP / BASE</li>
+<li>本地事务</li>
+<li>TCC</li>
+<li>Saga</li>
+<li>事务消息</li>
+<li>Outbox</li>
+<li>幂等</li>
+<li>重试</li>
+<li>补偿</li>
+<li>对账</li>
+<li>人工兜底</li>
+</ul>
+<h2 id="消费金融核心判断">消费金融核心判断</h2>
+<p>先问：</p>
+<blockquote>
+<p>哪些数据必须立即一致？</p>
+</blockquote>
+<p>例如核心资金/账务场景要求更严格。</p>
+<p>再问：</p>
+<blockquote>
+<p>哪些数据可以最终一致？</p>
+</blockquote>
+<p>例如部分通知、分析、异步状态传播。</p>
+<h3 id="思维导图分布式一致性">思维导图：分布式一致性</h3>
+<pre><code class="language-mermaid">mindmap
+  root((分布式一致性))
+    原因
+      网络
+      服务故障
+      重复消息
+      并发
+    一致性级别
+      强一致
+      最终一致
+    方案
+      TCC
+      Saga
+      事务消息
+      Outbox
+    正确性
+      幂等
+      状态机
+    恢复
+      Retry
+      Compensation
+      Reconciliation
+      Manual
+    核心
+      先划一致性边界
+      再选技术
+</code></pre>
+<hr>
+<h1 id="22-母题八微服务">22. 母题八：微服务</h1>
+<h2 id="需要掌握-8">需要掌握</h2>
+<ul>
+<li>服务拆分</li>
+<li>业务能力边界</li>
+<li>数据自治</li>
+<li>注册发现</li>
+<li>API Gateway</li>
+<li>REST/gRPC</li>
+<li>消息通信</li>
+<li>配置中心</li>
+<li>限流</li>
+<li>熔断</li>
+<li>降级</li>
+<li>链路追踪</li>
+<li>日志</li>
+<li>指标</li>
+<li>灰度</li>
+<li>容器化</li>
+<li>故障隔离</li>
+</ul>
+<h3 id="思维导图微服务">思维导图：微服务</h3>
+<pre><code class="language-mermaid">mindmap
+  root((微服务))
+    拆分
+      业务能力
+      DDD边界
+      数据自治
+    通信
+      REST
+      gRPC
+      MQ
+    服务治理
+      注册发现
+      Gateway
+      Config
+    韧性
+      限流
+      熔断
+      降级
+      重试
+    可观测
+      Logs
+      Metrics
+      Tracing
+    交付
+      容器
+      灰度
+      独立部署
+</code></pre>
+<hr>
+<h1 id="23-八大押题之间不是孤立的">23. 八大押题之间不是孤立的</h1>
+<h3 id="思维导图知识关联">思维导图：知识关联</h3>
+<pre><code class="language-mermaid">mindmap
+  root((八大押题关系))
+    复杂业务
+      DDD
+      微服务
+    服务协作
+      MQ
+      分布式一致性
+    高并发
+      Redis
+      弹性伸缩
+    AI应用
+      RAG
+      Agent
+    共同治理
+      可靠性
+      可观测
+      安全
+      权限
+      成本
+      降级
+</code></pre>
+<hr>
+</article><nav class="reader-pagination" aria-label="前后章节"><a href="./project-foundation.html">← 消费金融项目底座</a><a href="./universal-template.html">万能模板与速记 →</a></nav><footer class="page-footer"><a href="./index.html">学习主页</a><a href="./knowledge-map.html">完整知识地图（归档）</a></footer></main></div><div class="overlay" id="overlay"></div><script src="./app.js" defer></script></body></html>

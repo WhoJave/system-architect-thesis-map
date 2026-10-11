@@ -1,0 +1,115 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>消费金融项目底座｜架构师学习地图</title><meta name="description" content="业务闭环与全局架构师职责"><link rel="stylesheet" href="./styles.css"></head><body><div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="./index.html"><div class="brand-mark">A</div><div><strong>架构师学习地图</strong><span>论文 · 架构 · 交互训练</span></div></a><div class="search-wrap"><input id="searchInput" type="search" placeholder="搜索本页内容…" aria-label="搜索"></div><nav class="sidebar-hub" aria-label="学习导航"><a href="./index.html"  >学习主页</a><a href="./writing-method.html"  >论文写作方法</a><a href="./project-foundation.html" aria-current="page" >消费金融项目底座</a><a href="./architecture-topics.html"  >八大押题知识树</a><a href="./universal-template.html"  >万能模板与速记</a><a href="./training-plan.html"  >训练计划与记忆策略</a><a href="./theory-practice.html"  >理论 × 实践实验室</a><a href="./resources/thesis-study-plan.html"  >论文备考学习方案</a><a href="./resources/thesis-template-memory.html"  >论文模板记忆方案</a><a href="./resources/consumer-finance-flow.html"  >信贷全流程图解</a><a href="./resources/consumer-finance-microservices.html"  >微服务交互图</a><a href="./resources/software-testing.html"  >软件测试体系</a><a href="https://onepiece.fun/Cloud-Native-Learn/#00-overview"  target="_blank" rel="noopener noreferrer">云原生学习 ↗</a></nav><div class="sidebar-hub-title">本页目录</div><nav id="toc" class="toc" aria-label="本页目录"></nav><div class="sidebar-footer"><a href="https://github.com/WhoJave/system-architect-thesis-map">GitHub</a><button id="themeToggle" aria-label="切换主题">◐</button></div></aside><main class="main"><header class="hero"><button class="menu-btn" id="menuBtn" aria-label="打开导航" aria-expanded="false">☰</button><div><p class="eyebrow">System Architect · Learning Map</p><h1>消费金融项目底座</h1><p class="hero-desc">业务闭环与全局架构师职责</p><a href="./index.html">← 返回学习主页</a></div></header><p id="searchStatus" class="search-status" hidden></p><article id="content" class="markdown-body"><h1 id="4-项目底座一篇论文能不能写稳取决于这里">4. 项目底座：一篇论文能不能写稳，取决于这里</h1>
+<h2 id="资料原意">【资料原意】</h2>
+<p>资料反复强调：</p>
+<ul>
+<li>不要死背范文</li>
+<li>要形成自己的项目</li>
+<li>最好准备 PRD / 项目素材</li>
+<li>项目名称、目标、业务场景、个人职责、技术选型、实施过程、实际问题都要个性化</li>
+<li>背景要体现对整个项目的理解，而不是堆技术栈</li>
+</ul>
+<h2 id="教练提炼">【教练提炼】</h2>
+<p>你的万能项目固定为：</p>
+<blockquote>
+<p><strong>某大型持牌消费金融机构线上消费信贷平台</strong></p>
+</blockquote>
+<p>核心业务链：</p>
+<blockquote>
+<p>获客 → 申请 → 身份核验 → 风控 → 授信 → 借款 → 合同 → 放款 → 账务 → 还款 → 贷后</p>
+</blockquote>
+<p>核心架构层：</p>
+<blockquote>
+<p>渠道接入 → 业务受理 → 风控审批 → 核心信贷 → 资金账务 → 贷后运营 → 公共支撑</p>
+</blockquote>
+<h3 id="思维导图消费金融项目底座">思维导图：消费金融项目底座</h3>
+<pre><code class="language-mermaid">mindmap
+  root((消费金融万能项目))
+    渠道
+      App
+      H5
+      小程序
+      合作渠道
+    业务受理
+      注册实名
+      绑卡
+      授信申请
+      借款申请
+    风控审批
+      反欺诈
+      征信
+      评分
+      额度
+      定价
+    核心信贷
+      授信账户
+      借据
+      合同
+      还款计划
+    资金账务
+      放款
+      代扣
+      记账
+      清结算
+      对账
+    贷后
+      提醒
+      逾期
+      催收
+      客服
+    公共能力
+      MQ
+      Redis
+      配置
+      日志
+      监控
+      审计
+</code></pre>
+<hr>
+<h1 id="5-架构师视角从-ios-开发跳到全局">5. 架构师视角：从 iOS 开发跳到全局</h1>
+<h2 id="教练提炼-2">【教练提炼】</h2>
+<p>你真实最熟悉的是：</p>
+<blockquote>
+<p>“用户点了按钮 → App 发请求 → 接口返回”</p>
+</blockquote>
+<p>论文需要继续追问：</p>
+<blockquote>
+<p>“这个按钮后面有哪些系统？谁做风控？谁扣额度？谁生成借据？谁放款？谁记账？失败如何补偿？日志如何追踪？如何审计？”</p>
+</blockquote>
+<p>这是你最重要的思维转换。</p>
+<h3 id="思维导图前端视角-架构师视角">思维导图：前端视角 → 架构师视角</h3>
+<pre><code class="language-mermaid">mindmap
+  root((一次借款点击))
+    客户端
+      参数校验
+      登录态
+      请求提交
+    业务受理
+      创建申请
+      幂等控制
+    风控
+      准入
+      反欺诈
+      实时决策
+    核心信贷
+      额度校验
+      合同
+      借据
+    资金
+      放款请求
+      支付通道
+    账务
+      记账
+      还款计划
+      对账
+    消息
+      放款通知
+      贷后事件
+    治理
+      限流
+      熔断
+      监控
+      审计
+      异常补偿
+</code></pre>
+<hr>
+</article><nav class="reader-pagination" aria-label="前后章节"><a href="./writing-method.html">← 论文写作方法</a><a href="./architecture-topics.html">八大押题知识树 →</a></nav><footer class="page-footer"><a href="./index.html">学习主页</a><a href="./knowledge-map.html">完整知识地图（归档）</a></footer></main></div><div class="overlay" id="overlay"></div><script src="./app.js" defer></script></body></html>

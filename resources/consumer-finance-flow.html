@@ -1,1 +1,350 @@
-<!doctype html><html lang="zh-CN" data-resource-title="消费金融信贷全流程图解" data-resource-files="./.data/consumer-finance-flow.part1,./.data/consumer-finance-flow.part2,./.data/consumer-finance-flow.part3"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>消费金融信贷全流程图解</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1020;color:#eef2ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}main{max-width:720px;padding:32px}.muted{color:#94a3b8}a{color:#8ba4ff}pre{white-space:pre-wrap}</style></head><body><main id="loading"><h1>消费金融信贷全流程图解</h1><p class="muted">正在加载完整交互页面…</p></main><script src="./resource-loader.js"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <title>消费金融信贷全流程图解</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      color-scheme:light dark;
+      --bg:#f4f7f9;--paper:#ffffff;--paper2:#edf3f5;--ink:#102c35;--muted:#506a73;--line:#c9d9dd;
+      --teal:#087f75;--teal2:#0da79a;--blue:#2563a8;--orange:#cf6d19;--red:#be3f4b;--green:#397b4c;--gold:#a87918;
+      --shadow:0 18px 50px rgba(16,44,53,.10);--radius:18px;
+    }
+    @media(prefers-color-scheme:dark){:root{
+      --bg:#08161a;--paper:#102428;--paper2:#173136;--ink:#e9f6f5;--muted:#a6c1c4;--line:#29484d;
+      --teal:#3ed7c6;--teal2:#24b8aa;--blue:#70b7ff;--orange:#ffae61;--red:#ff7d87;--green:#78cf90;--gold:#e7bd58;
+      --shadow:0 18px 50px rgba(0,0,0,.32);
+    }}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans SC",sans-serif;line-height:1.6}
+    button,input{font:inherit}
+    button{color:inherit}
+    .wrap{width:min(1480px,calc(100% - 32px));margin:auto}
+    .intro{padding:32px 0 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end}
+    .intro h1{font-family:"ZCOOL XiaoWei",serif;font-size:clamp(30px,4.5vw,58px);line-height:1.08;margin:0 0 14px;letter-spacing:-.02em;max-width:900px}
+    .intro p{margin:0;color:var(--muted);font-size:clamp(15px,1.5vw,18px);max-width:820px}
+    .memory-tag{border:1px solid var(--line);background:var(--paper);padding:14px 16px;border-radius:13px;box-shadow:var(--shadow);min-width:220px}
+    .memory-tag strong{display:block;color:var(--teal);font-size:15px;margin-bottom:3px}
+    .memory-tag span{font-family:"ZCOOL XiaoWei",serif;font-size:18px}
+    .toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-block:1px solid var(--line)}
+    .toolbar-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;flex-wrap:wrap}
+    .seg,.controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    .seg button,.icon-btn,.chipbtn{border:1px solid var(--line);background:var(--paper);padding:8px 13px;border-radius:10px;cursor:pointer;transition:.2s}
+    .seg button.active,.chipbtn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    .seg button:hover,.icon-btn:hover,.chipbtn:hover{border-color:var(--teal)}
+    .icon-btn{display:flex;gap:7px;align-items:center}
+    .speed{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px}
+    input[type=range]{width:88px;accent-color:var(--teal)}
+    .section{padding:36px 0}
+    .section-head{display:flex;justify-content:space-between;gap:22px;align-items:end;margin-bottom:20px}
+    .section-head h2{font-size:clamp(22px,3vw,34px);line-height:1.2;margin:0 0 6px}
+    .section-head p{color:var(--muted);margin:0;max-width:760px}
+    .legend{display:flex;flex-wrap:wrap;gap:11px;font-size:12px;color:var(--muted)}
+    .legend span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+    .dot{width:8px;height:8px;border-radius:50%;display:inline-block}.d-blue{background:var(--blue)}.d-orange{background:var(--orange)}.d-red{background:var(--red)}.d-green{background:var(--green)}
+
+    .map-shell{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);overflow:hidden}
+    .map-shell:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--teal) 4%,transparent) 1px,transparent 1px),linear-gradient(color-mix(in srgb,var(--teal) 4%,transparent) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+    .map-area{position:relative;min-height:380px}
+    #flowCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .stage-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:66px 26px;align-items:stretch}
+    .stage{appearance:none;text-align:left;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 94%,var(--teal) 6%);border-radius:16px;padding:16px;min-height:156px;cursor:pointer;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s}
+    .stage:hover,.stage.active{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 12px 30px color-mix(in srgb,var(--teal) 16%,transparent)}
+    .stage.active{outline:3px solid color-mix(in srgb,var(--teal) 18%,transparent)}
+    .stage-num{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:var(--ink);color:var(--bg);font-size:12px;font-weight:800;margin-bottom:12px}
+    .stage h3{margin:0 0 7px;font-size:17px;line-height:1.2}
+    .stage p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    .stage .system{display:none;margin-top:9px;color:var(--blue);font-size:12px;font-weight:600}
+    .stage .risk-text{display:none;margin-top:9px;color:var(--red);font-size:12px;font-weight:600}
+    body[data-view="arch"] .stage .default-text,body[data-view="risk"] .stage .default-text{display:none}
+    body[data-view="arch"] .stage .system{display:block}
+    body[data-view="risk"] .stage .risk-text{display:block}
+    .stage:after{content:"点击拆解";position:absolute;top:14px;right:13px;font-size:10px;color:var(--muted);opacity:0;transition:.2s}
+    .stage:hover:after{opacity:1}
+
+    .event-rail{margin-top:24px;border-top:1px dashed var(--line);padding-top:18px;position:relative;z-index:2}
+    .event-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--orange)}
+    .topics{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .topic{background:color-mix(in srgb,var(--orange) 9%,var(--paper));border:1px solid color-mix(in srgb,var(--orange) 30%,var(--line));border-radius:10px;padding:8px 10px;font-family:ui-monospace,monospace;font-size:11px;overflow-wrap:anywhere;position:relative;overflow:hidden}
+    .topic:after{content:"";position:absolute;bottom:0;left:-20%;width:18%;height:2px;background:var(--orange);animation:topicflow 2.8s linear infinite}
+    @keyframes topicflow{to{left:110%}}
+    body.paused .topic:after{animation-play-state:paused}
+
+    .parallel-lane{width:100%;margin-top:14px;border:1px solid color-mix(in srgb,var(--red) 30%,var(--line));background:color-mix(in srgb,var(--red) 7%,var(--paper));border-radius:12px;padding:12px 14px;position:relative;z-index:2;cursor:pointer;text-align:left;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;overflow:hidden}
+    .parallel-lane:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 6px color-mix(in srgb,var(--red) 14%,transparent)}
+    .parallel-lane strong{display:block;font-size:14px}.parallel-lane span{display:block;font-size:12px;color:var(--muted)}
+    .parallel-lane code{font-size:11px;color:var(--red);white-space:nowrap}
+    .parallel-lane:after{content:"";position:absolute;left:-10%;bottom:0;width:12%;height:3px;background:var(--red);animation:topicflow 3.4s linear infinite}
+    body.paused .parallel-lane:after{animation-play-state:paused}
+    .storybar{margin-top:16px;display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--paper2);border-radius:12px;padding:10px 12px;position:relative;z-index:2}
+    .storybar p{font-size:13px;margin:0;color:var(--muted)}
+    .storybar strong{color:var(--ink)}
+    .story-actions{display:flex;gap:6px;flex-shrink:0}
+    .story-actions button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:6px 10px;cursor:pointer}
+
+    .system-map{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px}
+    .system-card{background:var(--paper);border:1px solid var(--line);padding:20px;border-radius:16px}
+    .system-card h3{margin:0 0 5px;font-size:18px}
+    .system-card>p{margin:0 0 16px;color:var(--muted);font-size:13px}
+    .stack{display:grid;gap:8px}
+    .stack-item{border-radius:10px;padding:10px 12px;background:var(--paper2);font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .stack-item b{font-size:12px;color:var(--teal)}
+    .crosscut{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .cross-item{background:var(--paper2);padding:14px;border-radius:11px}
+    .cross-item strong{display:block;font-size:14px;margin-bottom:4px}
+    .cross-item span{font-size:12px;color:var(--muted)}
+
+    .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .principle{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:18px;position:relative}
+    .principle .code{font-family:ui-monospace,monospace;color:var(--teal);font-weight:800;font-size:12px}
+    .principle h3{margin:7px 0 6px;font-size:17px}.principle p{margin:0;color:var(--muted);font-size:13px}
+    .principle button{border:0;background:none;color:var(--teal);padding:9px 0 0;cursor:pointer;font-weight:700;font-size:12px}
+    .principle .expand{display:none;border-top:1px solid var(--line);padding-top:10px;margin-top:10px;color:var(--ink);font-size:12px}
+    .principle.open .expand{display:block}
+
+    .risk-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}
+    .risk-index,.risk-detail{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+    .risk-index h3,.risk-detail h3{margin:0 0 14px}
+    .risk-list{display:grid;gap:6px}
+    .risk-list button{border:0;background:transparent;text-align:left;padding:10px;border-radius:9px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+    .risk-list button:hover,.risk-list button.active{background:var(--paper2);color:var(--teal)}
+    .risk-list span{font-size:11px;color:var(--muted)}
+    .risk-hero{display:flex;align-items:start;justify-content:space-between;gap:14px;margin-bottom:18px}
+    .risk-hero p{margin:5px 0 0;color:var(--muted)}
+    .severity{padding:5px 9px;border-radius:8px;background:color-mix(in srgb,var(--red) 13%,var(--paper));color:var(--red);font-size:12px;font-weight:700;white-space:nowrap}
+    .issue-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .issue{background:var(--paper2);border-radius:12px;padding:14px}
+    .issue strong{display:block;font-size:13px;margin-bottom:5px}.issue p{font-size:12px;color:var(--muted);margin:0}
+    .solution-block{margin-top:14px;border:1px solid color-mix(in srgb,var(--green) 35%,var(--line));background:color-mix(in srgb,var(--green) 7%,var(--paper));border-radius:12px;padding:14px}
+    .solution-block strong{color:var(--green)}.solution-block ul{margin:8px 0 0;padding-left:20px;font-size:13px}
+
+    .study{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .quiz,.mnemonic{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+    .quiz h3,.mnemonic h3{margin:0 0 8px}.quiz>p,.mnemonic>p{margin:0 0 16px;color:var(--muted);font-size:13px}
+    .quiz-card{min-height:160px;background:var(--paper2);border-radius:13px;padding:18px;display:grid;align-content:center;text-align:center}
+    .quiz-card .answer{display:none;color:var(--teal);font-weight:700;margin-top:12px}
+    .quiz-card.revealed .answer{display:block}
+    .quiz-controls{display:flex;justify-content:center;gap:8px;margin-top:12px}
+    .quiz-controls button{border:1px solid var(--line);background:var(--paper);padding:7px 11px;border-radius:9px;cursor:pointer}
+    .mnemonic-line{font-family:"ZCOOL XiaoWei",serif;font-size:clamp(21px,3vw,30px);line-height:1.5;color:var(--teal);margin:12px 0}
+    .mnemonic ol{padding-left:22px;margin:12px 0 0}.mnemonic li{margin:7px 0;font-size:13px;color:var(--muted)}
+    footer{padding:28px 0 44px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+
+    .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:40;opacity:0;pointer-events:none;transition:.2s}
+    .drawer{position:fixed;right:0;top:0;bottom:0;width:min(620px,100%);z-index:41;background:var(--paper);box-shadow:-20px 0 60px rgba(0,0,0,.22);transform:translateX(102%);transition:.28s ease;overflow:auto;padding:24px}
+    .drawer.open{transform:none}.drawer-backdrop.open{opacity:1;pointer-events:auto}
+    .drawer-close{position:sticky;top:0;float:right;border:1px solid var(--line);background:var(--paper2);border-radius:10px;padding:7px 11px;cursor:pointer;z-index:2}
+    .drawer-kicker{color:var(--teal);font-size:12px;font-weight:800;margin-top:20px}.drawer h2{font-size:30px;line-height:1.2;margin:5px 0 7px}.drawer>.drawer-content>p{color:var(--muted)}
+    .io{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.io div{padding:12px;background:var(--paper2);border-radius:11px}.io strong{display:block;font-size:12px;color:var(--teal);margin-bottom:4px}.io span{font-size:13px}
+    .detail-section{margin-top:22px}.detail-section h3{font-size:16px;margin:0 0 10px}.detail-section ul{padding-left:20px;margin:0}.detail-section li{margin:7px 0;font-size:13px}
+    .problem-row{display:grid;grid-template-columns:1fr 1.1fr;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.problem-row b{color:var(--red)}
+    .tags{display:flex;flex-wrap:wrap;gap:7px}.tag{padding:5px 8px;border-radius:7px;background:var(--paper2);font-size:11px;color:var(--blue)}
+
+    @media(max-width:980px){.system-map{grid-template-columns:1fr 1fr}.system-card:first-child{grid-column:1/-1}.crosscut{grid-template-columns:1fr 1fr}.principles{grid-template-columns:1fr 1fr}.risk-layout{grid-template-columns:1fr}.risk-list{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){
+      .wrap{width:min(100% - 20px,1480px)}.intro{grid-template-columns:1fr;padding-top:22px}.memory-tag{min-width:0}.toolbar-inner{align-items:flex-start}.section{padding:27px 0}.section-head{align-items:flex-start;flex-direction:column}
+      .map-shell{padding:13px;border-radius:18px}.stage-grid{gap:48px 16px}.stage{min-height:142px;padding:13px}.stage:after{display:none}.topics{grid-template-columns:1fr 1fr}.parallel-lane{grid-template-columns:auto 1fr}.parallel-lane code{grid-column:2;white-space:normal}.storybar{align-items:flex-start;flex-direction:column}.story-actions{align-self:flex-end}
+      .system-map,.principles,.study{grid-template-columns:1fr}.system-card:first-child{grid-column:auto}.crosscut{grid-template-columns:1fr}.risk-list{grid-template-columns:1fr 1fr}.issue-grid{grid-template-columns:1fr}.io{grid-template-columns:1fr}.problem-row{grid-template-columns:1fr}.drawer{padding:16px}.drawer h2{font-size:26px}
+    }
+    @media(max-width:430px){.seg button{padding:7px 9px;font-size:12px}.icon-btn{font-size:12px}.stage-grid{grid-template-columns:1fr!important}.topics{grid-template-columns:1fr}.risk-list{grid-template-columns:1fr}.legend{gap:7px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.topic:after{animation:none}.stage,.drawer,.drawer-backdrop{transition:none!important}}
+  </style>
+</head>
+<body data-view="business">
+  <header class="wrap intro">
+    <div>
+      <h1>一笔消费贷，穿过怎样的云原生系统？</h1>
+      <p>从渠道申请到贷后管理，把业务动作、微服务协作、Kafka 事件、风险控制与可观测能力叠在一张图上。先看全链路，再逐点拆解“哪里会坏、为何会坏、怎样修”。</p>
+    </div>
+    <aside class="memory-tag"><strong>10 站主线 + 1 条并行线</strong><span>接 · 受 · 验 · 审 · 签 · 借 · 放 · 账 · 还 · 结</span></aside>
+  </header>
+
+  <nav class="toolbar" aria-label="图解控制">
+    <div class="wrap toolbar-inner">
+      <div class="seg" aria-label="观察视角">
+        <button class="active" data-view-btn="business">业务视角</button>
+        <button data-view-btn="arch">架构视角</button>
+        <button data-view-btn="risk">问题视角</button>
+      </div>
+      <div class="controls">
+        <button class="icon-btn" id="playBtn" aria-pressed="false"><span id="playIcon">Ⅱ</span><span id="playText">暂停流动</span></button>
+        <label class="speed">速度 <input id="speedRange" type="range" min="0.4" max="2.4" value="1" step="0.2"><span id="speedText">1.0×</span></label>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="wrap section" id="flow">
+      <div class="section-head">
+        <div><h2>信贷全生命周期</h2><p>彩色点表示请求与事件正在系统间移动。点击任一站，查看输入输出、协作系统、典型故障与治理方案。</p></div>
+        <div class="legend"><span><i class="dot d-blue"></i>同步调用</span><span><i class="dot d-orange"></i>Kafka 事件</span><span><i class="dot d-red"></i>风控决策</span><span><i class="dot d-green"></i>观测信号</span></div>
+      </div>
+      <div class="map-shell">
+        <div class="map-area" id="mapArea">
+          <canvas id="flowCanvas" aria-hidden="true"></canvas>
+          <div class="stage-grid" id="stageGrid"></div>
+        </div>
+        <div class="event-rail">
+          <div class="event-title"><i class="dot d-orange"></i>Kafka 事件脉络（解耦，不等于“万事都异步”）</div>
+          <div class="topics">
+            <div class="topic">application.submitted</div><div class="topic">kyc.completed</div><div class="topic">credit.decided</div><div class="topic">loan.disbursed</div><div class="topic">repayment.received</div>
+          </div>
+        </div>
+        <button class="parallel-lane" id="postLoanLane"><i aria-hidden="true"></i><span><strong>贷后管理 · 从放款成功起并行运行，直至结清</strong>持续消费账务、还款、逾期与风险事件，驱动提醒、预警、催收和客户服务。</span><code>loan.disbursed → loan.closed</code></button>
+        <div class="storybar">
+          <p id="storyText"><strong>故事模式：</strong> 点击“下一站”，跟着一笔申请逐站前进。</p>
+          <div class="story-actions"><button id="prevStage">←</button><button id="nextStage">下一站 →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="systems">
+      <div class="section-head"><div><h2>系统如何分层协作</h2><p>业务服务负责领域规则，基础设施提供可靠积木，横切能力贯穿每次调用。边界清楚，才便于独立演进与故障隔离。</p></div></div>
+      <div class="system-map">
+        <article class="system-card"><h3>业务域服务</h3><p>按业务能力拆分，而不是按数据库表拆分。</p><div class="stack"><div class="stack-item">客户域 <b>客户 / KYC / 影像</b></div><div class="stack-item">信贷域 <b>申请 / 授信 / 合同</b></div><div class="stack-item">资产域 <b>借据 / 放款 / 还款</b></div><div class="stack-item">风险域 <b>反欺诈 / 决策 / 模型</b></div></div></article>
+        <article class="system-card"><h3>数据与消息底座</h3><p>不同数据形态，选择不同存储职责。</p><div class="stack"><div class="stack-item">MySQL / 分库分表 <b>交易事实</b></div><div class="stack-item">Redis <b>热点与幂等</b></div><div class="stack-item">Kafka <b>事件与削峰</b></div><div class="stack-item">对象存储 <b>合同与影像</b></div></div></article>
+        <article class="system-card"><h3>云原生运行底座</h3><p>让服务可调度、可伸缩、可恢复。</p><div class="stack"><div class="stack-item">Kubernetes <b>编排与自愈</b></div><div class="stack-item">Service Mesh <b>流量治理</b></div><div class="stack-item">配置 / 密钥中心 <b>动态配置</b></div><div class="stack-item">CI/CD + GitOps <b>可回滚发布</b></div></div></article>
+        <div class="crosscut">
+          <div class="cross-item"><strong>指标 Metrics</strong><span>Prometheus + Grafana：RED/USE、业务成功率、SLO</span></div>
+          <div class="cross-item"><strong>日志 Logs</strong><span>结构化日志 + traceId，集中检索并脱敏</span></div>
+          <div class="cross-item"><strong>链路 Traces</strong><span>OpenTelemetry：定位跨服务慢点与错误传播</span></div>
+          <div class="cross-item"><strong>安全 Security</strong><span>零信任、最小权限、密钥轮换、审计留痕</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="principles">
+      <div class="section-head"><div><h2>云原生原则，不是技术名词清单</h2><p>每条原则都要落到信贷业务的可验证结果：高峰不崩、失败可恢复、变更可回滚、决策可解释、数据可追溯。</p></div></div>
+      <div class="principles" id="principleGrid"></div>
+    </section>
+
+    <section class="wrap section" id="risk">
+      <div class="section-head"><div><h2>风险系统：贯穿全程的“第二条主线”</h2><p>风控不是授信审批处的一次调用。从设备、身份、额度、支用、交易到贷后预警，每一步都在累积证据与反馈。</p></div></div>
+      <div class="risk-layout">
+        <aside class="risk-index"><h3>六层风险防线</h3><div class="risk-list" id="riskList"></div></aside>
+        <article class="risk-detail" id="riskDetail"></article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="study">
+      <div class="section-head"><div><h2>理解以后，再把它记住</h2><p>用“业务站点 + 系统动作 + 失败补偿”三问法复习，不背孤立组件。</p></div></div>
+      <div class="study">
+        <article class="quiz"><h3>抽认卡</h3><p>先回答，再翻面；系统会随机换题。</p><div class="quiz-card" id="quizCard"><div id="quizQ"></div><div class="answer" id="quizA"></div></div><div class="quiz-controls"><button id="revealQuiz">显示答案</button><button id="nextQuiz">换一题</button></div></article>
+        <article class="mnemonic"><h3>一条主线，四个反复检查</h3><p>每经过一站，都问同样的四句话。</p><div class="mnemonic-line">谁来？做什么？失败怎么办？如何看见？</div><ol><li><b>谁来：</b>入口与身份是否可信、权限是否最小？</li><li><b>做什么：</b>领域边界、数据归属、同步还是异步？</li><li><b>失败怎么办：</b>超时、重试、幂等、补偿、降级是否成套？</li><li><b>如何看见：</b>指标、日志、链路、审计是否能还原现场？</li></ol></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">学习提示：图中的系统名称是通用参考架构。真实项目应结合产品形态、监管要求、团队规模与已有系统，先划清领域边界，再选择技术。</div></footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <button class="drawer-close" id="drawerClose">关闭 ×</button><div class="drawer-content" id="drawerContent"></div>
+  </aside>
+
+<script>
+(function(){
+  const stages=[
+    {name:'渠道接入',short:'用户提交申请',desc:'App、小程序、Web、合作渠道统一进入',sys:'CDN / WAF / API 网关 / BFF',risk:'流量突增、伪造请求、重复提交',input:'手机号、产品、设备与申请资料',output:'requestId、渠道标识、标准化请求',event:'application.submitted',systems:['API 网关','渠道 BFF','OAuth/OIDC','设备指纹'],principles:['弹性伸缩','零信任','限流熔断','幂等'],problems:[['突发流量压垮后端','WAF + 网关分层限流；HPA 按并发/队列扩容'],['多渠道协议各异','BFF 做渠道适配，领域服务只接收统一模型'],['重复点击生成多笔申请','客户端幂等键 + Redis 原子占位 + 数据库唯一约束'],['机器人批量撞库','设备指纹、行为验证码、风险限频与黑名单']],solutions:['入口层只做通用治理，不塞入授信规则','业务错误与技术错误分开编码','把渠道、用户、设备、traceId 写入统一上下文']},
+    {name:'客户受理',short:'建立申请与流程状态',desc:'校验必填项，创建申请单并启动编排',sys:'申请服务 / 流程引擎 / 客户服务',risk:'长事务、状态漂移、资料缺失',input:'标准化申请、产品规则、客户档案',output:'申请号、当前状态、待办任务',event:'case.accepted',systems:['申请服务','流程引擎','客户主数据','Outbox'],principles:['领域拆分','状态机','最终一致性','可恢复'],problems:[['跨服务大事务锁表','本地事务 + Saga 补偿，禁止跨库 2PC 滥用'],['流程状态被重复回调覆盖','显式状态机校验合法迁移，使用版本号乐观锁'],['数据库成功但事件丢失','Transactional Outbox 与 CDC 确保事实和事件一致'],['资料不全仍向后流转','Schema 校验 + 规则化材料清单 + 人工补件分支']],solutions:['申请服务拥有申请事实，流程引擎拥有编排状态','每个步骤记录开始、完成、失败与补偿','所有外部回调以业务键幂等']},
+    {name:'身份核验',short:'确认“你是你”',desc:'实名、OCR、活体、银行卡与运营商核验',sys:'KYC 服务 / OCR / 活体 / 三方适配器',risk:'冒用身份、三方超时、隐私泄露',input:'证件影像、活体视频、实名要素',output:'KYC 结果、证据索引、失败原因',event:'kyc.completed',systems:['KYC 编排','OCR/活体','三方适配层','加密对象存储'],principles:['隐私保护','超时隔离','多活降级','证据留痕'],problems:[['照片翻拍或深度伪造','活体挑战 + 设备风险 + 多模态比对，命中转人工'],['单一供应商故障卡死流程','适配器隔离、超时、熔断；合规前提下多供应商切换'],['重试造成重复计费','调用幂等号 + 结果短缓存 + 明确可重试错误'],['敏感影像在日志中泄露','字段分级、传输/存储加密、日志脱敏、短期授权 URL']],solutions:['只保存必要证据与索引，设置留存周期','核验结果携带供应商、版本、时间与原因码','高风险失败不要自动无限重试']},
+    {name:'授信审批',short:'判断“能借多少”',desc:'反欺诈、征信、规则、模型与人工审批',sys:'决策引擎 / 特征平台 / 模型服务 / 征信',risk:'特征过期、模型漂移、决策黑盒',input:'客户、KYC、征信、行为与设备特征',output:'通过/拒绝/转人工、额度、定价因子',event:'credit.decided',systems:['反欺诈引擎','规则引擎','特征平台','模型服务','人工审批台'],principles:['可解释','版本化','低延迟','灰度发布'],problems:[['在线离线特征不一致','统一特征定义与时间点，训练/服务同源，记录特征快照'],['模型升级导致通过率异常','影子流量 + 小比例灰度 + 指标护栏 + 一键回滚'],['征信/三方依赖变慢','超时预算、舱壁隔离、有限降级或转人工，绝不默认通过'],['无法解释拒绝原因','规则命中链、模型原因码、版本与输入快照全量审计']],solutions:['先反欺诈，再做信用风险与额度定价','规则和模型分层：规则兜底、模型排序','持续监控 PSI、通过率、坏账率及群体差异']},
+    {name:'借款合同',short:'把权利义务固化',desc:'合同生成、要素确认、电子签署与存证',sys:'合同服务 / 模板中心 / 电子签 / 存证',risk:'模板错版、要素篡改、回调丢失',input:'额度、利率、期限、费用与客户信息',output:'已签合同、签署证据、合同哈希',event:'contract.signed',systems:['合同服务','模板中心','电子签平台','对象存储/存证'],principles:['不可抵赖','版本管理','幂等回调','审计'],problems:[['合同模板与产品错配','模板版本与产品版本强绑定，发布需双人复核'],['渲染前后要素被修改','签署前冻结快照，对 PDF 计算哈希并核验'],['签署回调重复或乱序','回调验签 + 事件时间 + 状态机 + 幂等处理'],['合同文件不可追溯','加密存储、WORM/存证、访问审计与生命周期管理']],solutions:['合同正文、展示要素、计算口径同源','签署证据链独立于业务状态保存','下载权限短时化、最小化并可审计']},
+    {name:'借款 / 支用',short:'客户发起额度支用',desc:'校验可用额度、用途、期限与收款账户',sys:'借款服务 / 额度中心 / 实时风控',risk:'额度并发超卖、账户换绑、重复支用',input:'支用金额、期限、用途、收款账户',output:'借据、额度冻结、放款指令',event:'drawdown.requested',systems:['借款服务','额度中心','实时风控','产品定价'],principles:['强一致边界','原子扣减','再次风控','防重'],problems:[['两个请求同时占用同一额度','额度中心原子冻结，数据库条件更新/序列化业务键'],['授信后风险已发生变化','支用时再次做设备、账户、名单与额度风险校验'],['换绑收款卡后立即大额支用','敏感变更冷静期 + 强认证 + 风险加权'],['借据创建与额度冻结不一致','本地事实 + Saga；失败释放额度，补偿可重入']],solutions:['授信是资格，支用才产生债权，不要混为一次交易','额度冻结、占用、释放要有完整流水','放款指令必须携带全局幂等键']},
+    {name:'放款',short:'资金真正出账',desc:'对接支付/银行通道，处理受理、成功与退票',sys:'放款服务 / 支付路由 / 银行通道',risk:'重复放款、通道不确定、回调乱序',input:'已审批借据、收款账户、放款指令',output:'通道流水、放款状态、资金结果',event:'loan.disbursed',systems:['放款服务','支付路由','银行适配器','清结算'],principles:['幂等优先','状态机','对账兜底','故障隔离'],problems:[['超时后重试造成双放','业务幂等键贯穿路由与通道；先查单再重试'],['通道返回“处理中”','把不确定态作为一等状态，异步查询而非判失败'],['回调早于同步响应','状态机只允许单向收敛，按事实优先级合并'],['业务成功但资金未达','日内/日终对账，差异自动挂账并进入人工队列']],solutions:['至少一次传递 + 端到端幂等，比追求“恰好一次”现实','通道隔离线程池、熔断与路由切换','资金结果必须由通道事实和对账共同闭环']},
+    {name:'账务核算',short:'形成债权与账单',desc:'建立借据、还款计划、分录与余额',sys:'核心账务 / 计费引擎 / 总账接口',risk:'余额不平、重复记账、利息口径错',input:'放款事实、合同计价要素',output:'借据余额、还款计划、会计分录',event:'ledger.posted',systems:['借据服务','计费引擎','分录引擎','总账/数据仓库'],principles:['不可变流水','复式记账','可重放','对账'],problems:[['直接改余额无法追溯','以不可变业务流水/分录为事实，余额是可重建视图'],['重复消费放款事件','eventId 去重 + 会计业务键唯一约束'],['利率/天数口径不一致','计价参数版本化，合同、试算与账务共享口径'],['分录借贷不平','复式记账校验，批次封账前自动平衡检查']],solutions:['任何冲正都用反向分录，不删除历史','事件重放必须可控、可审计、可按账户隔离','每日业务账、支付账、总账三方核对']},
+    {name:'还款',short:'收款、核销与结清',desc:'主动还款、代扣、部分还款、提前结清',sys:'还款服务 / 代扣 / 核销引擎 / 对账',risk:'重复扣款、核销顺序错、渠道迟到',input:'还款意愿/扣款结果、账单余额',output:'收款流水、核销明细、剩余余额',event:'repayment.received',systems:['还款服务','支付/代扣','核销引擎','对账平台'],principles:['资金安全','顺序确定','延迟容忍','补偿'],problems:[['用户重复点击被多扣','还款单幂等 + 在途订单展示 + 通道防重'],['本金利息费用核销顺序错误','核销规则版本化并留快照，规则变更不回溯污染'],['通道 T+1 才确认','收款、到账、核销分状态；迟到事件按账务日处理'],['退款/冲正未恢复账单','以反向流水补偿，并重新计算余额与计划']],solutions:['支付事实与核销事实分离，再用对账闭环','结清证明必须在所有在途交易确认后生成','逾期扣款要遵守授权、频次与告知规则']},
+    {name:'结清 / 关闭',short:'债务清零并完成归档',desc:'确认所有在途资金结束，出具结清证明并关闭借据',sys:'账务 / 合同 / 额度 / 归档服务',risk:'在途未清、证明早发、额度恢复错误',input:'本金利息费用清零、在途交易确认',output:'结清证明、借据关闭、额度恢复或合同归档',event:'loan.closed',systems:['借据服务','账务服务','结清证明','合同归档','额度中心'],principles:['状态收敛','一致性校验','不可抵赖','生命周期治理'],problems:[['仍有在途扣款却提前结清','等待支付终态并执行账户级关账检查'],['结清证明与账务余额不一致','证明只从权威账务快照生成并绑定版本'],['额度恢复重复或错误','loan.closed 事件幂等消费，额度流水可追溯'],['个人数据无限期保留','按法规与合同配置保留期、归档与删除任务']],solutions:['“余额为零”不等于“立即关闭”，先处理在途交易','关闭动作生成不可变审计记录','贷后并行线在关闭后停止活跃监控并进入归档']}
+  ];
+  const postLoan={name:'贷后管理（并行线）',short:'放款后持续监测直至结清',desc:'不是还款后的串行步骤；借据生效后立即启动，与账务、还款、预警、客服和催收长期并行。',sys:'贷后服务 / 预警平台 / 催收 / 客服',risk:'预警滞后、失联、策略扰民、数据孤岛',input:'放款、账务、行为、还款、逾期与外部风险变化',output:'提醒、风险分层、催收任务、处置记录',event:'risk.alerted',systems:['贷后监控','预警模型','催收策略','客服工单','资产分析'],principles:['事件驱动','人机协同','合规审计','反馈学习'],problems:[['逾期后才发现风险','从放款成功起滚动监控余额、行为与外部信号，提前生成预警'],['催收策略一刀切','按风险与客户状态分层，频次/时段/渠道受规则约束'],['系统各说各话','以账户与借据为主键汇聚时间线，统一状态口径'],['模型只预测不闭环','处置结果回流特征与训练集，监控策略收益与副作用']],solutions:['贷后从 loan.disbursed 开始消费事件，不等待首次还款','风险预警、客户服务与催收拆分职责但共享时间线','所有触达记录可审计、可解释、可申诉','loan.closed 后终止活跃任务并进入归档']};
+
+  const principles=[
+    ['P01','按领域拆分','围绕客户、申请、风险、合同、资产、账务划边界；数据由所属域负责。','避免“共享大库”让一次表结构修改拖垮整条链路。'],
+    ['P02','无状态与弹性','会话、任务状态放到可靠外部存储，实例可随时扩缩、重建。','入口洪峰时扩容 BFF/网关；不要把流程状态留在单个 Pod 内存。'],
+    ['P03','韧性设计','超时、重试、熔断、舱壁、降级必须组合设计。','重试要有预算和抖动；资金与授信场景的降级通常是“转人工/稍后处理”，不是默认通过。'],
+    ['P04','事件驱动','Kafka 传播已经发生的业务事实，削峰并解耦下游。','事件使用过去式、带 eventId/schemaVersion；消费者幂等，支持死信与重放。'],
+    ['P05','可观测性','指标回答“是否异常”，链路回答“哪里慢”，日志回答“发生了什么”。','统一 traceId；技术 SLO 与业务成功率同时监控，日志默认脱敏。'],
+    ['P06','持续交付','小批量、可回滚、自动验证，降低规则与模型变更半径。','金丝雀发布搭配通过率、错误率、账务差异等护栏，越线自动回滚。'],
+    ['P07','安全左移','身份、权限、数据分级、依赖漏洞与密钥管理进入流水线。','零信任服务身份、mTLS、短期凭证、最小权限；PII 不进入普通日志。'],
+    ['P08','自动化治理','配置即代码、策略即代码、基础设施即代码，让环境可复制可审计。','准入控制阻止高权限容器、未设资源限制或含明文密钥的部署。'],
+    ['P09','一致性分级','余额与额度强调强一致；通知、画像、分析允许最终一致。','先识别业务不变量，再决定事务边界；不是所有服务都追求同一种一致性。']
+  ];
+
+  const risks=[
+    {name:'设备与渠道风险',where:'申请前',level:'高频',intro:'先判断“这台设备和这次操作像不像真人本人”。',issues:[['典型信号','设备篡改、模拟器、代理 IP、群控、短时高频'],['常见误区','只封 IP；攻击者换代理即可绕过，也容易误伤共享网络']],solution:['设备指纹 + 行为序列 + 网络风险联合评分','规则实时拦截，高不确定样本进入挑战或人工','反馈作弊标签，持续更新图谱与特征']},
+    {name:'身份与欺诈风险',where:'KYC',level:'高损',intro:'防止证件冒用、团伙包装与虚假资料。',issues:[['典型信号','证件/人脸不一致、联系方式关联异常、资料高度相似'],['常见误区','把一次实名认证等同于全程可信']],solution:['活体与要素交叉验证','关联图谱识别团伙与中介包装','高风险变更后重新认证']},
+    {name:'信用风险',where:'授信',level:'核心',intro:'评估未来偿付能力与意愿，并确定额度和价格。',issues:[['典型信号','负债、收入稳定性、历史履约、申请密度'],['常见误区','只看模型 AUC，不看校准、稳定性和业务成本']],solution:['规则、评分卡/模型、政策边界分层','训练与在线特征同源','持续监控 PSI、逾期迁徙与实际损失']},
+    {name:'交易与支用风险',where:'借款/放款',level:'实时',intro:'授信通过后，账户和设备仍可能被盗用。',issues:[['典型信号','换卡后大额支用、异地设备、收款账户异常'],['常见误区','复用授信结果，不做支用时复核']],solution:['支用前轻量实时决策','敏感信息变更冷静期与强认证','额度冻结和放款幂等协同']},
+    {name:'资金与账务风险',where:'放款/还款',level:'零容忍',intro:'防止多付、多扣、少记与账实不符。',issues:[['典型信号','通道不确定态、重复事件、账务差异'],['常见误区','仅依赖同步返回作为资金最终事实']],solution:['全链路业务幂等键','不可变资金流水与复式分录','日内监控 + 日终多方对账']},
+    {name:'贷后与模型风险',where:'贷后',level:'持续',intro:'识别风险恶化，也防止策略本身带来合规与客户伤害。',issues:[['典型信号','还款行为变化、联络失效、策略收益衰减'],['常见误区','只追求回收率，不监控触达合规与模型漂移']],solution:['预警分层与人机协同','触达频次、时段、渠道策略化控制','模型效果、偏差与副作用一起监控']}
+  ];
+
+  const quizzes=[
+    ['为什么 Kafka 不能替代数据库事务？','Kafka 传递事件；业务不变量仍需在服务自己的事务边界内保证，常用 Outbox 连接两者。'],
+    ['放款超时后，为什么不能直接重试？','超时不等于失败。应先用同一幂等键查单，确认未受理后再按策略重试，避免双放。'],
+    ['Redis 适合保存唯一账务事实吗？','不适合。Redis 可做热点、锁与幂等辅助；权威资金事实应在持久化账务流水中。'],
+    ['监控里 Metrics、Logs、Traces 各回答什么？','指标看是否异常，链路看哪里慢/错，日志还原具体发生了什么。'],
+    ['授信通过后，支用为什么还要风控？','授信到支用之间设备、账户、名单与行为可能变化，支用才真正触发资金风险。'],
+    ['“至少一次”消息如何避免重复业务？','生产侧 Outbox 保证不丢，消费侧用 eventId/业务键幂等，重复投递不产生重复结果。']
+  ];
+
+  const grid=document.getElementById('stageGrid');
+  stages.forEach((s,i)=>{
+    const b=document.createElement('button');b.className='stage';b.dataset.stage=i;b.innerHTML=`<span class="stage-num">${String(i+1).padStart(2,'0')}</span><h3>${s.name}</h3><p class="default-text">${s.desc}</p><p class="system">${s.sys}</p><p class="risk-text">${s.risk}</p>`;grid.appendChild(b);
+  });
+  const pg=document.getElementById('principleGrid');
+  principles.forEach(p=>{const a=document.createElement('article');a.className='principle';a.innerHTML=`<span class="code">${p[0]}</span><h3>${p[1]}</h3><p>${p[2]}</p><button>展开信贷落点 ↓</button><div class="expand">${p[3]}</div>`;a.querySelector('button').onclick=()=>{a.classList.toggle('open');a.querySelector('button').textContent=a.classList.contains('open')?'收起 ↑':'展开信贷落点 ↓'};pg.appendChild(a)});
+
+  let riskIdx=0;const riskList=document.getElementById('riskList'),riskDetail=document.getElementById('riskDetail');
+  risks.forEach((r,i)=>{const b=document.createElement('button');b.innerHTML=`${r.name}<span>${r.where}</span>`;b.onclick=()=>renderRisk(i);riskList.appendChild(b)});
+  function renderRisk(i){riskIdx=i;[...riskList.children].forEach((b,j)=>b.classList.toggle('active',i===j));const r=risks[i];riskDetail.innerHTML=`<div class="risk-hero"><div><h3>${r.name}</h3><p>${r.intro}</p></div><span class="severity">${r.level}</span></div><div class="issue-grid">${r.issues.map(x=>`<div class="issue"><strong>${x[0]}</strong><p>${x[1]}</p></div>`).join('')}</div><div class="solution-block"><strong>治理闭环</strong><ul>${r.solution.map(x=>`<li>${x}</li>`).join('')}</ul></div>`}
+  renderRisk(0);
+
+  document.querySelectorAll('[data-view-btn]').forEach(b=>b.onclick=()=>{document.body.dataset.view=b.dataset.viewBtn;document.querySelectorAll('[data-view-btn]').forEach(x=>x.classList.toggle('active',x===b))});
+
+  const drawer=document.getElementById('drawer'),back=document.getElementById('drawerBackdrop'),content=document.getElementById('drawerContent');let currentStage=-1;
+  function openStage(i,fromStory=false){currentStage=i;const s=i===10?postLoan:stages[i];document.querySelectorAll('.stage').forEach((n,j)=>n.classList.toggle('active',i===j));const kicker=i===10?'放款后并行线':`第 ${i+1} 站`;content.innerHTML=`<div class="drawer-kicker">${kicker} · ${s.event}</div><h2 id="drawerTitle">${s.name}</h2><p>${s.desc}</p><div class="io"><div><strong>输入</strong><span>${s.input}</span></div><div><strong>输出</strong><span>${s.output}</span></div></div><div class="detail-section"><h3>协作系统</h3><div class="tags">${s.systems.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div><div class="detail-section"><h3>典型问题 → 对策</h3>${s.problems.map(x=>`<div class="problem-row"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div><div class="detail-section"><h3>架构落地检查</h3><ul>${s.solutions.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="detail-section"><h3>关联原则</h3><div class="tags">${s.principles.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>`;
+    if(!fromStory){drawer.classList.add('open');back.classList.add('open');document.body.style.overflow='hidden';document.getElementById('drawerClose').focus()}
+  }
+  grid.addEventListener('click',e=>{const n=e.target.closest('.stage');if(n)openStage(+n.dataset.stage)});
+  document.getElementById('postLoanLane').onclick=()=>openStage(10);
+  function closeDrawer(){drawer.classList.remove('open');back.classList.remove('open');document.body.style.overflow='';document.querySelectorAll('.stage').forEach(n=>n.classList.remove('active'))}
+  document.getElementById('drawerClose').onclick=closeDrawer;back.onclick=closeDrawer;document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+  let story=-1;const storyText=document.getElementById('storyText');
+  function storyMove(dir){story=(story+dir+stages.length)%stages.length;openStage(story,true);const s=stages[story];storyText.innerHTML=`<strong>${story+1}/${stages.length} · ${s.name}：</strong> ${s.short}。事件 <code>${s.event}</code> 将事实传给下游。`;document.querySelector(`.stage[data-stage="${story}"]`).scrollIntoView({behavior:'smooth',block:'center'})}
+  document.getElementById('nextStage').onclick=()=>storyMove(1);document.getElementById('prevStage').onclick=()=>storyMove(-1);
+
+  let qidx=Math.floor(Math.random()*quizzes.length);const qc=document.getElementById('quizCard');
+  function renderQuiz(){qc.classList.remove('revealed');document.getElementById('quizQ').textContent=quizzes[qidx][0];document.getElementById('quizA').textContent=quizzes[qidx][1];document.getElementById('revealQuiz').textContent='显示答案'}renderQuiz();
+  document.getElementById('revealQuiz').onclick=()=>{qc.classList.toggle('revealed');document.getElementById('revealQuiz').textContent=qc.classList.contains('revealed')?'隐藏答案':'显示答案'};
+  document.getElementById('nextQuiz').onclick=()=>{qidx=(qidx+1+Math.floor(Math.random()*(quizzes.length-1)))%quizzes.length;renderQuiz()};
+
+  // Responsive snake layout and animated canvas routes
+  const mapArea=document.getElementById('mapArea'),canvas=document.getElementById('flowCanvas'),ctx=canvas.getContext('2d');let routes=[],paused=false,speed=1,start=performance.now(),lastCols=0;
+  function css(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()}
+  function layout(){
+    const w=grid.clientWidth;let cols=w>1050?5:w>670?3:w>400?2:1;lastCols=cols;grid.style.gridTemplateColumns=`repeat(${cols},minmax(0,1fr))`;
+    [...grid.children].forEach((el,i)=>{const row=Math.floor(i/cols)+1;let col=(i%cols)+1;if(row%2===0)col=cols-col+1;el.style.gridRow=row;el.style.gridColumn=col});
+    requestAnimationFrame(calcRoutes);
+  }
+  function calcRoutes(){
+    const dpr=Math.min(devicePixelRatio||1,2),rect=mapArea.getBoundingClientRect();canvas.width=Math.max(1,rect.width*dpr);canvas.height=Math.max(1,rect.height*dpr);canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';ctx.setTransform(dpr,0,0,dpr,0,0);routes=[];const nodes=[...grid.children];
+    for(let i=0;i<nodes.length-1;i++){const a=nodes[i].getBoundingClientRect(),b=nodes[i+1].getBoundingClientRect();let p0,p1,p2,p3;if(Math.abs(a.top-b.top)<15){const right=b.left>a.left;p0={x:(right?a.right:a.left)-rect.left,y:a.top+a.height/2-rect.top};p3={x:(right?b.left:b.right)-rect.left,y:b.top+b.height/2-rect.top};const dx=(p3.x-p0.x)*.5;p1={x:p0.x+dx,y:p0.y};p2={x:p3.x-dx,y:p3.y}}else{p0={x:a.left+a.width/2-rect.left,y:a.bottom-rect.top};p3={x:b.left+b.width/2-rect.left,y:b.top-rect.top};const dy=(p3.y-p0.y)*.55;p1={x:p0.x,y:p0.y+dy};p2={x:p3.x,y:p3.y-dy}}routes.push([p0,p1,p2,p3])}
+  }
+  function bez(r,t){const m=1-t;return{x:m*m*m*r[0].x+3*m*m*t*r[1].x+3*m*t*t*r[2].x+t*t*t*r[3].x,y:m*m*m*r[0].y+3*m*m*t*r[1].y+3*m*t*t*r[2].y+t*t*t*r[3].y}}
+  function draw(now){const W=canvas.clientWidth,H=canvas.clientHeight;ctx.clearRect(0,0,W,H);const lc=css('--line'),colors=[css('--blue'),css('--orange'),css('--red'),css('--green')];routes.forEach((r,ri)=>{ctx.beginPath();ctx.moveTo(r[0].x,r[0].y);ctx.bezierCurveTo(r[1].x,r[1].y,r[2].x,r[2].y,r[3].x,r[3].y);ctx.strokeStyle=lc;ctx.lineWidth=2;ctx.setLineDash([5,7]);ctx.stroke();ctx.setLineDash([]);const end=bez(r,.93),tip=bez(r,1);const ang=Math.atan2(tip.y-end.y,tip.x-end.x);ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(tip.x-8*Math.cos(ang-.45),tip.y-8*Math.sin(ang-.45));ctx.lineTo(tip.x-8*Math.cos(ang+.45),tip.y-8*Math.sin(ang+.45));ctx.closePath();ctx.fillStyle=lc;ctx.fill();for(let j=0;j<3;j++){let t=((now-start)*.00018*speed+j/3+ri*.11)%1;if(paused)t=((pauseAt-start)*.00018*speed+j/3+ri*.11)%1;const p=bez(r,t);ctx.beginPath();ctx.arc(p.x,p.y,j===0?4.5:3,0,Math.PI*2);ctx.fillStyle=colors[(ri+j)%colors.length];ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0}});requestAnimationFrame(draw)}
+  let pauseAt=0;document.getElementById('playBtn').onclick=()=>{paused=!paused;if(paused){pauseAt=performance.now();document.body.classList.add('paused')}else{start+=performance.now()-pauseAt;document.body.classList.remove('paused')}document.getElementById('playIcon').textContent=paused?'▶':'Ⅱ';document.getElementById('playText').textContent=paused?'继续流动':'暂停流动';document.getElementById('playBtn').setAttribute('aria-pressed',paused)};
+  document.getElementById('speedRange').oninput=e=>{speed=+e.target.value;document.getElementById('speedText').textContent=speed.toFixed(1)+'×'};
+  const ro=new ResizeObserver(layout);ro.observe(grid);window.addEventListener('load',layout);layout();requestAnimationFrame(draw);
+})();
+</script>
+<script src="../resource-nav.js"></script></body>
+</html>

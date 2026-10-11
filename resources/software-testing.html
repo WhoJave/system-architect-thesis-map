@@ -1,1 +1,1531 @@
-<!doctype html><html lang="zh-CN" data-resource-title="从零构建软件测试体系全貌" data-resource-files="./.data/software-testing.part1,./.data/software-testing.part2,./.data/software-testing.part3"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从零构建软件测试体系全貌</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1020;color:#eef2ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}main{max-width:720px;padding:32px}.muted{color:#94a3b8}a{color:#8ba4ff}pre{white-space:pre-wrap}</style></head><body><main id="loading"><h1>从零构建软件测试体系全貌</h1><p class="muted">正在加载完整交互页面…</p></main><script src="./resource-loader.js"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>从零构建软件测试体系全貌</title>
+<meta name="description" content="从零到全貌的软件测试与质量工程知识体系：测试种类、依据、阶段、用例设计、自动化、微服务、分布式、性能、安全、云原生、移动端、生产测试、质量治理与AI系统测试。">
+<style>
+:root{
+  --bg:#f6f7fb;--panel:#fff;--text:#172033;--muted:#667085;--line:#e6e8ef;
+  --brand:#315efb;--brand2:#7c3aed;--ok:#0f9d71;--warn:#c17d00;--danger:#cf3f4f;
+  --code:#111827;--shadow:0 10px 30px rgba(17,24,39,.06);--radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+a{color:var(--brand);text-decoration:none}
+code,pre{font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+header.hero{
+  padding:72px 24px 54px;
+  background:
+    radial-gradient(circle at 12% 20%,rgba(49,94,251,.18),transparent 28%),
+    radial-gradient(circle at 85% 20%,rgba(124,58,237,.16),transparent 30%),
+    linear-gradient(180deg,#ffffff 0%,#f7f8fc 100%);
+  border-bottom:1px solid var(--line)
+}
+.hero .wrap{max-width:1220px;margin:auto}
+.kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#315efb;font-weight:700;font-size:13px}
+h1{font-size:clamp(36px,5vw,68px);line-height:1.08;margin:18px 0 18px;letter-spacing:-.03em}
+.hero p{max-width:920px;color:var(--muted);font-size:18px}
+.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.stat{background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:24px}
+.layout{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;padding:24px}
+aside{position:sticky;top:14px;height:calc(100vh - 28px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+aside h3{margin:4px 0 12px}
+#search{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:12px;outline:none}
+#search:focus{border-color:#a5b4fc;box-shadow:0 0 0 3px #eef2ff}
+nav a{display:block;padding:7px 9px;border-radius:9px;color:#344054;font-size:14px}
+nav a:hover{background:#f2f4f7;color:#111827}
+main{min-width:0}
+section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin-bottom:22px;box-shadow:var(--shadow)}
+section h2{font-size:30px;line-height:1.25;margin:0 0 18px}
+h3{font-size:22px;line-height:1.35;margin:28px 0 12px}
+h4{font-size:18px;margin:22px 0 8px}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--brand);background:#f8faff;border-radius:0 10px 10px 0}
+pre{background:var(--code);color:#e5e7eb;padding:16px;border-radius:14px;overflow:auto;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;margin:16px 0;display:block;overflow:auto}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#f8fafc}
+.note,.tip,.warn{padding:14px 16px;border-radius:14px;margin:14px 0}
+.note{background:#eef4ff;border:1px solid #c7d7fe}
+.tip{background:#ecfdf3;border:1px solid #b7ebcd}
+.warn{background:#fff7e6;border:1px solid #f6d58b}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.card h4{margin-top:0}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#f2f4f7;font-size:12px;margin:2px 4px 2px 0}
+.mermaid{background:#fbfcff;border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto;white-space:pre-wrap}
+.mermaid-error{position:relative;padding-top:46px}
+.mermaid-error::before{content:attr(data-error);position:absolute;left:14px;top:10px;right:14px;padding:7px 10px;border-radius:8px;background:#fff7e6;border:1px solid #f6d58b;color:#8a5a00;font:13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}
+details{border-top:1px dashed var(--line);padding:12px 0}
+summary{cursor:pointer;font-weight:700}
+.topbtn{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border:0;border-radius:50%;background:#111827;color:#fff;cursor:pointer;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.badge{font-size:12px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--brand),var(--brand2));padding:4px 8px;border-radius:999px}
+@media(max-width:1100px){
+ .layout{grid-template-columns:1fr}
+ aside{position:relative;height:auto}
+ .hero-grid,.grid3{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+ .layout{padding:12px}
+ section{padding:20px}
+ .hero-grid,.grid2,.grid3{grid-template-columns:1fr}
+ h1{font-size:38px}
+}
+@media print{
+ aside,.topbtn{display:none}
+ .layout{display:block;max-width:none;padding:0}
+ section{box-shadow:none;break-inside:avoid}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Software Testing · Quality Engineering · Architecture</span>
+    <h1>从零构建软件测试体系全貌</h1>
+    <p>把测试从“开发完以后点一遍”提升为贯穿需求、设计、开发、集成、发布、生产和持续治理的完整质量工程体系。本文覆盖测试种类、依据、应用阶段、用例设计、自动化、微服务、分布式、数据层、性能、安全、云原生、移动端、生产验证、治理与 AI/LLM 系统测试。</p>
+    <div class="hero-grid">
+      <div class="stat"><b>10+</b><span>质量层级</span></div>
+      <div class="stat"><b>30+</b><span>测试类型与技术</span></div>
+      <div class="stat"><b>全生命周期</b><span>需求 → 生产</span></div>
+      <div class="stat"><b>架构师视角</b><span>风险 → 质量属性 → 验证</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside>
+  <h3>目录与检索</h3>
+  <input id="search" placeholder="搜索：幂等 / E2E / 混沌 / V模型 …">
+  <nav id="toc"></nav>
+</aside>
+
+<main id="content">
+
+<section id="overview">
+<h2>1. 测试体系总览：测试到底在做什么</h2>
+<blockquote>测试体系 = 在软件生命周期的不同阶段，用不同依据、不同粒度、不同技术手段，验证“系统是否做对了、做完整了、做稳定了、做安全了、做快了”。</blockquote>
+
+<pre class="mermaid">
+flowchart TD
+    A[软件测试体系] --> B[按测试阶段]
+    A --> C[按测试对象/粒度]
+    A --> D[按测试目的]
+    A --> E[按是否执行代码]
+    A --> F[按执行方式]
+    A --> G[按变更关系]
+    A --> H[按测试依据]
+    B --> B1[需求评审]
+    B --> B2[开发阶段]
+    B --> B3[联调阶段]
+    B --> B4[测试阶段]
+    B --> B5[上线前]
+    B --> B6[上线后]
+    C --> C1[单元测试]
+    C --> C2[组件测试]
+    C --> C3[集成测试]
+    C --> C4[接口测试]
+    C --> C5[系统测试]
+    C --> C6[端到端测试]
+    D --> D1[功能]
+    D --> D2[性能]
+    D --> D3[安全]
+    D --> D4[兼容性]
+    D --> D5[可靠性]
+    D --> D6[可用性]
+    D --> D7[恢复性]
+    E --> E1[静态测试]
+    E --> E2[动态测试]
+    F --> F1[人工测试]
+    F --> F2[自动化测试]
+    G --> G1[冒烟测试]
+    G --> G2[回归测试]
+    G --> G3[确认测试]
+    H --> H1[需求]
+    H --> H2[设计]
+    H --> H3[代码]
+    H --> H4[标准规范]
+    H --> H5[用户场景]
+    H --> H6[风险]
+</pre>
+
+<h3>软件测试本质上解决五个问题</h3>
+<ol>
+<li>功能对不对。</li>
+<li>数据对不对。</li>
+<li>系统之间协作对不对。</li>
+<li>异常情况下还能不能工作。</li>
+<li>上线以后扛不扛得住。</li>
+</ol>
+
+<p>例如一个消费金融类业务主链路：</p>
+<pre>用户注册
+↓
+实名认证
+↓
+额度申请
+↓
+风控审批
+↓
+授信
+↓
+借款
+↓
+放款
+↓
+还款</pre>
+
+<p>测试绝不只是“点击申请额度，看页面有没有报错”，还要验证输入、参数、网关、鉴权、风控、数据库、Redis、消息、幂等、并发、故障、重试、数据一致性以及安全。</p>
+
+<div class="tip"><b>核心认知：</b>测试是从用户界面一直延伸到数据、基础设施、依赖关系和生产运行状态的系统性验证。</div>
+</section>
+
+<section id="levels">
+<h2>2. 按测试层级划分：Unit → Component → Integration → API → System → E2E → UAT</h2>
+
+<pre class="mermaid">
+flowchart BT
+    A[Unit 单元测试]
+    B[Component 组件测试]
+    C[Integration 集成测试]
+    D[API 接口测试]
+    E[System 系统测试]
+    F[E2E 端到端测试]
+    G[Acceptance 验收测试]
+    A --> B --> C --> D --> E --> F --> G
+</pre>
+
+<h3>2.1 单元测试 Unit Test</h3>
+<p>测试最小代码单元：函数、方法、类、ViewModel、Service 方法、算法模块。核心要求是快、独立、稳定、可重复，并尽量不依赖真实外部系统。</p>
+<pre>数据库 → Mock
+网络 → Mock
+第三方 SDK → Mock
+时间 → Mock
+随机数 → Mock</pre>
+<p>如果一个 LoanService 测试必须真实连接数据库、风控和银行，那它已经不是严格意义的单元测试。</p>
+
+<h3>2.2 组件测试 Component Test</h3>
+<p>测试一个完整业务组件内部多个类、规则和模块的协作。例如“额度计算组件”内部可能包含额度规则、风险等级、产品规则、利率模型。关注点不是一个函数，而是一个可独立理解的组件。</p>
+
+<h3>2.3 集成测试 Integration Test</h3>
+<p>验证多个模块或服务组合后能否正确协作。常见问题包括字段命名不一致、协议不一致、事务边界问题、依赖配置问题。</p>
+<pre>单元测试：组件自己对不对
+集成测试：组件之间能不能合作</pre>
+
+<h3>2.4 接口测试 API Test</h3>
+<p>接口测试不仅看 HTTP 200，还要验证参数校验、认证、权限、业务规则、返回码、返回数据、数据库变化、幂等、重复提交、异常、超时和并发。</p>
+
+<table>
+<tr><th>场景</th><th>预期</th></tr>
+<tr><td>amount=10000</td><td>成功</td></tr>
+<tr><td>amount=-1</td><td>参数错误</td></tr>
+<tr><td>amount 超出额度</td><td>业务拒绝</td></tr>
+<tr><td>userId 不存在</td><td>用户不存在</td></tr>
+<tr><td>重复 requestId</td><td>不重复创建</td></tr>
+<tr><td>token 过期</td><td>401 / 指定鉴权错误</td></tr>
+</table>
+
+<h3>2.5 系统测试 System Test</h3>
+<p>验证完整系统是否满足需求。例如 App → Gateway → 用户 → 额度 → 风控 → 借款 → 支付的完整系统行为。</p>
+
+<h3>2.6 E2E 端到端测试</h3>
+<p>模拟真实用户完成完整业务链路，通常跨 App、Web、后端、数据库和第三方系统。优点是真实，缺点是慢、贵、易受环境影响、维护成本高。</p>
+
+<h3>2.7 验收测试 Acceptance / UAT</h3>
+<p>验证系统在业务上是否可以交付。通常由业务、产品或真实用户代表确认功能和规则是否满足预期。</p>
+
+<h3>2.8 测试金字塔</h3>
+<pre>              UI / E2E
+                 ▲
+                / \
+               /   \
+              / API \
+             /-------\
+            /集成测试 \
+           /---------\
+          / 单元测试   \
+         /_____________\</pre>
+<p>核心不是固定比例，而是：大量快速、稳定、低成本测试；较少昂贵、脆弱、跨系统测试。</p>
+</section>
+
+<section id="purpose">
+<h2>3. 按测试目的划分：功能、性能、安全、可靠性、兼容性与恢复</h2>
+
+<h3>3.1 功能测试 Functional Testing</h3>
+<p>验证系统是否按需求工作。常见测试设计方法包括等价类、边界值、判定表、因果图、状态迁移、场景法、错误推测。</p>
+
+<h3>3.2 性能测试 Performance Testing</h3>
+<div class="grid2">
+<div class="card"><h4>Load Test</h4><p>在预期负载下验证系统是否稳定，例如目标 5000 TPS。</p></div>
+<div class="card"><h4>Stress Test</h4><p>不断增加压力直到系统达到极限，寻找崩溃点。</p></div>
+<div class="card"><h4>Spike Test</h4><p>验证秒杀、热点等瞬间流量暴增场景。</p></div>
+<div class="card"><h4>Soak / Endurance</h4><p>连续运行 24h、72h、7 天，发现内存、连接、线程等泄漏。</p></div>
+<div class="card"><h4>Capacity Test</h4><p>确定最大用户数、连接数、订单量、数据规模等容量边界。</p></div>
+<div class="card"><h4>Scalability Test</h4><p>验证横向/纵向扩容后性能是否按预期提升。</p></div>
+</div>
+
+<h3>3.3 安全测试 Security Testing</h3>
+<p>覆盖认证、授权、敏感信息、输入攻击、漏洞、越权、重放、依赖风险等。典型问题包括 SQL Injection、XSS、CSRF、SSRF、IDOR、弱口令和 Token 问题。</p>
+
+<h3>3.4 兼容性测试 Compatibility</h3>
+<p>覆盖操作系统、浏览器、设备、分辨率、网络、数据库、SDK、客户端版本和 API 版本。</p>
+
+<h3>3.5 可靠性测试 Reliability</h3>
+<p>验证系统是否能够长期稳定运行，常关注 MTBF、MTTR、可用性和故障率。</p>
+
+<h3>3.6 容错测试 Fault Tolerance</h3>
+<p>主动制造 Redis、MySQL、MQ、服务、网络、磁盘等故障，验证降级、切换、重试、熔断和恢复行为。</p>
+
+<h3>3.7 混沌工程 Chaos Engineering</h3>
+<p>通过杀 Pod、断网络、增加延迟、制造丢包、模拟 AZ 故障来验证系统在真实故障下是否仍符合可靠性目标。</p>
+
+<h3>3.8 恢复测试 Recovery Testing</h3>
+<p>验证数据库、备份、日志、灾备等恢复能力，关注：</p>
+<ul><li><b>RTO：</b>多久恢复。</li><li><b>RPO：</b>最多允许丢多少数据。</li></ul>
+</section>
+
+<section id="lifecycle">
+<h2>4. 按软件生命周期划分：测试从需求开始，而不是从“测试阶段”开始</h2>
+
+<pre class="mermaid">
+flowchart LR
+    A[需求] --> B[设计] --> C[开发] --> D[构建] --> E[测试] --> F[发布] --> G[生产]
+</pre>
+
+<h3>4.1 需求阶段</h3>
+<p>测试需求本身是否清晰、完整、无歧义。例如“密码错误多次后锁定”必须继续追问：几次？多久？连续还是累计？不同设备怎么算？验证码错误算不算？</p>
+
+<h3>4.2 设计阶段</h3>
+<p>评审架构、数据库、接口、安全、幂等、状态、事务和依赖设计。很多线上事故的根因其实是设计阶段没有明确。</p>
+
+<h3>4.3 开发阶段</h3>
+<p>执行 Lint、静态分析、代码审查、单元测试、组件测试，并在 CI 中失败即阻断。</p>
+
+<h3>4.4 联调阶段</h3>
+<p>重点做接口、契约、集成测试，验证 App、Gateway、服务和数据层的协作。</p>
+
+<h3>4.5 系统测试阶段</h3>
+<p>集中验证功能、异常、兼容、性能、安全和可靠性。</p>
+
+<h3>4.6 上线前</h3>
+<p>进行冒烟、回归、性能基线、安全扫描、发布验证和数据迁移演练。</p>
+
+<h3>4.7 上线后</h3>
+<p>通过灰度、Canary、Feature Flag、Synthetic Monitoring、RUM、Chaos 和生产监控继续验证。</p>
+
+<h3>4.8 Shift Left 与 Shift Right</h3>
+<p><b>Shift Left：</b>尽早在需求、设计、开发发现缺陷。<br><b>Shift Right：</b>上线后通过生产验证、监控、灰度、实验和混沌继续验证质量。</p>
+</section>
+
+<section id="change">
+<h2>5. 变更相关测试：Smoke、Retest、Regression</h2>
+<h3>5.1 冒烟测试 Smoke Test</h3>
+<p>只测试最核心路径，判断当前构建是否值得继续测试。例如登录、额度查询、借款、还款。</p>
+<h3>5.2 确认测试 Retest</h3>
+<p>针对已经修复的具体 Bug 再次验证该问题本身是否解决。</p>
+<h3>5.3 回归测试 Regression Test</h3>
+<p>验证修改没有破坏原本正常的其他功能。自动化测试价值最大的场景之一就是回归。</p>
+</section>
+
+<section id="static-dynamic">
+<h2>6. 静态测试、动态测试、黑盒、白盒、灰盒</h2>
+<h3>6.1 静态测试</h3>
+<p>不运行程序，包括需求评审、设计评审、代码审查、Lint、SAST、静态代码扫描。</p>
+<h3>6.2 动态测试</h3>
+<p>运行程序并观察行为，包括 Unit、API、UI、Performance、Security 等。</p>
+<h3>6.3 黑盒测试</h3>
+<p>只关心输入与输出，不依赖内部实现。</p>
+<h3>6.4 白盒测试</h3>
+<p>知道代码逻辑并针对路径、分支和条件设计测试。</p>
+<h3>6.5 灰盒测试</h3>
+<p>掌握部分内部架构，例如数据库、Redis、MQ、接口，但不一定深入每个代码实现。企业中非常常见。</p>
+</section>
+
+<section id="basis">
+<h2>7. 测试依据：为什么要这样测</h2>
+<pre class="mermaid">
+flowchart TD
+ A[测试依据] --> B[需求]
+ A --> C[设计]
+ A --> D[协议/API Contract]
+ A --> E[行业规范]
+ A --> F[用户真实场景]
+ A --> G[风险]
+</pre>
+<p><b>需求：</b>定义业务应该做什么。<br>
+<b>设计：</b>定义系统如何实现，以及幂等、事务、状态等约束。<br>
+<b>API Contract：</b>定义字段、类型、范围、枚举、错误码。<br>
+<b>标准规范：</b>如 OWASP、行业安全规范、合规标准。<br>
+<b>用户场景：</b>如弱网、切后台、重复点击、网络切换。<br>
+<b>风险：</b>根据失败概率 × 影响决定测试深度。</p>
+</section>
+
+<section id="case-design">
+<h2>8. 测试用例设计：如何从需求系统性推导测试空间</h2>
+
+<h3>8.1 测试空间</h3>
+<p>完整测试空间至少包括：</p>
+<pre>输入空间
++
+状态空间
++
+环境空间
++
+时间空间</pre>
+
+<h3>8.2 等价类</h3>
+<p>把行为相同的一组输入划为一类，只选代表值测试，避免无意义穷举。</p>
+
+<h3>8.3 边界值</h3>
+<p>重点测试边界附近。例如范围 18～60，应关注 17、18、19、59、60、61。边界不仅是数字，也包括字符长度、日期、时间、数量和容量。</p>
+
+<h3>8.4 判定表</h3>
+<p>适合多个布尔条件组合，例如实名、年龄、风控、黑名单等组合业务规则。</p>
+
+<h3>8.5 因果图</h3>
+<p>强调条件之间 AND / OR / NOT 等逻辑关系，用于复杂规则系统。</p>
+
+<h3>8.6 状态迁移测试</h3>
+<p>适合订单、支付、贷款、审批、工单、物流、会员等生命周期业务。不仅测合法状态迁移，还要测非法迁移。</p>
+
+<pre class="mermaid">
+stateDiagram-v2
+    [*] --> 待审批
+    待审批 --> 审批通过
+    待审批 --> 审批拒绝
+    审批通过 --> 已放款
+    已放款 --> 还款中
+    还款中 --> 已结清
+</pre>
+
+<h3>8.7 场景法</h3>
+<p>按真实用户链路组织测试，并重点加入断网、重试、刷新、杀进程、重复点击、超时等异常节点。</p>
+
+<h3>8.8 错误推测</h3>
+<p>依靠工程经验判断高概率 Bug 区域，例如 iOS 中的生命周期、异步回调、WebView、Token、页面重复跳转等。</p>
+
+<h3>8.9 Pairwise 两两组合</h3>
+<p>用于解决设备 × OS × 网络 × 语言 × 用户状态等组合爆炸问题。目标是让任意两个因素的组合至少覆盖一次。</p>
+
+<h3>8.10 覆盖率</h3>
+<p>包括需求覆盖、语句覆盖、分支覆盖、条件覆盖、路径覆盖。但必须记住：</p>
+<div class="warn"><b>Coverage ≠ Quality。</b>覆盖率只能证明代码被执行过，不能证明逻辑正确。</div>
+</section>
+
+<section id="advanced-test-tech">
+<h2>9. 高级测试技术：探索式、TDD、BDD、Property、Mutation、Fuzz、Model-Based</h2>
+
+<h3>9.1 探索式测试 Exploratory Testing</h3>
+<p>边测试、边学习、边设计下一步。它不是“瞎点”，而是围绕目标、风险和假设不断探索复杂交互。</p>
+
+<h3>9.2 Ad Hoc Testing</h3>
+<p>几乎没有结构和计划的临时测试。与探索式测试相比，系统性更弱。</p>
+
+<h3>9.3 Session-Based Testing</h3>
+<p>把探索式测试组织成固定时间的 Session，例如 60～90 分钟，明确目标、覆盖范围、发现和后续调查点。</p>
+
+<h3>9.4 TDD</h3>
+<pre>Red → Green → Refactor</pre>
+<p>先写失败测试，再写最少代码通过测试，最后在测试保护下重构。价值不仅是测试，而是推动低耦合和可测试设计。</p>
+
+<h3>9.5 BDD</h3>
+<pre>Given 用户已有额度
+When 用户申请借款
+Then 系统按业务规则处理</pre>
+<p>用业务语言连接产品、开发和测试。</p>
+
+<h3>9.6 ATDD</h3>
+<p>在开发前由业务、测试、开发共同定义验收标准。</p>
+
+<h3>9.7 Property-Based Testing</h3>
+<p>不是只定义输入和输出，而是定义系统应永远成立的性质，例如“余额不能为负”“同一个 requestId 最多产生一个结果”，再自动生成大量输入验证。</p>
+
+<h3>9.8 Invariant Testing</h3>
+<p>针对系统不变量进行验证，例如资金不能凭空产生、还款后本金余额不能增加。</p>
+
+<h3>9.9 Mutation Testing</h3>
+<p>自动故意修改代码制造错误，例如把 <code>&gt;=</code> 改成 <code>&gt;</code>。如果测试仍全部通过，说明测试检测能力不足。</p>
+
+<h3>9.10 Fuzz Testing</h3>
+<p>用随机、畸形、超长、非法编码、异常嵌套等输入轰击解析器、协议、接口和文件处理逻辑。</p>
+
+<h3>9.11 Model-Based Testing</h3>
+<p>先建立状态模型，再自动生成状态迁移测试，适合订单、支付、审批和协议。</p>
+
+<h3>9.12 Formal Verification</h3>
+<p>对于分布式协议、高可靠系统，可用形式化规范、Model Checking、TLA+ 等手段验证死锁、安全属性和状态可达性。</p>
+</section>
+
+<section id="automation">
+<h2>10. 自动化测试体系：不是 Selenium，而是一整套工程能力</h2>
+
+<blockquote>自动化测试 = 测试代码 + 测试环境 + 测试数据 + Test Double + CI/CD + 报告 + 质量门禁。</blockquote>
+
+<pre class="mermaid">
+flowchart LR
+    A[Commit] --> B[Lint] --> C[Static Analysis] --> D[Unit Test] --> E[Build]
+    E --> F[Component Test] --> G[Contract Test] --> H[API Test]
+    H --> I[Integration Test] --> J[E2E] --> K[Security Scan] --> L[Release]
+</pre>
+
+<h3>10.1 为什么 UI 自动化不能太多</h3>
+<p>UI 自动化依赖元素标识、动画、网络、后端、数据、设备性能等，非常容易形成 Flaky Test。</p>
+
+<h3>10.2 Test Double</h3>
+<table>
+<tr><th>类型</th><th>作用</th></tr>
+<tr><td>Stub</td><td>返回固定答案。</td></tr>
+<tr><td>Mock</td><td>除了返回值，还验证调用次数、参数、行为。</td></tr>
+<tr><td>Fake</td><td>有简化版真实实现，例如内存数据库。</td></tr>
+<tr><td>Spy</td><td>记录真实调用供验证。</td></tr>
+<tr><td>Dummy</td><td>只是占位，不真正使用。</td></tr>
+</table>
+
+<h3>10.3 测试数据</h3>
+<p>避免长期共享账号。推荐 Setup → Test → Teardown，每个测试准备独立数据并负责清理。</p>
+
+<h3>10.4 环境</h3>
+<pre>DEV → SIT → QA → UAT → PRE → PROD</pre>
+<p>不同公司命名会不同。PRE 重点是尽可能接近生产，用于配置、发布、性能和迁移演练。</p>
+
+<h3>10.5 Quality Gate</h3>
+<p>例如 Unit Test、Critical Security、API Regression、Build、Coverage 等指标不达标时禁止合并或发布。</p>
+</section>
+
+<section id="microservices">
+<h2>11. 微服务、契约测试与服务协作</h2>
+
+<p>微服务测试复杂度主要来自依赖：</p>
+<pre>Loan Service
+├─ User Service
+├─ Risk Service
+├─ Payment Service
+├─ Redis
+├─ Kafka
+└─ MySQL</pre>
+
+<h3>11.1 推荐测试结构</h3>
+<pre>Service Unit
+↓
+Component
+↓
+Contract
+↓
+Integration
+↓
+E2E</pre>
+
+<h3>11.2 Contract Testing</h3>
+<p>防止双方各自单测都通过，但接口契约已不兼容。例如 Consumer 期待字段 <code>limit</code>，Provider 改成 <code>creditLimit</code>。</p>
+
+<h3>11.3 Consumer-Driven Contract</h3>
+<p>Consumer 声明自己依赖哪些字段和行为，Provider 每次发布前验证自己仍满足这些契约。</p>
+
+<h3>11.4 API Schema Testing</h3>
+<p>除了值，还要验证字段存在、类型、nullable、范围、枚举和格式，通常基于 OpenAPI / JSON Schema。</p>
+
+<h3>11.5 API Version Testing</h3>
+<p>测试 v1、v2、v3 的前向和后向兼容，特别是移动端老版本客户端长期存在时。</p>
+</section>
+
+<section id="distributed">
+<h2>12. 分布式系统测试：真正重点是“失败时仍然正确”</h2>
+
+<h3>12.1 超时 Timeout</h3>
+<p>测试下游从 100ms 变为 500ms、3s、10s，验证调用方是否有合理 Timeout，是否留下半成品状态。</p>
+
+<h3>12.2 重试 Retry</h3>
+<p>验证重试次数、退避策略以及重试是否引发重复业务。</p>
+
+<h3>12.3 熔断 Circuit Breaker</h3>
+<p>验证 Closed → Open → Half-Open → Closed 的状态切换，避免持续打击故障服务。</p>
+
+<h3>12.4 降级 Fallback</h3>
+<p>次要服务失败时系统是否可以返回默认值或隐藏模块，而不是拖垮核心业务。</p>
+
+<h3>12.5 Bulkhead 舱壁隔离</h3>
+<p>验证某一模块流量爆炸时，是否耗尽全局线程池、连接池等共享资源。</p>
+
+<h3>12.6 Backpressure</h3>
+<p>生产速度大于消费速度时，系统是排队、拒绝、限流还是丢弃。</p>
+
+<h3>12.7 Rate Limit</h3>
+<p>测试阈值边界、返回码、Retry-After、用户级/IP级限流以及公平性。</p>
+
+<h3>12.8 服务发现</h3>
+<p>实例挂掉后是否及时摘除，流量是否停止发送到故障实例。</p>
+
+<h3>12.9 故障矩阵 Failure Matrix</h3>
+<table>
+<tr><th>故障点</th><th>应验证</th></tr>
+<tr><td>Gateway 超时</td><td>客户端重试是否安全</td></tr>
+<tr><td>Risk 超时</td><td>申请不重复、状态可恢复</td></tr>
+<tr><td>DB 写失败</td><td>事务和补偿</td></tr>
+<tr><td>Payment 超时</td><td>不重复放款</td></tr>
+<tr><td>MQ 发送失败</td><td>Outbox / 重试 / 补偿</td></tr>
+<tr><td>Redis 故障</td><td>明确降级或失败路径</td></tr>
+</table>
+
+<div class="tip"><b>关键规律：</b>单体系统更关注“功能正确”；微服务系统更关注“协作正确”；分布式系统更关注“失败时仍然正确”。</div>
+</section>
+
+<section id="idempotency">
+<h2>13. 幂等、并发与重复请求</h2>
+<p>真实系统中的重复请求可能来自用户连续点击、网络超时、App 重试、Gateway 重试、服务重试、MQ 重投。</p>
+
+<h3>13.1 幂等测试</h3>
+<p>对同一个 requestId 连续或并发发送多次请求，验证：</p>
+<ul>
+<li>数据库只产生一条有效业务记录。</li>
+<li>关键下游不会重复执行危险操作。</li>
+<li>消息不会形成重复业务结果。</li>
+<li>最终状态唯一。</li>
+</ul>
+
+<h3>13.2 并发竞争</h3>
+<p>例如同一用户同时发 10 个不同 requestId，但业务要求只能有一个审批中申请，则应验证最终只有一个进入流程。</p>
+
+<h3>13.3 可测试的实现机制</h3>
+<p>包括 Redis 分布式锁、数据库唯一索引、CAS、乐观锁、版本号等。测试需要针对锁过期、持锁服务崩溃、锁提前释放和高竞争设计异常场景。</p>
+</section>
+
+<section id="data">
+<h2>14. 数据库、事务、迁移、精度与对账</h2>
+
+<h3>14.1 数据库测试</h3>
+<p>覆盖 Schema、Migration、Constraint、Transaction、Index、Consistency。</p>
+
+<h3>14.2 事务测试</h3>
+<p>故意让事务中间某一步失败，验证前面的数据是否正确回滚或由一致性机制恢复。</p>
+
+<h3>14.3 Schema Evolution</h3>
+<p>测试增加列、删除列、改字段类型、索引、约束，以及新旧服务并存时的兼容性。</p>
+
+<h3>14.4 数据迁移</h3>
+<p>旧系统迁往新系统时必须验证数量、金额、关键字段、关系、异常记录、重复记录和缺失记录。</p>
+
+<h3>14.5 Reconciliation 对账</h3>
+<p>金融、支付等系统要验证内部账、渠道账、外部账差异发现和补偿机制。</p>
+
+<h3>14.6 Precision Testing 精度</h3>
+<p>测试金额小数、Decimal、整数分、四舍五入、截断、累计误差和利息计算，避免浮点误差。</p>
+
+<h3>14.7 Backup / Restore</h3>
+<p>备份成功不代表可恢复。必须定期真正恢复，验证恢复时间和数据完整性。</p>
+</section>
+
+<section id="cache-mq">
+<h2>15. Redis / Cache / MQ 专项测试</h2>
+
+<h3>15.1 Redis 与缓存</h3>
+<ul>
+<li>缓存命中与失效。</li>
+<li>缓存穿透。</li>
+<li>缓存击穿。</li>
+<li>缓存雪崩。</li>
+<li>TTL。</li>
+<li>分布式锁。</li>
+<li>缓存与数据库一致性。</li>
+<li>Redis 故障后的降级。</li>
+</ul>
+
+<h3>15.2 MQ</h3>
+<ul>
+<li>消息重复。</li>
+<li>消息丢失。</li>
+<li>消息延迟。</li>
+<li>消息乱序。</li>
+<li>消费失败。</li>
+<li>重复消费。</li>
+<li>消费者重启。</li>
+<li>Broker 故障。</li>
+<li>消息积压。</li>
+</ul>
+
+<h3>15.3 重复消息</h3>
+<p>相同 eventId 投递多次，业务结果仍应只发生一次。</p>
+
+<h3>15.4 乱序</h3>
+<p>例如 Approved → Cancelled 的正常顺序被反转，需要通过 version、sequence、状态机等保证结果正确。</p>
+
+<h3>15.5 DB 成功、MQ 失败</h3>
+<p>这是经典分布式一致性场景，需要验证 Outbox、补偿任务、消息重放、重试和最终一致性。</p>
+</section>
+
+<section id="performance">
+<h2>16. 性能测试深入：不要只看 TPS</h2>
+
+<p>完整性能指标至少包括：</p>
+<pre>TPS / QPS
+Latency
+P50 / P90 / P95 / P99 / P99.9
+Error Rate
+CPU / Memory
+GC
+Thread Pool
+Connection Pool
+DB QPS
+Redis QPS / Hit Rate
+MQ Lag</pre>
+
+<h3>16.1 为什么 P99 很重要</h3>
+<p>平均值可能掩盖长尾。即使平均 100ms，也可能有 1% 用户等待 10 秒。</p>
+
+<h3>16.2 性能测试流程</h3>
+<pre>确定性能目标
+↓
+构造数据
+↓
+模拟真实流量模型
+↓
+逐步加压
+↓
+观察系统指标
+↓
+定位瓶颈
+↓
+调优
+↓
+重新验证</pre>
+
+<h3>16.3 性能定位</h3>
+<p>必须结合 Trace 和 Metrics，拆出 Gateway、服务、DB、缓存、外部调用的耗时。</p>
+
+<h3>16.4 资源专项</h3>
+<p>还要测试线程池耗尽、连接池耗尽、队列饱和、GC Pause、内存泄漏、文件句柄和 Socket 泄漏。</p>
+</section>
+
+<section id="security">
+<h2>17. 安全测试与 DevSecOps</h2>
+
+<h3>17.1 客户端安全</h3>
+<p>逆向、敏感数据、本地存储、证书校验、调试、越狱/Root 环境等。</p>
+
+<h3>17.2 API 安全</h3>
+<p>认证、授权、越权、重放、参数篡改、限流、错误信息泄露。</p>
+
+<h3>17.3 横向越权</h3>
+<p>修改资源 ID 后访问其他用户数据，例如修改 loanId / userId。</p>
+
+<h3>17.4 纵向越权</h3>
+<p>普通用户调用管理员能力。</p>
+
+<h3>17.5 服务端安全</h3>
+<p>SQLi、SSRF、RCE、依赖漏洞、错误权限、Secret。</p>
+
+<h3>17.6 SAST / DAST / IAST / SCA</h3>
+<table>
+<tr><th>类型</th><th>含义</th></tr>
+<tr><td>SAST</td><td>静态分析源码或字节码。</td></tr>
+<tr><td>DAST</td><td>运行系统后从外部攻击。</td></tr>
+<tr><td>IAST</td><td>结合运行时与内部信息。</td></tr>
+<tr><td>SCA</td><td>分析第三方依赖和开源组件漏洞。</td></tr>
+</table>
+
+<h3>17.7 Secret / Supply Chain</h3>
+<p>检查 API Key、Token、Private Key 泄露，以及依赖、构建流水线、镜像、Artifact、签名、SBOM 等供应链风险。</p>
+</section>
+
+<section id="cloud">
+<h2>18. 云原生 / Kubernetes 测试</h2>
+<ul>
+<li>Pod Crash / Restart。</li>
+<li>Node Down。</li>
+<li>Readiness / Liveness Probe。</li>
+<li>Rolling Update。</li>
+<li>Auto Scaling。</li>
+<li>单 AZ 故障。</li>
+<li>单 Region 故障。</li>
+<li>服务发现与流量摘除。</li>
+<li>配置和 Secret 更新。</li>
+</ul>
+
+<h3>18.1 Rolling Update</h3>
+<p>发布过程中 v1 和 v2 会同时存在，因此必须验证新旧版本的 API、DB Schema、消息格式兼容。</p>
+
+<h3>18.2 多级故障</h3>
+<pre>单 Pod
+↓
+单 Node
+↓
+单 AZ
+↓
+单 Region</pre>
+<p>不同故障级别对应不同恢复机制和验证目标。</p>
+</section>
+
+<section id="mobile-web">
+<h2>19. Web 与移动端专项测试</h2>
+
+<h3>19.1 Web</h3>
+<ul>
+<li>组件测试。</li>
+<li>页面功能测试。</li>
+<li>API 测试。</li>
+<li>跨浏览器测试。</li>
+<li>Visual Regression。</li>
+<li>Accessibility。</li>
+<li>Web Performance：LCP、INP、CLS、TTFB。</li>
+</ul>
+
+<h3>19.2 移动端生命周期</h3>
+<p>前台 → 后台 → 锁屏 → 恢复；测试请求、Timer、页面状态、Token、异步回调。</p>
+
+<h3>19.3 杀进程</h3>
+<p>支付或借款进行中杀 App，重启后应基于服务端真实状态恢复，不应简单假设失败。</p>
+
+<h3>19.4 权限</h3>
+<p>相机、照片、定位、通知、麦克风等都要覆盖允许、拒绝、永久拒绝、设置重新开启。</p>
+
+<h3>19.5 弱网</h3>
+<p>高延迟、低带宽、丢包、断网、Wi-Fi / 4G / 5G 切换。</p>
+
+<h3>19.6 安装与升级</h3>
+<p>首次安装、覆盖安装、重新安装、空间不足、v1→v2、v1→v3、本地 DB、Keychain、UserDefaults、缓存和登录态迁移。</p>
+
+<h3>19.7 Crash / Memory / Energy</h3>
+<p>关注 Crash-Free Users、Crash-Free Sessions、内存增长、CPU 和后台能耗。</p>
+</section>
+
+<section id="time-i18n-a11y">
+<h2>20. 容易遗漏的专项：时间、国际化、无障碍、易用性</h2>
+
+<h3>20.1 时间测试</h3>
+<p>覆盖时区、UTC、本地时间、跨天、月末、年末、闰年、2 月 29 日、夏令时、Clock Skew。</p>
+
+<h3>20.2 Localization 与 i18n</h3>
+<p>覆盖语言、日期、货币、数字格式、RTL、字符长度、复数规则。i18n 更偏系统设计能力，Localization 更偏具体语言版本验证。</p>
+
+<h3>20.3 Accessibility</h3>
+<p>测试 VoiceOver / Screen Reader、焦点顺序、动态字体、对比度、键盘操作、Accessibility Label 和 Traits。</p>
+
+<h3>20.4 Usability</h3>
+<p>“按钮能不能点”属于功能测试；“用户知不知道应该点哪个按钮”属于可用性测试。</p>
+</section>
+
+<section id="release-prod">
+<h2>21. 发布、生产验证与渐进式交付</h2>
+
+<h3>21.1 数据库升级</h3>
+<p>测试 ALTER 对锁表、耗时、旧代码兼容和回滚的影响。</p>
+
+<h3>21.2 Rollback</h3>
+<p>必须认识：代码回滚 ≠ 数据回滚。新版本已经写入新数据结构时，回退旧代码可能直接不兼容。</p>
+
+<h3>21.3 Canary</h3>
+<pre>1% → 5% → 20% → 50% → 100%</pre>
+<p>逐步放量并观察错误率、Latency、Crash 和业务指标。</p>
+
+<h3>21.4 Feature Flag</h3>
+<p>代码已部署，但功能通过开关逐步开放。</p>
+
+<h3>21.5 Dark Launch</h3>
+<p>新系统接收真实流量，但结果不影响用户，用于性能与稳定性验证。</p>
+
+<h3>21.6 Shadow Traffic</h3>
+<p>复制生产请求到新系统，不返回结果给用户，用于新旧系统结果比对。</p>
+
+<h3>21.7 A/B Test</h3>
+<p>验证产品假设和转化差异，不是传统意义上的缺陷测试。</p>
+
+<h3>21.8 Synthetic Monitoring</h3>
+<p>上线后定期自动模拟用户完成关键链路，验证服务仍然可用。</p>
+
+<h3>21.9 RUM</h3>
+<p>真实用户监控，关注真实网络、加载时间、错误和 Crash。</p>
+</section>
+
+<section id="observability">
+<h2>22. 测试与可观察性 Observability</h2>
+<p>现代测试体系离不开：</p>
+<pre>Logs
+Metrics
+Traces
+Profiles</pre>
+<p>测试失败时，理想状态应能通过 TraceId、requestId、service、latency、error 快速定位 Gateway、服务、DB、Redis、MQ 或第三方依赖。</p>
+
+<h3>22.1 SLO</h3>
+<p>如果系统目标是 99.95% 可用性，测试和架构验证应判断系统是否具备达到该目标的能力。</p>
+
+<h3>22.2 Error Budget</h3>
+<p>当错误预算消耗过快时，团队可能暂停高风险发布，转而优先提高可靠性。</p>
+
+<h3>22.3 SRE 与测试</h3>
+<p>传统测试更偏发布前；SRE 更偏生产持续可靠性。现代 Quality Engineering 会把两者逐渐打通。</p>
+</section>
+
+<section id="quality-model">
+<h2>23. 软件质量模型与架构质量属性</h2>
+<p>可以把质量理解为：</p>
+<ul>
+<li>功能适合性。</li>
+<li>性能效率。</li>
+<li>兼容性。</li>
+<li>易用性。</li>
+<li>可靠性。</li>
+<li>安全性。</li>
+<li>可维护性。</li>
+<li>可移植性。</li>
+</ul>
+
+<p>测试和架构的关系是：</p>
+<pre>架构设计
+↓
+定义质量属性与目标
+↓
+测试策略
+↓
+验证质量属性是否实现</pre>
+
+<div class="tip"><b>架构师视角：</b>测试不是独立于架构的活动，而是架构质量属性的验证机制。</div>
+</section>
+
+<section id="verification-validation">
+<h2>24. Verification、Validation 与 V 模型</h2>
+
+<h3>24.1 Verification</h3>
+<p>“我们是不是把系统做对了？”主要关注实现是否符合规格、设计和要求。</p>
+
+<h3>24.2 Validation</h3>
+<p>“我们是不是做了正确的系统？”主要关注最终产品是否真正满足用户和业务需求。</p>
+
+<h3>24.3 V 模型</h3>
+<table>
+<tr><th>开发阶段</th><th>对应测试活动</th></tr>
+<tr><td>需求</td><td>验收测试设计</td></tr>
+<tr><td>系统设计</td><td>系统测试设计</td></tr>
+<tr><td>架构 / 概要设计</td><td>集成测试设计</td></tr>
+<tr><td>详细设计 / 模块设计</td><td>单元测试设计</td></tr>
+</table>
+<p>重点不是图形本身，而是强调测试设计和开发阶段同步进行。</p>
+</section>
+
+<section id="principles">
+<h2>25. 软件测试经典原则</h2>
+<ol>
+<li><b>测试只能证明缺陷存在，不能证明绝对没有缺陷。</b></li>
+<li><b>穷尽测试不可能。</b></li>
+<li><b>越早测试，发现和修复成本越低。</b></li>
+<li><b>缺陷通常聚集在少数模块。</b></li>
+<li><b>杀虫剂悖论：</b>同一组测试长期重复执行，发现新缺陷的能力会下降。</li>
+<li><b>测试依赖上下文：</b>金融、电商、游戏、医疗的风险重点不同。</li>
+<li><b>无错误谬误：</b>没有已知 Bug 的产品，也可能不是用户真正需要的产品。</li>
+</ol>
+</section>
+
+<section id="testability">
+<h2>26. 可测试性 Testability：好的架构应该容易测试</h2>
+<p>如果业务逻辑直接依赖真实数据库、网络和时间，就很难测试。更好的设计通常通过接口和依赖注入隔离外部依赖。</p>
+<pre>LoanService
+↓
+LoanRepository Interface
+
+生产：
+MySQLLoanRepository
+
+测试：
+FakeLoanRepository</pre>
+<p>可测试性与模块化、低耦合、清晰接口、稳定状态机、可观察性高度相关。</p>
+</section>
+
+<section id="test-data-env">
+<h2>27. 测试数据、测试环境与 Service Virtualization</h2>
+
+<h3>27.1 测试数据原则</h3>
+<pre>可重复
+可隔离
+可清理
+可追踪
+不使用真实敏感数据</pre>
+
+<h3>27.2 Synthetic Data</h3>
+<p>优先生成合成数据，而不是复制真实身份证、银行卡、手机号和交易数据。</p>
+
+<h3>27.3 Data Masking</h3>
+<p>必须使用近似生产数据时，应进行不可逆脱敏或符合要求的匿名化。</p>
+
+<h3>27.4 环境污染</h3>
+<p>测试 A 创建、测试 B 依赖、测试 C 修改同一批共享数据，会造成不可复现。测试应具备隔离性。</p>
+
+<h3>27.5 Infrastructure as Code</h3>
+<p>环境应该可以通过 Docker、Kubernetes、Terraform 等方式重建，而不是依赖人工配置。</p>
+
+<h3>27.6 Ephemeral Environment</h3>
+<p>每个 PR 创建临时环境，测试后销毁，可显著提升隔离性。</p>
+
+<h3>27.7 Service Virtualization</h3>
+<p>对于银行、运营商、第三方支付等不可稳定调用的依赖，通过虚拟服务模拟成功、失败、超时和异常。</p>
+</section>
+
+<section id="strategy-plan">
+<h2>28. 测试策略、测试计划、Entry / Exit Criteria</h2>
+
+<h3>28.1 Test Strategy</h3>
+<p>回答：测什么、不测什么、怎么测、谁负责、什么时候测、通过标准是什么。</p>
+
+<h3>28.2 Test Plan</h3>
+<p>包括范围、目标、人员、环境、工具、时间、测试类型、风险、入口条件和出口条件。</p>
+
+<h3>28.3 Entry Criteria</h3>
+<ul>
+<li>Build 成功。</li>
+<li>Unit Test 通过。</li>
+<li>环境部署完成。</li>
+<li>测试数据准备完成。</li>
+<li>接口或需求定义达到约定状态。</li>
+</ul>
+
+<h3>28.4 Exit Criteria</h3>
+<ul>
+<li>P0 / P1 按规则清零或明确接受。</li>
+<li>核心回归通过。</li>
+<li>性能达到目标。</li>
+<li>关键安全问题关闭。</li>
+<li>核心业务链路通过。</li>
+</ul>
+
+<h3>28.5 Traceability Matrix</h3>
+<p>建立需求与测试用例的映射，避免关键需求遗漏。</p>
+</section>
+
+<section id="defect">
+<h2>29. 缺陷管理、RCA 与缺陷预防</h2>
+
+<h3>29.1 Defect Lifecycle</h3>
+<pre>New → Assigned → Fixed → Retest → Closed</pre>
+<p>也可能出现 Rejected、Duplicate、Deferred、Won't Fix。</p>
+
+<h3>29.2 Severity vs Priority</h3>
+<p><b>Severity：</b>技术和业务影响有多严重。<br><b>Priority：</b>多快必须修。</p>
+
+<h3>29.3 Root Cause Analysis</h3>
+<p>线上事故不应只修代码，还应追问为什么需求、设计、单测、集成测试、环境和监控没有提前发现。</p>
+
+<h3>29.4 Defect Prevention</h3>
+<p>Code Review、Static Analysis、Type System、Lint、API Schema、Architecture Rule 等都属于预防缺陷。</p>
+
+<h3>29.5 Production Bug Should Become Test</h3>
+<p>线上缺陷修复后，应考虑增加自动化回归测试，避免同类问题再次出现。</p>
+</section>
+
+<section id="metrics">
+<h2>30. 质量指标与测试治理</h2>
+<p>成熟团队不会只看 Bug 数量，还会看：</p>
+<ul>
+<li>Defect Escape Rate。</li>
+<li>Regression Pass Rate。</li>
+<li>Automation Coverage。</li>
+<li>Flaky Rate。</li>
+<li>MTTD。</li>
+<li>MTTR。</li>
+<li>Change Failure Rate。</li>
+<li>Production Incident Rate。</li>
+<li>测试执行时间。</li>
+</ul>
+
+<h3>30.1 Defect Escape Rate</h3>
+<p>反映多少缺陷没有在测试阶段发现，而是进入生产。</p>
+
+<h3>30.2 Change Failure Rate</h3>
+<p>反映部署中有多少导致故障、回滚或紧急修复。</p>
+
+<h3>30.3 Flaky Test 治理</h3>
+<p>随机失败会让团队逐渐忽略 CI 红灯，最终测试体系失去可信度。常见原因有时间依赖、网络、共享数据、异步等待、动画、随机数、环境污染。</p>
+
+<h3>30.4 测试并行化与选择</h3>
+<p>通过并行执行、按代码影响选择相关测试、Risk-Based Regression 缩短反馈周期。</p>
+
+<h3>30.5 Fast Feedback</h3>
+<pre>秒级：Static / Unit
+分钟级：Component / API / Contract
+十几分钟：Integration
+小时级：E2E / Performance
+持续：Monitoring / Chaos</pre>
+</section>
+
+<section id="organization">
+<h2>31. 测试组织模式与 Quality Engineering</h2>
+
+<p>常见组织方式：</p>
+<ul>
+<li>独立 QA 团队。</li>
+<li>嵌入式 QA。</li>
+<li>开发自测。</li>
+<li>SDET。</li>
+<li>Quality Engineering。</li>
+</ul>
+
+<p>SDET 更偏测试框架、平台、工具和自动化工程，而不是单纯执行手工用例。</p>
+
+<div class="tip"><b>现代趋势：</b>从 “QA owns quality” 转向 “Team owns quality”。质量是产品、开发、测试、DevOps、SRE、安全共同责任。</div>
+
+<h3>31.1 测试四象限</h3>
+<pre>Q1 技术 + 支持开发：Unit / Component
+Q2 业务 + 支持开发：Functional / Story
+Q3 业务 + 评价产品：Exploratory / Usability / UAT
+Q4 技术 + 评价产品：Performance / Security / Reliability</pre>
+
+<h3>31.2 测试金字塔不是绝对比例</h3>
+<p>不同架构还会讨论 Testing Trophy、Testing Honeycomb。核心仍然是：以最低成本、最快速度、最高稳定性发现最重要风险。</p>
+</section>
+
+<section id="ai">
+<h2>32. AI / LLM / RAG / Agent 系统测试</h2>
+
+<h3>32.1 为什么传统 assert 不够</h3>
+<p>LLM 输出具有随机性和语言表达差异，不能总是简单做 <code>output == expected</code>。</p>
+
+<h3>32.2 LLM Eval 关注</h3>
+<ul>
+<li>正确性。</li>
+<li>事实性。</li>
+<li>相关性。</li>
+<li>安全性。</li>
+<li>一致性。</li>
+<li>幻觉。</li>
+<li>延迟。</li>
+<li>成本。</li>
+</ul>
+
+<h3>32.3 Golden Dataset</h3>
+<p>准备典型问题、标准答案、危险问题、边界问题，每次模型、Prompt、RAG、工具链改变后重新评测。</p>
+
+<h3>32.4 Evaluation 方法</h3>
+<p>Human Evaluation、规则、Semantic Evaluation、LLM-as-Judge 等组合使用。</p>
+
+<h3>32.5 RAG 测试</h3>
+<p>把 Retrieval 和 Generation 分开测：是否找到正确材料，以及是否依据材料正确生成。</p>
+
+<h3>32.6 Agent 测试</h3>
+<p>需要覆盖 Planning、Tool Call、Memory、Execution、Recovery。特别要测试工具失败、权限不足、网络异常、重试、终止和恢复行为。</p>
+</section>
+
+<section id="real-project">
+<h2>33. 真实项目：从业务系统反推完整测试体系</h2>
+
+<p>以泛化消费金融流程为例：</p>
+
+<pre class="mermaid">
+flowchart LR
+    A[注册登录] --> B[实名认证] --> C[额度申请] --> D[风控审批]
+    D --> E[授信] --> F[借款申请] --> G[放款] --> H[还款] --> I[结清]
+</pre>
+
+<h3>33.1 先画系统测试地图</h3>
+<pre class="mermaid">
+flowchart TD
+    APP[iOS / Android / Web]
+    GW[API Gateway]
+    AUTH[认证服务]
+    USER[用户服务]
+    CREDIT[额度服务]
+    RISK[风控服务]
+    LOAN[借款服务]
+    PAY[支付服务]
+    REPAY[还款服务]
+    REDIS[(Redis)]
+    DB[(MySQL)]
+    MQ[(MQ)]
+    THIRD[外部渠道]
+    APP --> GW
+    GW --> AUTH
+    GW --> USER
+    GW --> CREDIT
+    GW --> LOAN
+    GW --> REPAY
+    CREDIT --> RISK
+    CREDIT --> REDIS
+    CREDIT --> DB
+    LOAN --> RISK
+    LOAN --> PAY
+    LOAN --> DB
+    LOAN --> MQ
+    REPAY --> PAY
+    REPAY --> DB
+    REPAY --> MQ
+    PAY --> THIRD
+</pre>
+
+<h3>33.2 再做风险识别</h3>
+<table>
+<tr><th>风险</th><th>概率</th><th>影响</th><th>优先级</th></tr>
+<tr><td>重复授信</td><td>中</td><td>极高</td><td>P0</td></tr>
+<tr><td>数据不一致</td><td>中</td><td>极高</td><td>P0</td></tr>
+<tr><td>风控超时</td><td>高</td><td>高</td><td>P0</td></tr>
+<tr><td>埋点丢失</td><td>中</td><td>中</td><td>P1</td></tr>
+<tr><td>页面文案错误</td><td>中</td><td>低</td><td>P2</td></tr>
+</table>
+
+<h3>33.3 给风险匹配测试手段</h3>
+<pre>重复申请 → 幂等 + 并发 + 状态测试
+风控超时 → Timeout + Retry + Circuit Breaker
+缓存不一致 → Redis 故障 + Cache Aside 一致性
+DB/MQ 部分成功 → 事务 + Outbox + 补偿
+金额错误 → 精度 + 对账 + Invariant
+</pre>
+
+<h3>33.4 单个接口应覆盖的维度</h3>
+<table>
+<tr><th>维度</th><th>测试内容</th></tr>
+<tr><td>功能</td><td>正常业务成功</td></tr>
+<tr><td>输入</td><td>非法值、空值、错误类型</td></tr>
+<tr><td>边界</td><td>最小值、最大值、长度、时间边界</td></tr>
+<tr><td>权限</td><td>非本人、不同角色</td></tr>
+<tr><td>状态</td><td>合法/非法状态迁移</td></tr>
+<tr><td>幂等</td><td>重复 requestId</td></tr>
+<tr><td>并发</td><td>同时提交、多实例竞争</td></tr>
+<tr><td>依赖</td><td>超时、错误、断连、非法返回</td></tr>
+<tr><td>DB</td><td>事务失败、约束、Migration</td></tr>
+<tr><td>MQ</td><td>重复、乱序、丢失、积压</td></tr>
+<tr><td>性能</td><td>高并发、容量、长尾</td></tr>
+<tr><td>安全</td><td>参数篡改、越权、重放</td></tr>
+<tr><td>兼容</td><td>旧客户端与新 API</td></tr>
+<tr><td>发布</td><td>v1/v2 混跑、灰度</td></tr>
+<tr><td>灾难</td><td>Redis/DB/依赖异常</td></tr>
+</table>
+</section>
+
+<section id="risk">
+<h2>34. 风险驱动测试：测试资源永远有限</h2>
+<p>核心公式：</p>
+<pre>Risk = Probability × Impact</pre>
+<p>因此首页文案错误和重复扣款不应该获得相同的测试强度。关键资金、账务、授信、幂等、安全、可用性应获得更高优先级。</p>
+
+<div class="note"><b>成熟测试设计的逻辑：</b>风险 → 测试目标 → 测试方法 → 测试用例 → 自动化与质量门禁。</div>
+</section>
+
+<section id="ultimate-framework">
+<h2>35. 架构师级测试思考框架</h2>
+<p>以后看到任何系统，先问：</p>
+<ol>
+<li>核心业务链路是什么？</li>
+<li>系统边界在哪里？</li>
+<li>有哪些外部与内部依赖？</li>
+<li>关键状态有哪些？</li>
+<li>哪些数据必须强一致或最终一致？</li>
+<li>哪些请求必须幂等？</li>
+<li>哪些地方存在并发竞争？</li>
+<li>下游超时/失败怎么办？</li>
+<li>MQ 重复、乱序、丢失怎么办？</li>
+<li>高并发下系统容量边界在哪里？</li>
+<li>升级过程中是否兼容？</li>
+<li>生产故障如何发现、隔离和恢复？</li>
+</ol>
+
+<p>再把问题扩展成：</p>
+<pre>功能
++
+数据
++
+并发
++
+故障
++
+安全
++
+性能
++
+兼容
++
+升级
++
+恢复
++
+监控</pre>
+</section>
+
+<section id="quality-architecture">
+<h2>36. 最终形态：Quality Architecture</h2>
+
+<blockquote>成熟体系不是“先开发系统，再补测试”，而是系统从设计开始就具有可验证性。</blockquote>
+
+<p>例如架构中主动明确：</p>
+<ul>
+<li>稳定且可版本化的接口。</li>
+<li>明确状态机。</li>
+<li>系统不变量。</li>
+<li>统一错误码。</li>
+<li>TraceId / RequestId。</li>
+<li>幂等键。</li>
+<li>事务与一致性策略。</li>
+<li>可替换依赖。</li>
+<li>可注入故障。</li>
+<li>可观察性。</li>
+</ul>
+
+<pre class="mermaid">
+flowchart TB
+    A[1 需求质量]
+    B[2 架构与设计质量]
+    C[3 代码质量]
+    D[4 组件质量]
+    E[5 服务集成质量]
+    F[6 系统质量]
+    G[7 发布质量]
+    H[8 生产质量]
+    I[9 安全与合规]
+    J[10 质量治理]
+    A --> B --> C --> D --> E --> F --> G --> H
+    I --> A
+    I --> B
+    I --> C
+    I --> D
+    I --> E
+    I --> F
+    I --> G
+    I --> H
+    J --> A
+    J --> H
+</pre>
+
+<h3>36.1 最终推导链</h3>
+<pre>业务目标
+↓
+关键质量属性
+↓
+系统架构
+↓
+关键风险
+↓
+系统不变量
+↓
+故障模型
+↓
+测试策略
+↓
+测试矩阵
+↓
+自动化策略
+↓
+CI/CD质量门禁
+↓
+生产验证与监控
+</pre>
+
+<div class="tip"><b>最终认知：</b>真正完整的软件测试体系，是通过需求、设计、架构、代码、自动化、测试、发布、监控和反馈共同控制软件风险。这已经不是狭义 Testing，而是完整的 Quality Engineering。</div>
+</section>
+
+<section id="grand-map">
+<h2>37. 软件测试与质量工程全景脑图</h2>
+<pre class="mermaid">
+mindmap
+  root((Software Quality Engineering))
+    测试依据
+      Requirement
+      Design
+      Architecture
+      API Contract
+      Standards
+      User Scenario
+      Risk
+    测试层级
+      Unit
+      Component
+      Integration
+      Contract
+      API
+      System
+      E2E
+      UAT
+    功能测试
+      Equivalence
+      Boundary
+      Decision Table
+      Cause Effect
+      State Transition
+      Scenario
+      Pairwise
+      Exploratory
+    高级技术
+      Property Based
+      Invariant
+      Mutation
+      Fuzz
+      Model Based
+      Formal Verification
+    非功能
+      Performance
+        Load
+        Stress
+        Spike
+        Soak
+        Capacity
+      Security
+      Reliability
+      Compatibility
+      Accessibility
+      Usability
+      Localization
+      Portability
+    数据层
+      Database
+      Transaction
+      Migration
+      Precision
+      Reconciliation
+      Backup Restore
+    分布式
+      Timeout
+      Retry
+      Idempotency
+      Circuit Breaker
+      Bulkhead
+      Backpressure
+      Rate Limit
+      MQ
+        Duplicate
+        Loss
+        Delay
+        Ordering
+      Consistency
+      Failover
+    云原生
+      Pod
+      Node
+      AZ
+      Region
+      Scaling
+      Probe
+      Rolling Update
+      Chaos
+    客户端
+      Lifecycle
+      Weak Network
+      Upgrade
+      Permission
+      Memory
+      Crash
+      Power
+      Device Compatibility
+    自动化
+      TDD
+      BDD
+      ATDD
+      Mock
+      Stub
+      Fake
+      CI CD
+      Quality Gate
+    基础设施
+      Test Data
+      Test Environment
+      Service Virtualization
+      Ephemeral Environment
+      Observability
+    发布生产
+      Canary
+      Feature Flag
+      Dark Launch
+      Shadow Traffic
+      Synthetic Monitoring
+      RUM
+    安全工程
+      SAST
+      DAST
+      IAST
+      SCA
+      Secret Scan
+      Supply Chain
+    质量治理
+      Strategy
+      Plan
+      Traceability
+      Entry Criteria
+      Exit Criteria
+      Defect Management
+      RCA
+      Metrics
+    AI系统
+      Golden Dataset
+      Evaluation
+      RAG Testing
+      Agent Testing
+      Safety
+      Latency
+      Cost
+</pre>
+</section>
+
+<section id="closing">
+<h2>38. 一句话收束整套体系</h2>
+<p>不要再把测试理解成“开发完以后 QA 点点 App 找 Bug”。完整的软件质量体系应该持续回答：</p>
+<pre>需求是否正确？
+架构是否支撑质量属性？
+代码是否正确？
+组件是否正确？
+服务是否协作正确？
+异常情况下是否仍然正确？
+高并发下是否满足目标？
+攻击情况下是否安全？
+升级过程中是否兼容？
+故障后是否能恢复？
+上线后是否持续健康？
+</pre>
+<p>最终，测试从“发现 Bug”演化为：</p>
+<blockquote>通过需求、设计、架构、代码、自动化、测试、发布、监控和持续反馈，共同控制软件风险。</blockquote>
+</section>
+
+</main>
+</div>
+
+<button class="topbtn" title="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+async function renderMermaidDiagrams() {
+  if (!window.mermaid) {
+    document.querySelectorAll('.mermaid').forEach(el => {
+      el.classList.add('mermaid-error');
+      el.setAttribute('data-error', 'Mermaid 脚本加载失败。请检查网络或重新加载页面。');
+    });
+    return;
+  }
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true },
+    sequence: { useMaxWidth: true },
+    state: { useMaxWidth: true }
+  });
+
+  const nodes = [...document.querySelectorAll('.mermaid')];
+  for (let i = 0; i < nodes.length; i++) {
+    const el = nodes[i];
+    try {
+      await mermaid.run({ nodes: [el] });
+    } catch (err) {
+      console.error('Mermaid render failed', i, err);
+      el.classList.add('mermaid-error');
+      el.setAttribute('data-error', '该图渲染失败，已保留源码供查看。');
+    }
+  }
+}
+window.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+
+const toc=document.getElementById('toc');
+document.querySelectorAll('main section').forEach((s,i)=>{
+  const h=s.querySelector('h2'); if(!h) return;
+  const a=document.createElement('a');
+  a.href='#'+s.id; a.textContent=h.textContent;
+  toc.appendChild(a);
+});
+const input=document.getElementById('search');
+input.addEventListener('input',()=>{
+  const q=input.value.trim().toLowerCase();
+  document.querySelectorAll('main section').forEach(s=>{
+    const hit=!q || s.innerText.toLowerCase().includes(q);
+    s.style.display=hit?'block':'none';
+  });
+});
+</script>
+<script src="../resource-nav.js"></script></body>
+</html>
