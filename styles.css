@@ -71,3 +71,4 @@ mark.search-hit{background:rgba(255,207,112,.3);color:inherit;border-radius:3px;
 [hidden]{display:none!important}
 button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+.glossary-link{text-decoration:underline dotted;text-underline-offset:5px;color:var(--accent-2)}.glossary-link:hover{text-decoration:underline}
