@@ -19,6 +19,12 @@
           "description": "业务闭环与架构师职责"
         },
         {
+          "id": "architecture-terms",
+          "title": "论文技术术语图解",
+          "url": "resources/architecture-terms.html",
+          "description": "前端类比 · 原理图 · 异常演练 · 论文表达"
+        },
+        {
           "id": "architecture-topics",
           "title": "八大押题知识树",
           "url": "architecture-topics.html",

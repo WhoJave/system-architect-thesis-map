@@ -42,3 +42,14 @@ python3 -m http.server 8080
 ```
 
 访问 `http://localhost:8080`。GitHub Actions 在 `main` 更新后自动生成导航、检查链接并部署静态文件到 GitHub Pages。菜单与正文由静态 HTML 提供，无需等待远程库；论文 Mermaid 图解仍使用 CDN。
+
+## 论文技术术语图解
+
+`resources/architecture-terms.html` 面向有前端基础、后端入门的学习者，包含 44 节讲解及 SVG 原理图，覆盖基础、缓存、MQ、一致性、DDD、微服务、弹性、RAG 和 Agent。每节提供前端类比、工程细节、消费金融教学案例、方案边界、论文表达和主动回忆；另含三个失败窗口实验。
+
+- 内容数据：`data/technical-guide.json`。按分组添加卡片，填写定义、类比、细节、图节点、边界、案例、表达与参考资料；ID 保持稳定以便论文页深链。
+- 图文生成：`node scripts/build-technical-guide.mjs`。静态输出全部正文和 SVG，并在六个论文页面的首次术语出现处生成解释链接。
+- 页面交互：`technical-guide.js` / `technical-guide.css`。不依赖 CDN；支持搜索、分类、逐步点亮、回忆答案、复制表达与本地已理解标记。
+- 验证：`node tests/technical-guide.cjs` 检查重复投递、未决交易和容量瓶颈的教学模型，以及内容和原理图的完整性。
+
+发布顺序是先生成术语页与深链，再生成全站导航，最后运行教学模型和站内链接检查。扩展术语时无需手改页面，复用稳定的 JSON 结构即可。
