@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#0b1020" />
+<title>万能论文模板随机填空｜架构师学习地图</title>
+<style>
+:root{color-scheme:dark;--bg:#090d18;--panel:#0f1628;--panel2:#131d33;--text:#edf2ff;--muted:#96a4bb;--line:#25324d;--accent:#7c9cff;--accent2:#52d5b3;--ok:#54d68b;--bad:#ff7b83;--warn:#ffcf70;--shadow:0 24px 70px rgba(0,0,0,.28)}
+@media(prefers-color-scheme:light){:root{color-scheme:light;--bg:#f5f7fb;--panel:#fff;--panel2:#f7f9fe;--text:#172033;--muted:#667085;--line:#dce3ef;--accent:#4f6ef7;--accent2:#0aa47f;--ok:#087f5b;--bad:#c83c49;--warn:#a96d00;--shadow:0 20px 55px rgba(40,60,100,.12)}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 12% 0,color-mix(in srgb,var(--accent) 10%,transparent),transparent 32%),var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.72}button,input,select{font:inherit}.shell{width:min(1180px,calc(100% - 28px));margin:auto;padding:24px 0 70px}.topbar{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px}.back{color:var(--muted);text-decoration:none}.back:hover{color:var(--text)}.badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:var(--panel)}.hero{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;margin-bottom:18px}.hero-main,.stats{border:1px solid var(--line);background:var(--panel);border-radius:24px;box-shadow:var(--shadow)}.hero-main{padding:clamp(24px,4vw,48px)}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent2);font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.08;margin:10px 0 14px;letter-spacing:-.035em}.hero p{color:var(--muted);margin:0;max-width:760px}.stats{padding:20px;display:grid;gap:10px;align-content:start}.stat{display:flex;justify-content:space-between;gap:14px;padding:12px;border:1px solid var(--line);background:var(--panel2);border-radius:13px}.stat span{color:var(--muted);font-size:13px}.stat b{font-size:18px}.controls{display:grid;grid-template-columns:1.2fr .8fr auto auto;gap:10px;padding:12px;border:1px solid var(--line);background:var(--panel);border-radius:17px;position:sticky;top:10px;z-index:20;box-shadow:0 10px 35px rgba(0,0,0,.10)}select,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:10px 12px}.btn{cursor:pointer;font-weight:750}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}.btn:hover{transform:translateY(-1px)}.workspace{margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}.card{border:1px solid var(--line);background:var(--panel);border-radius:22px;box-shadow:var(--shadow)}.quiz{padding:clamp(20px,3vw,36px)}.quiz-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}.quiz-head h2{margin:0;font-size:26px}.quiz-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.difficulty{font-size:12px;padding:5px 9px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);white-space:nowrap}.passage{font-size:17px;line-height:2.05;letter-spacing:.01em}.blank-wrap{display:inline-flex;align-items:baseline;margin:0 3px;vertical-align:baseline}.blank{width:clamp(86px,12vw,160px);border:0;border-bottom:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--text);padding:2px 7px;border-radius:7px 7px 3px 3px;outline:none}.blank:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}.blank.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}.blank.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}.answer-tip{display:none;color:var(--bad);font-size:11px;margin-left:5px}.blank-wrap.show-answer .answer-tip{display:inline}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}.feedback{margin-top:16px;padding:13px 15px;border-radius:13px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);display:none}.feedback.show{display:block}.side{padding:18px}.side h3{margin:0 0 10px;font-size:17px}.side-section+.side-section{border-top:1px solid var(--line);margin-top:18px;padding-top:18px}.memory-list{display:grid;gap:8px}.memory-item{border:1px solid var(--line);background:var(--panel2);padding:11px 12px;border-radius:12px}.memory-item b{display:block;font-size:13px}.memory-item span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.progress{height:9px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}.hint{margin-top:12px;color:var(--muted);font-size:13px}.source{margin-top:18px;padding:16px 18px;border:1px dashed var(--line);border-radius:15px;color:var(--muted);font-size:13px}.source strong{color:var(--text)}.mini-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.mini-nav a{font-size:12px;text-decoration:none;color:var(--muted);border:1px solid var(--line);padding:7px 9px;border-radius:999px;background:var(--panel2)}
+@media(max-width:850px){.hero,.workspace{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.controls{grid-template-columns:1fr 1fr}.controls .btn{width:100%}}
+@media(max-width:560px){.shell{width:min(100% - 18px,1180px);padding-top:14px}.stats{grid-template-columns:1fr}.controls{position:static;grid-template-columns:1fr}.passage{font-size:16px}.blank{width:112px}.quiz-head{display:block}.difficulty{display:inline-block;margin-top:8px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar"><a class="back" href="./index.html">← 返回学习主页</a><span class="badge">主动回忆 · 随机填空</span></div>
+  <section class="hero">
+    <div class="hero-main"><div class="eyebrow">Universal Thesis Template · Cloze Trainer</div><h1>万能论文模板<br>随机填空训练</h1><p>专练最值得固定记忆的三块：摘要、项目背景、结尾。每次随机挖空关键短语，先主动回忆，再核对答案；比反复阅读更容易形成考场提取能力。</p></div>
+    <aside class="stats"><div class="stat"><span>本次题目</span><b id="roundCount">0</b></div><div class="stat"><span>累计正确</span><b id="correctCount">0</b></div><div class="stat"><span>累计正确率</span><b id="accuracy">—</b></div></aside>
+  </section>
+
+  <section class="controls">
+    <select id="sectionSelect" aria-label="选择模板"><option value="random">随机：摘要 / 背景 / 结尾</option><option value="abstract">摘要模板</option><option value="background">项目背景模板</option><option value="ending">结尾模板</option></select>
+    <select id="levelSelect" aria-label="难度"><option value="easy">简单 · 3 个空</option><option value="medium" selected>标准 · 5 个空</option><option value="hard">困难 · 8 个空</option></select>
+    <button class="btn primary" id="newBtn">随机出题</button>
+    <button class="btn" id="resetStatsBtn">清空统计</button>
+  </section>
+
+  <div class="workspace">
+    <main class="card quiz">
+      <div class="quiz-head"><div><h2 id="quizTitle">摘要模板</h2><p id="quizSub">请填写被挖空的关键短语；标点可忽略。</p></div><span class="difficulty" id="difficultyBadge">标准 · 5 个空</span></div>
+      <div class="passage" id="passage"></div>
+      <div class="actions"><button class="btn primary" id="checkBtn">检查答案</button><button class="btn" id="hintBtn">显示首字提示</button><button class="btn" id="answerBtn">显示答案</button><button class="btn" id="nextBtn">下一题</button></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="source"><strong>记忆原则：</strong>先回忆结构，再回忆原句。摘要记“背景 → 项目 → 角色 → 主题 → 三问题 → 效果 → 扣题”；背景记“行业变化 → 原系统问题 → 新平台 → 业务闭环 → 职责 → 引题”；结尾记“成果 → 认识 → 权衡 → 治理 → 演进”。</div>
+    </main>
+
+    <aside class="card side">
+      <div class="side-section"><h3>当前模板结构</h3><div class="memory-list" id="memoryList"></div></div>
+      <div class="side-section"><h3>本题完成度</h3><div class="progress"><i id="progressBar"></i></div><div class="hint" id="progressText">0 / 0 已填写</div></div>
+      <div class="side-section"><h3>快速跳转</h3><div class="mini-nav"><a href="./universal-template.html">万能模板全文</a><a href="./theory-practice.html">理论 × 实践实验室</a><a href="./resources/thesis-template-memory.html">模板记忆方案</a></div></div>
+    </aside>
+  </div>
+</div>
+<script>
+const templates={
+abstract:{title:'摘要模板',structure:[['背景','线上消费金融发展与效率、稳定性要求'],['项目','某大型持牌消费金融机构新一代线上消费信贷平台'],['角色','总体架构设计、方案评审、核心模块落地'],['主题','引出论文主题'],['三问题','三个核心问题'],['效果','效率、稳定性、扩展能力'],['扣题','本文重点论述主题设计与应用']],segments:[
+['随着线上消费金融业务持续发展，客户对','授信审批效率、资金处理速度和系统稳定性','提出了更高要求。'],
+['我所在的','某大型持牌消费金融机构','启动了','新一代线上消费信贷平台建设项目','，平台覆盖','客户准入、授信审批、额度管理、借款、放款、账务、还款及贷后管理','等核心业务。'],
+['本人作为','项目核心技术人员','，主要承担','总体架构设计、关键技术方案评审及核心模块方案落地工作','。'],
+['项目建设过程中，针对','【主题对应的业务问题】','，我们采用','【论文主题/核心技术】','进行架构设计，重点解决了','【问题一】、【问题二】和【问题三】','。'],
+['系统上线后，在','业务处理效率、稳定性及扩展能力','等方面取得了良好效果。'],
+['本文结合该项目，重点论述','【论文主题】在系统中的设计与应用','。'] ]},
+background:{title:'项目背景模板',structure:[['行业变化','线上化、实时化、智能化'],['原系统问题','处理效率、服务协作、稳定性不足'],['新平台','建设新一代线上消费信贷平台'],['业务闭环','贷前、贷中、贷后'],['职责','架构规划与关键方案设计'],['引题','具体场景 → 三问题 → 论文主题']],segments:[
+['随着','移动互联网和线上金融服务不断发展','，传统消费信贷业务逐步向','线上化、实时化和智能化','方向演进。'],
+['客户可以通过移动端完成','注册、实名认证、授信申请、借款、还款','等操作，业务处理链路由过去单一系统逐渐演变为','渠道、风控、信贷、资金、账务和贷后等多个系统协同运行','。'],
+['随着业务规模持续扩大，原有系统在','处理效率、服务协作和稳定性','等方面逐渐暴露出不足，已经难以满足业务快速发展的要求。'],
+['为提升线上信贷业务的','处理能力和系统整体支撑水平','，我所在的某大型持牌消费金融机构启动了','新一代线上消费信贷平台建设项目','。'],
+['系统面向个人消费金融业务，覆盖','渠道接入、客户受理、身份核验、风险审批、授信额度、借款合同、放款、账务、还款及贷后管理','等核心环节，并与外部','身份认证、征信、支付','等服务进行集成，形成','贷前、贷中和贷后的完整业务闭环','。'],
+['我作为项目核心技术人员，主要参与','总体架构规划和关键技术方案设计','，负责梳理','系统业务边界、服务协作关系及关键非功能需求','，并参与重要方案评审和实施落地。'],
+['在项目建设过程中，我们重点围绕','系统性能、可靠性、扩展性、数据一致性和安全合规','等方面开展架构设计，为业务持续发展提供稳定的技术支撑。'],
+['在上述业务快速发展的过程中，','【具体业务场景】','逐渐成为影响系统整体运行效率和稳定性的关键因素。'],
+['经过分析，我们发现主要问题集中在','【问题 A】、【问题 B】和【问题 C】','三个方面。'],
+['为解决这些问题，我们在总体架构中引入','【论文主题】','，并围绕','业务特点、技术边界和质量属性要求','进行系统设计与落地。'] ]},
+ending:{title:'结尾模板',structure:[['成果','效率、稳定性、扩展能力改善'],['认识','主题不是简单引入组件'],['权衡','性能、扩展、一致性、合规、成本'],['治理','监控、降级、补偿、持续优化'],['演进','业务目标、技术能力、工程成本持续平衡']],segments:[
+['通过本项目的建设和实践，系统在','业务处理效率、运行稳定性和扩展能力','等方面均得到明显改善，也能够较好地支撑消费金融业务持续发展。'],
+['通过此次项目实践，我更加深刻地认识到，','【论文主题】并不是简单引入某一种框架、组件或技术产品','，而是需要结合','具体业务特点、系统边界和质量属性要求','进行系统性的分析与权衡。'],
+['在大型消费金融系统中，架构设计既要关注','性能和扩展能力','，也必须兼顾','数据准确性、系统可靠性、安全合规和运维复杂度','。'],
+['因此，在技术方案设计过程中，不能片面追求','某一项技术指标','，而应根据不同业务场景','合理划分技术边界','，并建立','监控、降级、补偿和持续优化机制','。'],
+['通过本项目，我进一步体会到，','架构设计本质上是业务目标、技术能力和工程成本之间不断权衡的过程','。'],
+['只有让技术方案真正服务于','业务目标','，并随着业务变化持续演进，才能发挥','【论文主题】在大型信息系统建设中的实际价值','。'] ]}
+};
+let current=null,blankAnswers=[];const $=id=>document.getElementById(id);
+const normalize=s=>String(s||'').replace(/[，。；：、“”‘’（）()\s]/g,'').replace(/【|】/g,'').trim().toLowerCase();
+function flattenSegments(t){const tokens=[];t.segments.forEach((row,ri)=>row.forEach((txt,ci)=>tokens.push({ri,ci,txt,blank:ci%2===1})));return tokens}
+function pickIndexes(items,count){const eligible=items.map((x,i)=>x.blank?i:-1).filter(i=>i>=0);for(let i=eligible.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[eligible[i],eligible[j]]=[eligible[j],eligible[i]]}return new Set(eligible.slice(0,Math.min(count,eligible.length)))}
+function newQuestion(){const sec=$('sectionSelect').value;const key=sec==='random'?['abstract','background','ending'][Math.floor(Math.random()*3)]:sec;const level=$('levelSelect').value;const counts={easy:3,medium:5,hard:8};const t=templates[key],items=flattenSegments(t),chosen=pickIndexes(items,counts[level]);blankAnswers=[];current={key,t,level};$('quizTitle').textContent=t.title;$('difficultyBadge').textContent={easy:'简单 · 3 个空',medium:'标准 · 5 个空',hard:'困难 · 8 个空'}[level];$('feedback').className='feedback';$('feedback').textContent='';let html='',idx=0;items.forEach((x,i)=>{if(chosen.has(i)){const n=idx++;blankAnswers.push(x.txt);html+=`<span class="blank-wrap"><input class="blank" data-index="${n}" aria-label="填空 ${n+1}" autocomplete="off"><small class="answer-tip">答案：${escapeHtml(x.txt)}</small></span>`}else html+=escapeHtml(x.txt);});$('passage').innerHTML=html;renderMemory(t);$('roundCount').textContent=Number($('roundCount').textContent||0)+1;bindInputs();updateProgress();}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderMemory(t){$('memoryList').innerHTML=t.structure.map(([a,b])=>`<div class="memory-item"><b>${a}</b><span>${b}</span></div>`).join('')}
+function bindInputs(){document.querySelectorAll('.blank').forEach(i=>i.addEventListener('input',updateProgress))}
+function updateProgress(){const inputs=[...document.querySelectorAll('.blank')];const filled=inputs.filter(i=>i.value.trim()).length;$('progressText').textContent=`${filled} / ${inputs.length} 已填写`;$('progressBar').style.width=(inputs.length?filled/inputs.length*100:0)+'%'}
+function check(){const inputs=[...document.querySelectorAll('.blank')];let correct=0;inputs.forEach((i,n)=>{const ok=normalize(i.value)===normalize(blankAnswers[n]);i.classList.toggle('ok',ok);i.classList.toggle('bad',!ok);if(ok)correct++;});const oldCorrect=Number(localStorage.getItem('clozeCorrect')||0),oldTotal=Number(localStorage.getItem('clozeTotal')||0);localStorage.setItem('clozeCorrect',oldCorrect+correct);localStorage.setItem('clozeTotal',oldTotal+inputs.length);$('feedback').className='feedback show';$('feedback').innerHTML=`本题答对 <strong>${correct} / ${inputs.length}</strong>。${correct===inputs.length?'全部正确，继续下一题。':'先看错项，再尝试不看答案复述整段。'}`;refreshStats()}
+function reveal(){document.querySelectorAll('.blank-wrap').forEach((w,n)=>{w.classList.add('show-answer');const i=w.querySelector('.blank');if(!i.value)i.value=blankAnswers[n];});updateProgress()}
+function hints(){document.querySelectorAll('.blank').forEach((i,n)=>{if(!i.value){const a=blankAnswers[n].replace(/^【|】$/g,'');i.placeholder=a.slice(0,Math.min(2,a.length))+'…'}})}
+function refreshStats(){const c=Number(localStorage.getItem('clozeCorrect')||0),t=Number(localStorage.getItem('clozeTotal')||0);$('correctCount').textContent=c;$('accuracy').textContent=t?Math.round(c/t*100)+'%':'—'}
+$('newBtn').onclick=newQuestion;$('nextBtn').onclick=newQuestion;$('checkBtn').onclick=check;$('answerBtn').onclick=reveal;$('hintBtn').onclick=hints;$('resetStatsBtn').onclick=()=>{localStorage.removeItem('clozeCorrect');localStorage.removeItem('clozeTotal');refreshStats()};$('sectionSelect').onchange=newQuestion;$('levelSelect').onchange=newQuestion;refreshStats();newQuestion();
+</script>
+</body></html>
