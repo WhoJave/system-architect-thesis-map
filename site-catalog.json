@@ -31,10 +31,22 @@
           "description": "RAG、Agent、缓存、MQ、DDD 等"
         },
         {
+          "id": "essay-q23-maps",
+          "title": "论文第2/3问速记图谱",
+          "url": "essay-q23-maps.html",
+          "description": "八道押题 · 16 张 Mermaid 理论实践图 · 主动回忆"
+        },
+        {
           "id": "universal-template",
           "title": "万能模板与速记",
           "url": "universal-template.html",
           "description": "摘要、背景、理论、实践与结尾"
+        },
+        {
+          "id": "template-cloze",
+          "title": "论文随机填空训练",
+          "url": "template-cloze.html",
+          "description": "摘要背景结尾 · RAG、Agent、一致性、微服务专项填空"
         },
         {
           "id": "training-plan",
