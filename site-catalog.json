@@ -68,6 +68,24 @@
           "description": "拆解、演练与自测"
         },
         {
+          "id": "architecture-exam-lab",
+          "title": "架构解题实验室",
+          "url": "resources/architecture-exam-lab.html",
+          "description": "九大质量属性 · ATAM · SOA · 云原生 · Redis 交互学习"
+        },
+        {
+          "id": "case-five-star-lab",
+          "title": "案例五星研习室",
+          "url": "resources/case-five-star-lab.html",
+          "description": "14 项超级重点 · 20 章精炼 · 261 项五星清单"
+        },
+        {
+          "id": "mnemonic-workshop",
+          "title": "架构记忆工坊",
+          "url": "resources/mnemonic-workshop.html",
+          "description": "37 条记忆口诀 · 翻卡默写 · 口诀闯关"
+        },
+        {
           "id": "study",
           "title": "论文备考学习方案",
           "url": "resources/thesis-study-plan.html",
