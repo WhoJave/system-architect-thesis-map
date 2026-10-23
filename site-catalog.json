@@ -37,6 +37,12 @@
           "description": "八道押题 · 16 张 Mermaid 理论实践图 · 主动回忆"
         },
         {
+          "id": "essay-14-topic-masterclass",
+          "title": "论文14大主题实战精讲",
+          "url": "resources/essay-14-topic-masterclass.html",
+          "description": "14 个重点主题 · 实战案例 · 原理图解 · 论文第2/3问写法"
+        },
+        {
           "id": "universal-template",
           "title": "万能模板与速记",
           "url": "universal-template.html",
