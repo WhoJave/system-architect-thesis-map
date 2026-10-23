@@ -1,0 +1,2211 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#243c85"><meta name="description" content="软考系统架构设计师论文14大主题全量实战讲解，涵盖实际场景、技术架构、论文论点、代码、图示和原始资料。"><title>架构师论文研习手册 · 14 个重点主题完整实战精讲</title><style>:root{--bg:#f6f7fb;--panel:#fff;--panel2:#f9fafc;--ink:#1b2537;--muted:#657185;--line:#e4e9f2;--accent:#4165db;--accent2:#18a49d;--soft:#edf1ff;--shadow:0 8px 34px rgba(20,36,76,.055);--code:#192337;--quote:#eef4fe;--success:#138769;--border-radius:18px;color-scheme:light}
+html[data-theme=dark]{--bg:#0f1421;--panel:#171e2d;--panel2:#1d2637;--ink:#ecf0f8;--muted:#a2aec4;--line:#30394d;--accent:#91a7ff;--accent2:#65ddcf;--soft:#293657;--shadow:0 12px 28px rgba(0,0,0,.2);--code:#0d1420;--quote:#22304a;--success:#5dd7ad;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.87;-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+#reading-progress{position:fixed;z-index:120;height:3px;top:0;left:0;width:0;background:linear-gradient(90deg,#4779ef,#24b6a4);transition:width .12s}
+.topbar{height:68px;position:sticky;top:0;z-index:90;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 30px;gap:22px}.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink);font-size:14px;font-weight:790}.logo{width:33px;height:33px;display:grid;place-items:center;background:linear-gradient(145deg,#4b65e8,#21b49e);border-radius:10px;color:white;font-size:18px;box-shadow:0 4px 12px #4361dc33}.brand small{font-size:11px;font-weight:500;color:var(--muted);margin-left:5px}.top-actions{display:flex;align-items:center;gap:8px}.search-wrap{display:flex;align-items:center;border:1px solid var(--line);border-radius:11px;background:var(--panel2);height:38px;min-width:270px;padding:0 12px;gap:8px;color:var(--muted)}.search-wrap input{border:0;outline:0;background:transparent;width:100%;font-size:13px;color:var(--ink)}.search-wrap kbd{font-size:11px;border:1px solid var(--line);background:var(--panel);padding:0 5px;border-radius:5px;white-space:nowrap}.icon-btn{height:38px;min-width:38px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);display:grid;place-items:center;gap:3px;padding:0 11px;font-size:13px}.icon-btn:hover,.complete-btn:hover{border-color:var(--accent);color:var(--accent)}.mobile-menu{display:none}
+.layout{max-width:1480px;margin:auto;display:grid;grid-template-columns:270px minmax(0,880px);gap:38px;padding:32px 34px 90px;justify-content:center}.sidebar{position:sticky;top:99px;align-self:start;max-height:calc(100vh - 125px);overflow:auto;scrollbar-width:thin;padding:0 6px 20px 0}.side-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:var(--shadow);margin-bottom:15px}.side-title{font-size:11px;letter-spacing:.09em;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:10px}.progress-title{display:flex;justify-content:space-between;font-size:13px;font-weight:700}.progress-title span{color:var(--accent);font-variant-numeric:tabular-nums}.progress-track{height:8px;background:var(--line);border-radius:15px;overflow:hidden;margin:12px 0 8px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s;border-radius:inherit}.progress-caption{font-size:11px;color:var(--muted)}.nav{display:flex;flex-direction:column;gap:3px}.nav a{display:flex;gap:10px;align-items:center;padding:7px 10px;border-radius:9px;color:var(--muted);font-size:12.8px;line-height:1.45;font-weight:560;position:relative}.nav a>span:first-child{font-variant-numeric:tabular-nums;opacity:.67;font-size:11px}.nav a.active,.nav a:hover{color:var(--accent);background:var(--soft);text-decoration:none}.nav a.done:after{content:'✓';color:var(--success);margin-left:auto}.side-footer{font-size:11px;color:var(--muted);padding:0 7px}.main{min-width:0}.hero{border-radius:22px;background:linear-gradient(125deg,#202e67 2%,#3455ae 53%,#128d9c 100%);color:#fff;padding:40px 45px 35px;position:relative;overflow:hidden;box-shadow:0 17px 42px #2e55902b;margin-bottom:25px}.hero:after{content:'';position:absolute;width:300px;height:300px;right:-110px;top:-90px;border:70px solid rgba(255,255,255,.08);border-radius:50%;pointer-events:none}.hero .eyebrow{font-size:12px;letter-spacing:2px;font-weight:700;opacity:.82}.hero h1{font-size:34px;line-height:1.4;letter-spacing:-1px;margin:12px 0 10px;font-weight:860;max-width:710px}.hero p{opacity:.9;max-width:670px;font-size:13.5px;line-height:1.8;margin-bottom:20px}.hero-stats{display:flex;gap:10px;flex-wrap:wrap}.hero-stats span{display:inline-block;border:1px solid #ffffff50;border-radius:100px;background:#ffffff1a;padding:5px 13px;font-size:12px}.intro,.chapter,.summary,.source-panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);margin-bottom:23px;padding:35px 43px}.intro{padding-top:27px;padding-bottom:25px}.intro h1{display:none}.prose{overflow-wrap:break-word}.prose h2{font-size:26px;line-height:1.4;letter-spacing:-.3px;margin:0 0 24px;scroll-margin-top:100px;font-weight:830}.prose h3{font-size:18px;line-height:1.5;margin:34px 0 14px;font-weight:780;scroll-margin-top:90px}.prose h4{font-size:16px;margin:24px 0 12px}.prose p{margin:11px 0 16px}.prose strong{font-weight:730;color:var(--ink)}.prose ul,.prose ol{padding-left:1.65em;margin:12px 0 20px}.prose li{padding-left:.18em;margin:5px 0}.prose li::marker{color:var(--accent)}.prose blockquote{margin:19px 0 21px;border-left:3px solid var(--accent);padding:12px 18px;background:var(--quote);border-radius:0 10px 10px 0;color:var(--ink);font-size:14px}.prose blockquote p{margin:0 0 8px}.prose blockquote p:last-child{margin-bottom:0}.prose hr{border:0;border-top:1px dashed var(--line);margin:32px 0}.prose p>code,.prose li>code,.prose td code{background:var(--soft);color:var(--accent);border-radius:4px;font-size:.89em;padding:2px 5px;word-break:break-word}.prose pre{background:var(--code);border-radius:13px;padding:20px 22px;overflow:auto;line-height:1.7;font-size:12.5px;color:#dce9ff;position:relative;margin:16px 0 23px}.prose pre code{white-space:pre;font-family:Consolas,Menlo,Monaco,monospace;font-size:inherit}.prose h2+blockquote{border-radius:10px;background:var(--soft);color:var(--muted);font-size:12.5px;border:0;padding:8px 13px;margin:-10px 0 21px}.prose h2+blockquote p{margin:0}.chapter h2{color:var(--ink)}.chapter-tools{display:flex;align-items:center;justify-content:space-between;gap:9px;border-bottom:1px solid var(--line);padding:0 0 18px;margin-bottom:23px}.chapter-num{font-size:11px;font-weight:750;letter-spacing:1.3px;color:var(--accent)}.complete-btn{border:1px solid var(--line);background:var(--panel2);color:var(--muted);padding:5px 13px;font-size:12px;border-radius:50px}.complete-btn.complete{background:#daf5e9;color:#087357;border-color:#a1e3c4}html[data-theme=dark] .complete-btn.complete{background:#1a4139;color:#79e2bb;border-color:#356e5a}.chapter-end{border-top:1px solid var(--line);margin-top:39px;padding-top:16px;display:flex;justify-content:space-between;font-size:12px;gap:15px;color:var(--muted)}
+.table-scroll{width:100%;overflow:auto;margin:19px 0 23px;border:1px solid var(--line);border-radius:12px}.prose table{width:100%;border-collapse:collapse;font-size:12.7px;line-height:1.6;min-width:400px}.prose th,.prose td{text-align:left;padding:11px 13px;vertical-align:top;border-bottom:1px solid var(--line)}.prose th{background:var(--panel2);font-weight:750;white-space:nowrap}.prose tr:nth-child(even) td{background:color-mix(in srgb,var(--panel2) 65%,transparent)}.prose tr:last-child td{border-bottom:0}
+.diagram{margin:24px 0 25px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel2)}.diagram-title{font-size:12px;font-weight:750;padding:11px 18px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center}.diagram-icon{color:var(--accent);font-size:15px}.diagram-body{padding:23px 24px}.diagram figcaption{color:var(--muted);font-size:11px;padding:0 20px 15px;text-align:center}.flow-col{display:flex;align-items:center;flex-direction:column;width:100%;gap:2px}.flow-node{min-width:125px;width:100%;max-width:600px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:11px 14px;display:flex;flex-direction:column;gap:4px;text-align:center;align-items:center;justify-content:center;box-shadow:0 2px 6px #00000005}.flow-node b{font-size:12px;font-weight:750}.flow-node small{font-size:11px;line-height:1.6;color:var(--muted)}.flow-node.green{border-color:#80cfb4;background:color-mix(in srgb,#d4f3e6 44%,var(--panel))}.flow-node.blue{border-color:#91afe7;background:color-mix(in srgb,#dce8ff 48%,var(--panel))}.flow-node.gold{border-color:#dbbb83;background:color-mix(in srgb,#fff3d9 40%,var(--panel))}.flow-node.orange{border-color:#dfa56f;background:color-mix(in srgb,#ffedda 44%,var(--panel))}.flow-node.red{border-color:#db9999;background:color-mix(in srgb,#ffe1e1 40%,var(--panel))}.flow-arrow{font-size:21px;color:var(--accent);line-height:1.35;flex-shrink:0}.flow-row{display:flex;gap:10px;align-items:stretch;justify-content:center;width:100%}.flow-row .flow-node{width:auto;flex:1;min-width:0}.flow-row .horiz{align-self:center;font-size:19px}.nodes-three .flow-node{max-width:180px}.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}.flow-grid .flow-node{min-width:0}.flow-step-warning{width:100%;text-align:center;color:#ad7139;font-size:12px;padding:9px}.arrow-description{font-size:11px;color:var(--muted);text-align:center;padding:6px}.status-row{display:flex;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.status-row:last-child{border-bottom:0}.status-ok{color:var(--success)}.status-bad{color:#db665e}.trace-chart{display:flex;flex-direction:column;gap:13px}.trace-row{display:flex;align-items:center;gap:10px;font-size:11px}.trace-row>span{width:68px;flex-shrink:0}.trace-row>code{width:56px;text-align:right;font-size:11px}.trace-bg{background:var(--line);height:13px;border-radius:5px;flex:1;overflow:hidden}.trace-bar{background:#6b91d8;height:100%;border-radius:5px}.trace-bar.hot{background:#cb875c}.pyramid{display:flex;align-items:center;flex-direction:column;gap:7px}.pyramid-level{padding:13px 5px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;flex-direction:column;text-align:center;gap:3px}.pyramid-level b{font-size:12px}.pyramid-level small{font-size:11px;color:var(--muted)}.pyramid-level.l1{width:55%;background:color-mix(in srgb,#f5e5d6 50%,var(--panel))}.pyramid-level.l2{width:77%;background:color-mix(in srgb,#dceaff 50%,var(--panel))}.pyramid-level.l3{width:100%;background:color-mix(in srgb,#d7f6e6 45%,var(--panel))}.domain-grid,.devops-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.domain-card,.devops-node{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:13px 16px}.domain-card b,.devops-node b{font-size:12px}.domain-card p{margin:3px 0 0;color:var(--muted);font-size:11px}.devops-node{display:flex;flex-direction:column;gap:3px}.devops-node em{font-size:10px;font-style:normal;color:var(--accent)}.devops-node small{font-size:11px;color:var(--muted)}.loop-caption{font-size:11px;text-align:center;color:var(--success);margin:15px 0 0!important}.stage-grid{display:flex;flex-direction:column;gap:10px}.stage{border-left:4px solid var(--accent);padding:9px 14px;display:flex;flex-direction:column;gap:4px;background:var(--panel);border-radius:0 9px 9px 0}.stage.s2{border-color:#9c86d0}.stage.s3{border-color:#c2985e}.stage.s4{border-color:#4fad93}.stage b{font-size:13px}.stage span{color:var(--accent);font-size:11px}.stage small{font-size:11px;color:var(--muted)}.essay-grid{display:grid;gap:10px}.essay-step{display:flex;gap:13px;align-items:center;padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}.essay-step i{font-size:12px;font-style:normal;font-weight:800;color:#fff;background:var(--accent);border-radius:50%;width:25px;height:25px;display:grid;place-items:center;flex-shrink:0}.essay-step span{display:flex;flex-wrap:wrap;column-gap:12px;align-items:center}.essay-step b{font-size:12px}.essay-step small{font-size:11px;color:var(--muted)}
+.summary{border:1px solid color-mix(in srgb,var(--accent) 38%,var(--line));}.summary h2{color:var(--accent)}.source-panel summary{cursor:pointer;display:flex;gap:10px;align-items:center;list-style:none;font-size:17px;font-weight:790}.source-panel summary::-webkit-details-marker{display:none}.source-panel summary:after{content:'＋';margin-left:auto;color:var(--accent)}.source-panel[open] summary:after{content:'－'}.source-desc{color:var(--muted);font-size:12px;margin:10px 0 0}.source-content{border-top:1px solid var(--line);padding-top:28px;margin-top:24px}.source-content h1{font-size:24px}.source-content h2{font-size:22px;margin-top:32px}.source-content h3{font-size:18px;margin-top:28px}.source-content h4{font-size:15px;margin-top:22px}.source-content .table-scroll{font-size:12px}.source-content p{font-size:13px}.source-content ul{font-size:13px}.search-result{font-size:11px;color:var(--muted);margin:0 0 12px;padding:0 2px}.empty-search{display:none;padding:30px;text-align:center;background:var(--panel);border-radius:15px;color:var(--muted)}.footnote{font-size:12px;color:var(--muted);text-align:center;padding:0 20px 35px}.footnote a{font-weight:650}.bottom-top{position:fixed;right:20px;bottom:22px;z-index:15;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 13px;border-radius:50%;box-shadow:var(--shadow)}
+@media(max-width:1050px){.layout{grid-template-columns:222px minmax(0,1fr);gap:20px;padding:24px 20px 60px}.intro,.chapter,.summary,.source-panel{padding:30px}.hero{padding:34px}.hero h1{font-size:29px}.topbar{padding:0 20px}.brand small{display:none}.search-wrap{min-width:210px}}
+@media(max-width:760px){.topbar{height:58px;padding:0 14px}.brand{font-size:12px}.logo{width:29px;height:29px;font-size:15px}.search-wrap{min-width:0;width:44px;padding:0 12px;transition:width .2s}.search-wrap:focus-within{width:min(49vw,235px)}.search-wrap input{width:100%;min-width:0}.search-wrap:not(:focus-within) input::placeholder{color:transparent}.search-wrap kbd{display:none}.top-actions{gap:5px}.icon-btn{height:34px;min-width:34px;padding:0 8px}.mobile-menu{display:grid}.layout{display:block;padding:17px 12px 65px}.sidebar{display:none;position:fixed;z-index:100;top:58px;left:0;bottom:0;width:min(310px,87vw);max-height:none;background:var(--bg);box-shadow:16px 0 35px #0002;padding:20px 13px;overflow:auto}.sidebar.open{display:block}.main{width:100%}.hero{padding:30px 23px;border-radius:17px}.hero h1{font-size:25px}.intro,.chapter,.summary,.source-panel{padding:23px 20px;border-radius:16px;margin-bottom:14px}.prose h2{font-size:22px}.prose h3{font-size:17px}.prose{font-size:14px}.diagram-body{padding:18px 12px}.flow-row{gap:3px}.flow-row .horiz{font-size:13px}.flow-node{padding:10px 5px}.flow-node b{font-size:10px}.flow-node small{font-size:9px}.flow-grid{gap:4px}.flow-grid .flow-node{min-height:48px}.chapter-end{font-size:11px}.pyramid-level.l1{width:67%}.pyramid-level.l2{width:85%}.chapter-tools{margin-bottom:20px}.topbar .print-btn{display:none}}
+@media print{*{box-shadow:none!important}body{background:#fff;color:#111;font-size:10.5pt;line-height:1.5}.topbar,.sidebar,.chapter-tools,.chapter-end,.bottom-top,#reading-progress,.footnote,.search-result{display:none!important}.layout{display:block;padding:0;max-width:none}.hero{background:#fff;color:#111;border-bottom:2px solid #333;border-radius:0;padding:0 0 18px}.hero:after{display:none}.hero h1{font-size:23pt}.hero .eyebrow,.hero p,.hero-stats{color:#333}.intro,.chapter,.summary,.source-panel{border:0;padding:10px 0;margin:0;break-inside:auto}.chapter,.summary{break-before:page}.chapter h2{font-size:19pt}.prose h3{font-size:13pt}.diagram{break-inside:avoid}.prose table{font-size:9pt}.source-panel:not([open]){display:none}.source-panel[open]{break-before:page}.flow-node,.domain-card{background:#fff!important}a{color:#111}}
+</style></head><body id="top"><div id="reading-progress"></div><header class="topbar"><div class="brand"><span class="logo">架</span>系统架构师 · 论文研习手册 <small>14 个主题 · 实战案例精讲</small></div><div class="top-actions"><div class="search-wrap"><span aria-hidden="true">⌕</span><input aria-label="搜索全部主题" id="global-search" placeholder="搜索知识点、技术、论文…"><kbd>⌘ K</kbd></div><button id="theme-toggle" class="icon-btn" title="切换深色模式" aria-label="切换深色模式">☾</button><button id="print-btn" class="icon-btn print-btn" title="打印或另存为 PDF">⎙</button><button id="menu-toggle" class="icon-btn mobile-menu" aria-expanded="false" aria-label="打开章节目录">☰</button></div></header><div class="layout"><aside class="sidebar" id="sidebar"><div class="side-card"><div class="side-title">复习进度</div><div class="progress-title">已掌握章节 <span id="mastered-num">0 / 14</span></div><div class="progress-track"><div class="progress-fill" id="mastered-percent"></div></div><div class="progress-caption" id="mastered-text"></div></div><div class="side-card"><div class="side-title">实战精讲 · 14 主题</div><nav class="nav"><a class="chapter-link" href="#ch-01" data-id="01"><span>01</span><span>软件架构风格 · 2.1</span></a><a class="chapter-link" href="#ch-02" data-id="02"><span>02</span><span>负载均衡设计技术 · 3.1</span></a><a class="chapter-link" href="#ch-03" data-id="03"><span>03</span><span>分布式事务 · 3.2</span></a><a class="chapter-link" href="#ch-04" data-id="04"><span>04</span><span>秒杀场景 · 3.3</span></a><a class="chapter-link" href="#ch-05" data-id="05"><span>05</span><span>面向服务架构 SOA · 4.1</span></a><a class="chapter-link" href="#ch-06" data-id="06"><span>06</span><span>微服务架构 · 4.2</span></a><a class="chapter-link" href="#ch-07" data-id="07"><span>07</span><span>边云协同架构 · 5.1</span></a><a class="chapter-link" href="#ch-08" data-id="08"><span>08</span><span>可观测架构 · 5.2</span></a><a class="chapter-link" href="#ch-09" data-id="09"><span>09</span><span>系统测试 · 6.1</span></a><a class="chapter-link" href="#ch-10" data-id="10"><span>10</span><span>动态测试 · 6.3</span></a><a class="chapter-link" href="#ch-11" data-id="11"><span>11</span><span>自动化测试 · 6.4</span></a><a class="chapter-link" href="#ch-12" data-id="12"><span>12</span><span>性能测试 · 6.5</span></a><a class="chapter-link" href="#ch-13" data-id="13"><span>13</span><span>领域驱动设计 DDD · 7.4</span></a><a class="chapter-link" href="#ch-14" data-id="14"><span>14</span><span>DevOps · 9.1</span></a><a href="#summary"><span>↳</span><span>15 分钟串联记忆</span></a><a href="#source"><span>⊕</span><span>原始专项资料 · 完整附件</span></a></nav></div><div class="side-footer">离线单文件 · 不依赖网络 · 学习进度保存在当前浏览器</div></aside><main class="main"><div class="hero"><div class="eyebrow">ARCHITECTURE / EXAM MASTERCLASS</div><h1>14 个重点主题<br>从真实场景理解到论文落笔</h1><p>系统设计不是术语堆砌。用“问题 → 理论 → 方案 → 难点 → 验证”建立可迁移的架构能力。</p><div class="hero-stats"><span>14 个主题</span><span>完整实战讲解</span><span>13 幅概念图</span><span>原始资料全文</span></div></div><section class="intro prose" id="intro"><h1>系统架构设计师论文：14 个重点主题实战场景精讲</h1>
+<p>这次我们不只背理论，而是站在<strong>系统架构负责人的视角</strong>，通过真实工程中可能发生的业务问题，理解每一种架构技术为什么出现、解决什么问题、具体怎么实现，以及如何写进软考论文。</p>
+<p>我会保留你上传资料的 14 个主题及核心论点，并补充具体的模拟项目案例。重点区分：</p>
+<ul>
+<li><strong>论文第二问：</strong> 理论依据、架构设计方法、技术选型及其原因。</li>
+<li><strong>论文第三问：</strong> 我在项目中遇到了什么问题、采取了什么措施、如何验证效果。</li>
+</ul>
+<p>主要采用消费金融平台、电商秒杀、工业物联网和软考阅卷系统四种场景，方便把不同主题串联起来。</p>
+<hr />
+</section><p class="search-result" id="search-result">按章节阅读，或搜索关键技术、场景与论文写法。</p><div id="search-empty" class="empty-search">没有找到匹配的章节。试试“幂等”“Redis”“服务治理”或“论文”等关键词。</div><section class="chapter prose" id="ch-01" data-title="软件架构风格（2.1）"><div class="chapter-tools"><span class="chapter-num">专题 01 / 14</span><button class="complete-btn" type="button" data-id="01" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-01">01. 软件架构风格（2.1）</h2>
+<blockquote>
+<p>核心：数据流、调用返回、独立构件、虚拟机、仓库</p>
+</blockquote>
+<p><strong>一句话理解：架构风格就是决定一个系统的各个部分应该如何组织、如何协作。</strong></p>
+<p>想象你正在设计一个消费金融贷款审批平台。用户申请贷款后，系统需要采集资料、验证身份、查询征信、计算风险、审批额度。</p>
+<p>问题来了：应该把所有代码写在一个大程序里，还是拆成不同模块？拆开之后又该怎么协作？</p>
+<p>这就是架构风格要解决的问题。</p>
+<h3>场景一：贷款数据处理——数据流风格</h3>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>管道—过滤器风格</div><div class="diagram-body"><div class="flow-row"><div class="flow-node "><b>原始资料</b></div><span class="flow-arrow horiz">→</span><div class="flow-node "><b>数据清洗</b></div><span class="flow-arrow horiz">→</span><div class="flow-node "><b>特征计算</b></div><span class="flow-arrow horiz">→</span><div class="flow-node green"><b>风险评分</b></div></div></div><figcaption>每一阶段接收上游数据，处理后交给下游。</figcaption></figure>
+<p>假设风控数据需要经过四道工序：</p>
+<p>原始数据中可能存在缺失值、错误手机号和重复申请。如果所有处理逻辑混在同一个方法中，任何规则调整都可能影响整个计算过程。</p>
+<p>架构师将处理过程划分为多个独立的过滤器，每个过滤器具有明确的输入、输出和错误处理规则。</p>
+<p><strong>工程技术：</strong> 可以使用 Spring Batch 构建批处理流程，或采用 Kafka 配合独立消费者完成异步数据加工。</p>
+<p><strong>对应论文论点：</strong> 数据流风格适合链式加工场景，提高各处理阶段的独立性与可扩展性。</p>
+<p><strong>设计代价：</strong> 数据格式必须约定清楚，还需要考虑重复消费、处理失败和数据追踪。</p>
+<h3>场景二：贷款审批——调用/返回风格</h3>
+<p>用户点击“申请贷款”，审批流程通常存在明确的调用顺序：</p>
+<p><code>审批主控 → 身份认证 → 征信查询 → 额度计算 → 返回审批结果</code></p>
+<p>其中审批主控负责流程编排，征信服务只负责查询征信，额度计算模块只负责计算额度。</p>
+<p>如果征信查询失败，主控根据异常类型决定重试、转人工或终止流程，而不让征信模块直接修改审批状态。</p>
+<p><strong>对应论点：</strong> 调用/返回风格适合流程编排，强调主控逻辑与子功能分离。</p>
+<h3>场景三：接入不同银行——独立构件风格</h3>
+<p>贷款系统最初接入银行 A，后来又需要接入银行 B、银行 C。</p>
+<p>如果每次接入银行都修改贷款主流程，会造成大量条件判断：</p>
+<p><code>if 银行A ... else if 银行B ...</code></p>
+<p>架构师可以定义统一的 <code>BankAdapter</code> 接口，为每家银行提供不同适配器。</p>
+<p>新增银行时只需注册新的适配器，主流程基本不变。这体现了<strong>可插拔构件、隔离变化点</strong>的思想。</p>
+<h3>场景四：风控规则经常变化——虚拟机风格</h3>
+<p>假设风险规则为：</p>
+<p><code>年龄 &gt;= 22 且 信用分 &gt;= 700 → 允许进入审批</code></p>
+<p>如果每次规则调整都要修改代码、测试和重新发布，会影响业务响应速度。</p>
+<p>因此可采用规则解释器或规则引擎，将业务规则配置化，例如使用 Drools，由规则引擎解释执行。</p>
+<p>这体现虚拟机风格：<strong>将规则表达与执行机制分离</strong>。但必须限制规则执行权限、耗时及版本变更。</p>
+<p>仓库风格则可用于多个模块围绕共享数据或知识库协作的系统，例如专家系统中的黑板模型。</p>
+<p><strong>论文记忆：</strong> 链式加工选数据流；明确流程选调用返回；变化频繁选独立构件；规则复杂选虚拟机；共享知识协作选仓库。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-02" data-title="负载均衡设计技术（3.1）"><div class="chapter-tools"><span class="chapter-num">专题 02 / 14</span><button class="complete-btn" type="button" data-id="02" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-02">02. 负载均衡设计技术（3.1）</h2>
+<blockquote>
+<p>核心：流量分配、横向扩展、请求调度、故障切换、职责解耦</p>
+</blockquote>
+<p><strong>一句话理解：一家银行只有一个柜台，排队会很长；增加柜台之后，还需要有人合理分配客户。负载均衡就是那个分配员。</strong></p>
+<h3>实际场景：贷款平台突然出现流量高峰</h3>
+<p>假设某消费金融平台发放优惠券，瞬间涌入大量用户申请贷款。</p>
+<p>原先只有一台应用服务器，处理能力假设为每秒 500 次请求。</p>
+<p>突然来了每秒 2,000 次请求：</p>
+<ul>
+<li>CPU 接近满载。</li>
+<li>请求不断积压。</li>
+<li>接口超时增加。</li>
+<li>一旦服务器宕机，整个贷款申请服务不可用。</li>
+</ul>
+<h3>架构师如何解决？</h3>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>负载均衡后的集群架构</div><div class="diagram-body"><div class="flow-col"><div class="flow-node "><b>客户端请求</b></div><div class="flow-arrow">↓</div><div class="flow-node green"><b>Nginx / 七层负载均衡</b></div><div class="flow-arrow">↓</div><div class="flow-row nodes-three"><div class="flow-node blue"><b>应用节点 A</b></div><div class="flow-node blue"><b>应用节点 B</b></div><div class="flow-node blue"><b>应用节点 C</b></div></div><div class="flow-arrow">↓</div><div class="flow-node gold"><b>共享数据层 / 数据库</b></div></div></div><figcaption>将流量分散到多个应用实例，数据层仍需要独立的容量与高可用设计。</figcaption></figure>
+<p><strong>第一层：入口负载均衡。</strong></p>
+<p>采用 Nginx、Envoy 或云负载均衡，将请求分发到多个应用实例。</p>
+<p>常见调度策略包括：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>策略</th>
+  <th>通俗理解</th>
+  <th>适合什么情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>轮询</td>
+  <td>按顺序分配客户</td>
+  <td>节点处理能力接近</td>
+</tr>
+<tr>
+  <td>加权轮询</td>
+  <td>大柜台多分客户</td>
+  <td>节点性能有差异</td>
+</tr>
+<tr>
+  <td>最少连接</td>
+  <td>谁当前最闲就分给谁</td>
+  <td>长连接或处理耗时差异较大</td>
+</tr>
+<tr>
+  <td>一致性哈希</td>
+  <td>尽量让同类请求落在固定节点</td>
+  <td>部分缓存亲和场景</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>第二层：横向扩容。</strong></p>
+<p>把单个应用实例增加到多个实例。理论计算能力可能随节点数增加，但实际还受数据库、网络、锁竞争等瓶颈约束。</p>
+<p><strong>第三层：健康检查。</strong></p>
+<p>如果节点 B 出现故障，负载均衡器通过健康探测发现异常，把新的请求转移到 A、C。</p>
+<p>Kubernetes 可以利用就绪探针判断节点是否能够接流量，避免尚未完成初始化的实例接收请求。</p>
+<p><strong>第四层：职责分离。</strong></p>
+<p>流量调度由入口基础设施管理，业务服务只负责审批、额度等业务逻辑。</p>
+<p>这就是分层解耦。</p>
+<h3>对应附件的五条论点</h3>
+<ol>
+<li>高并发支撑：通过集群并行处理分散压力。</li>
+<li>性能优化：减少节点负载不均，提高资源利用效率。</li>
+<li>请求调度：按节点状态选择合适实例。</li>
+<li>连续服务：通过健康检查和冗余节点实现故障转移。</li>
+<li>架构解耦：将流量管理与业务处理分离。</li>
+</ol>
+<p><strong>需要特别理解：</strong> 负载均衡并不等于整个系统高可用。如果所有应用最终都调用同一个已经过载的数据库，增加应用服务器也无法解决瓶颈。</p>
+<p><strong>论文落笔示例：</strong></p>
+<blockquote>
+<p>针对平台营销活动期间请求集中、单节点处理能力不足的问题，我设计了基于 Nginx 的七层负载均衡架构，将业务请求分发至多个无状态应用实例，并结合健康检查和动态扩容机制实现故障隔离与弹性伸缩，提高了系统在高峰负载下的处理能力和可用性。</p>
+</blockquote>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-03" data-title="分布式事务（3.2）"><div class="chapter-tools"><span class="chapter-num">专题 03 / 14</span><button class="complete-btn" type="button" data-id="03" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-03">03. 分布式事务（3.2）</h2>
+<blockquote>
+<p>核心：ACID、CAP、2PC、TCC、Saga、BASE、幂等与补偿</p>
+</blockquote>
+<p><strong>一句话理解：一次业务操作涉及多个服务，不能允许一半成功、一半失败后无人处理。</strong></p>
+<h3>实际场景：用户申请贷款成功，但没有收到钱</h3>
+<p>假设系统拆成三个独立服务：</p>
+<ul>
+<li>贷款服务：创建放款订单。</li>
+<li>额度服务：扣减用户可用额度。</li>
+<li>支付服务：执行银行转账。</li>
+</ul>
+<p>一次正常放款：</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>一次放款出现的部分成功问题</div><div class="diagram-body"><div class="status-row"><span>贷款服务：订单已创建</span><b class="status-ok">✓ 成功</b></div><div class="status-row"><span>额度服务：额度已占用</span><b class="status-ok">✓ 成功</b></div><div class="status-row"><span>银行支付：转账失败</span><b class="status-bad">✕ 失败</b></div></div></figure>
+<p>这时用户额度已经减少，但是钱没到账。</p>
+<p>更麻烦的是：如果调用银行支付接口超时，我们甚至不知道银行是否实际完成了付款。</p>
+<p>这就是分布式事务的难点。</p>
+<h3>方案一：2PC，两阶段提交</h3>
+<p>你可以把 2PC 理解成一个协调人组织多个参与者完成交易。</p>
+<p>第一阶段，协调人询问所有参与者：能否提交？参与者准备资源并反馈。</p>
+<p>第二阶段，协调人根据准备结果发出统一提交或者回滚决定。</p>
+<p>适合对事务原子性要求很高、参与资源可支持协调协议的场景。</p>
+<p>但缺点是存在资源锁定、阻塞和协调者故障处理成本。普通外部银行转账接口通常也不支持参与我们的 2PC。</p>
+<h3>方案二：TCC，先预留，再确认</h3>
+<p>TCC 的三个动作：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>阶段</th>
+  <th>消费金融场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Try</td>
+  <td>冻结用户贷款额度</td>
+</tr>
+<tr>
+  <td>Confirm</td>
+  <td>确认放款后，将冻结额度转为已使用</td>
+</tr>
+<tr>
+  <td>Cancel</td>
+  <td>放款最终失败时，解除额度冻结</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里最重要的是 <strong>Try 不应直接造成不可逆的业务结果</strong>。</p>
+<p>例如，用户原有 10,000 元额度，申请放款 3,000 元。Try 先冻结 3,000 元，而不是立即做最终扣减。</p>
+<p>如果后续业务成功，执行 Confirm；如果业务失败，执行 Cancel。</p>
+<p>TCC 特别适合能够设计明确资源预留、确认和释放语义的业务。</p>
+<p>但还需要解决：</p>
+<ul>
+<li>Confirm 重复调用不得重复扣款。</li>
+<li>Cancel 必须幂等。</li>
+<li>Cancel 先于 Try 到达时，需要防止后续 Try 又成功（空回滚与悬挂问题）。</li>
+</ul>
+<h3>方案三：Saga，本地事务加补偿</h3>
+<p>对于耗时较长、参与系统较多的业务，可将整个操作拆成多个本地事务。</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>Saga 补偿示意</div><div class="diagram-body"><div class="flow-row"><div class="flow-node blue"><b>创建放款订单</b></div><span class="flow-arrow horiz">→</span><div class="flow-node blue"><b>冻结额度</b></div><span class="flow-arrow horiz">→</span><div class="flow-node orange"><b>银行转账</b></div></div><div class="flow-step-warning">↙ 银行明确转账失败后，启动补偿</div><div class="flow-row"><div class="flow-node red"><b>订单标记失败</b></div><span class="flow-arrow horiz">→</span><div class="flow-node red"><b>解除额度冻结</b></div></div></div></figure>
+<p>如果银行明确返回转账失败，就可以补偿释放额度、更新订单状态。</p>
+<p>如果银行只是超时，不能直接认为失败。应先查询银行交易状态，核实结果后再决定补偿，否则可能发生银行已付款、系统却再次付款的问题。</p>
+<p>补偿并不等于数据库事务的物理回滚。已经发生的外部业务行为，有时只能通过新的反向业务操作纠正。</p>
+<h3>保证重试结果唯一：幂等设计</h3>
+<p>用户网络卡顿，连续点击三次“申请放款”，系统不能创建三笔贷款。</p>
+<p>可为业务操作生成唯一 <code>requestId</code>，并通过数据库唯一约束、业务状态机及幂等处理保证重复请求不会产生重复结果。</p>
+<p><strong>技术选型：</strong> Seata 可以支持 AT、TCC、Saga、XA 等模式，但模式选择取决于数据库、服务和业务补偿能力。</p>
+<p><strong>论文对应三条论点：</strong> 跨服务更新保证一致、网络异常下执行可控、失败重试确保结果唯一。</p>
+<p><strong>考试记忆：</strong> 2PC 是大家统一表态；TCC 是先预留后确认；Saga 是一步步执行、失败时补偿；BASE 是允许短暂不一致，但最终必须收敛。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-04" data-title="秒杀场景（3.3）"><div class="chapter-tools"><span class="chapter-num">专题 04 / 14</span><button class="complete-btn" type="button" data-id="04" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-04">04. 秒杀场景（3.3）</h2>
+<blockquote>
+<p>核心：限流、削峰、原子扣减、最终一致</p>
+</blockquote>
+<p><strong>一句话理解：100 件商品，10 万人同时抢。难点不是让 10 万人都能立即进入数据库，而是只让系统处理自己承受得住的请求，并且绝不超卖。</strong></p>
+<h3>实际场景：电商平台限量优惠活动</h3>
+<p>假设商城推出 100 台特价手机，10 万用户同时点击购买。</p>
+<p>如果所有请求直接访问 MySQL：</p>
+<p>数据库连接池耗尽、库存行锁争用、请求超时，整个商城都可能受到影响。</p>
+<p>架构师要建立四道防线。</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>高并发请求的四道防线</div><div class="diagram-body"><div class="flow-col"><div class="flow-node "><b>10 万用户同时发起请求</b><small>入口洪峰</small></div><div class="flow-arrow">↓</div><div class="flow-node blue"><b>① Nginx / 网关限流</b><small>拒绝超出承载能力的请求</small></div><div class="flow-arrow">↓</div><div class="flow-node blue"><b>② Redis 原子预扣库存</b><small>判断资格、库存和重复抢购</small></div><div class="flow-arrow">↓</div><div class="flow-node blue"><b>③ Kafka / RabbitMQ 异步削峰</b><small>缓冲通过资格检查的订单请求</small></div><div class="flow-arrow">↓</div><div class="flow-node green"><b>④ MySQL 持久化订单</b><small>最终校验并确认业务结果</small></div></div></div></figure>
+<h3>第一关：限流——挡住处理不了的请求</h3>
+<p>入口网关设置令牌桶限流。例如根据系统压测能力，限制每秒最多接收一定数量的有效请求。</p>
+<p>限流不是让全部请求无限排队，而是及时拒绝或提示稍后重试，保护核心业务。</p>
+<h3>第二关：原子扣减——避免超卖</h3>
+<p>为什么普通 Redis 操作也可能超卖？</p>
+<p>因为“读取库存”和“扣减库存”如果分两次执行，会发生并发竞态。</p>
+<p>两个用户可能同时发现库存等于 1，然后分别执行扣减。</p>
+<p>因此可使用 Redis Lua 脚本将资格校验、重复抢购校验、库存判断和扣减组织为原子操作。</p>
+<p>但 Redis 预扣成功只是<strong>资格预留成功</strong>，并不意味着订单已经最终成立。</p>
+<p>数据库侧还应有库存约束、订单唯一约束等兜底机制。</p>
+<h3>第三关：消息队列——削峰填谷</h3>
+<p>假设数据库每秒稳定处理 500 笔订单，而瞬间有 5,000 个合法下单请求。</p>
+<p>消息队列负责将请求暂存，消费者按照系统可承受的速度处理。</p>
+<p>就像餐厅先发排队号码，而不是允许几千个人同时挤进厨房。</p>
+<p>需要考虑消息可靠性、积压告警、重复消费、超时和死信处理。</p>
+<h3>第四关：最终一致——保证库存和订单收敛</h3>
+<p>消费者创建订单失败时，需要根据可确认的业务状态补偿库存预留。</p>
+<p>订单未支付而超时关闭时，也应按业务规则回补库存。</p>
+<p>还可通过定时任务核对 Redis 预留数量、数据库实际订单和库存记录，发现异常后进行修复。</p>
+<p><strong>考试论点对应：</strong></p>
+<ul>
+<li>论点一：用前置限流与 MQ 削峰实现流量隔离。</li>
+<li>论点二：用原子操作、数据库约束与补偿机制确保库存正确。</li>
+</ul>
+<p><strong>论文落笔示例：</strong></p>
+<blockquote>
+<p>为防止促销高峰期的瞬时访问流量冲击数据库，我设计了“网关限流—Redis 原子预扣—消息队列削峰—数据库异步落单”的分层处理架构。通过 Lua 脚本确保库存预扣原子性，并结合订单幂等、失败补偿及库存核对机制，实现高并发场景下的流量隔离与数据最终一致。</p>
+</blockquote>
+<p>记住一个关键区别：<strong>Redis 解决高并发竞争，MQ 解决流量瞬时集中，数据库约束和补偿机制负责最终业务正确性。</strong></p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-05" data-title="面向服务架构 SOA（4.1）"><div class="chapter-tools"><span class="chapter-num">专题 05 / 14</span><button class="complete-btn" type="button" data-id="05" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-05">05. 面向服务架构 SOA（4.1）</h2>
+<blockquote>
+<p>核心：服务识别、服务设计、服务发布、服务治理</p>
+</blockquote>
+<p><strong>一句话理解：企业里原本互不相通的系统，通过统一的服务接口，像积木一样组合起来。</strong></p>
+<h3>实际场景：一家银行有六套老系统</h3>
+<p>假设银行有 CRM 客户系统、贷款系统、支付系统、风控系统、信用卡系统和账户系统。</p>
+<p>每套系统由不同团队维护，使用的语言、数据库和接口协议也不同。</p>
+<p>现在需要开发手机银行 App，让客户一次登录就可以查看存款、信用卡和贷款余额。</p>
+<p>如果采用点对点集成，可能出现：</p>
+<ul>
+<li>手机银行分别适配六种接口。</li>
+<li>各系统重复开发身份验证逻辑。</li>
+<li>修改客户基本信息时，不同系统规则不一致。</li>
+<li>一个老系统升级后，多个下游应用都要改造。</li>
+</ul>
+<h3>SOA 如何解决？</h3>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>SOA 服务接入与治理模型</div><div class="diagram-body"><div class="flow-col"><div class="flow-node "><b>手机银行 / 柜台系统 / 业务门户</b></div><div class="flow-arrow">↓</div><div class="flow-node blue"><b>服务接入与治理层</b><small>API 管理、身份认证、协议转换、服务编排</small></div><div class="flow-arrow">↓</div><div class="flow-grid"><div class="flow-node "><b>客户服务</b></div><div class="flow-node "><b>账户服务</b></div><div class="flow-node "><b>支付服务</b></div><div class="flow-node "><b>贷款服务</b></div><div class="flow-node "><b>风控服务</b></div><div class="flow-node "><b>信用卡服务</b></div></div></div></div><figcaption>不同系统的内部实现可以不同，但对外遵循约定的服务契约。</figcaption></figure>
+<h3>论点一：系统能力必须技术解耦</h3>
+<p>假设原来的账户系统由 COBOL 实现，新的手机银行由 Java 实现。</p>
+<p>SOA 不要求把旧系统全部重写，而是让账户系统通过约定的服务接口提供余额查询能力。</p>
+<p>上层只需要知道“查询余额需要哪些参数、返回什么结果”，不必知道旧系统内部如何实现。</p>
+<p><strong>本质：以稳定的服务契约屏蔽异构技术差异。</strong></p>
+<h3>论点二：系统结构必须服务化拆分</h3>
+<p>将账户查询、客户管理、授信审批、支付处理等能力明确划分服务边界。</p>
+<p>用户需要贷款信息时调用贷款服务，而不是直接访问贷款数据库。</p>
+<p>需要注意，SOA 不意味着每个小功能都必须部署成一个独立程序。服务粒度要根据业务能力和集成成本合理选择。</p>
+<h3>论点三：业务逻辑必须服务内聚</h3>
+<p>假设银行有五套应用，都需要计算客户可用额度。</p>
+<p>如果每套应用自己计算，不仅重复开发，还可能造成计算口径不一致。</p>
+<p>把额度计算封装为统一的额度服务，由各业务系统调用，就能集中维护规则、减少重复实现。</p>
+<h3>论点四：系统运行必须具备隔离性</h3>
+<p>假设信用卡服务响应缓慢，不应该让整个手机银行失去响应。</p>
+<p>架构师可以采用服务级超时、隔离、熔断和降级设计。</p>
+<p>例如：信用卡账单查询失败时，允许其他账户信息继续显示，并提示“信用卡账单暂不可用”。</p>
+<h3>技术落地</h3>
+<p>传统 SOA 可以使用 Apache ServiceMix、WSO2 等集成平台，处理服务路由、协议转换和集成治理。</p>
+<p>现代 SOA 也可以采用 API 网关、契约管理、统一认证、服务治理等机制，不一定必须引入 ESB。</p>
+<p><strong>论文记忆：</strong> SOA 的核心是“四个服务”：识别服务、设计服务、发布服务、治理服务。重点解决的是<strong>异构系统集成难、业务能力复用不足、接口标准不一致</strong>。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-06" data-title="微服务架构（4.2）"><div class="chapter-tools"><span class="chapter-num">专题 06 / 14</span><button class="complete-btn" type="button" data-id="06" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-06">06. 微服务架构（4.2）</h2>
+<blockquote>
+<p>核心：服务自治、独立部署、注册发现、网关、容错治理、异步通信</p>
+</blockquote>
+<p><strong>一句话理解：SOA 让系统提供可复用的服务；微服务进一步强调服务自身可以相对独立地开发、部署、扩缩容和治理。</strong></p>
+<h3>实际场景：贷款平台修改一个功能，就要重新发布整个系统</h3>
+<p>假设早期贷款平台是一个大型单体应用：</p>
+<p><code>用户管理 + 贷款申请 + 风控审批 + 额度管理 + 还款处理</code></p>
+<p>这些模块部署在同一个应用中。</p>
+<p>随着业务增长，会出现几个问题：</p>
+<p>风控团队频繁修改审批模型，但每次都需要发布整个系统；还款查询流量很高，必须把整个应用一起扩容；还款模块出现内存泄漏时，还可能影响贷款申请。</p>
+<h3>架构师如何改造成微服务？</h3>
+<p>首先根据业务边界，将平台划分为用户服务、贷款服务、风控服务、额度服务和还款服务。</p>
+<p>随后配置配套的运行和治理能力。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>技术组件</th>
+  <th>实际负责什么</th>
+  <th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Spring Boot</td>
+  <td>构建独立服务</td>
+  <td>开发和运行标准化</td>
+</tr>
+<tr>
+  <td>Nacos / Consul</td>
+  <td>注册与发现服务实例</td>
+  <td>不依赖固定 IP 地址</td>
+</tr>
+<tr>
+  <td>Spring Cloud Gateway</td>
+  <td>统一鉴权、路由和限流</td>
+  <td>横切逻辑集中治理</td>
+</tr>
+<tr>
+  <td>Sentinel</td>
+  <td>熔断、限流、降级</td>
+  <td>防止故障级联</td>
+</tr>
+<tr>
+  <td>Kafka / RabbitMQ</td>
+  <td>发布和消费业务事件</td>
+  <td>异步解耦</td>
+</tr>
+<tr>
+  <td>Redis</td>
+  <td>缓存热点信息</td>
+  <td>降低数据库访问压力</td>
+</tr>
+<tr>
+  <td>Docker / Kubernetes</td>
+  <td>部署和弹性伸缩</td>
+  <td>独立发布与运行治理</td>
+</tr>
+<tr>
+  <td>Jaeger / SkyWalking</td>
+  <td>追踪跨服务请求</td>
+  <td>定位调用链故障</td>
+</tr>
+</tbody>
+</table></div>
+<h3>看一次实际的贷款申请</h3>
+<p>用户通过 App 提交申请：</p>
+<p><code>API 网关 → 贷款服务 → 风控服务 → 额度服务</code></p>
+<p>假设风控服务由于外部征信接口缓慢，响应时间从 200ms 增加到 8 秒。</p>
+<p><strong>如果没有容错机制：</strong></p>
+<p>贷款服务的请求线程大量等待风控结果，连接池逐渐耗尽，严重时整个贷款申请服务无法处理其他请求。</p>
+<p><strong>如果设计了服务治理：</strong></p>
+<ol>
+<li>贷款服务设置合理的调用超时。</li>
+<li>Sentinel 监测到持续失败或慢调用，触发熔断。</li>
+<li>对符合业务条件的请求转入“待审核”状态，等待后续处理。</li>
+<li>风控服务恢复后，通过业务任务重新处理待审核申请。</li>
+</ol>
+<p>这样既避免故障传播，也不会因为风控服务暂时不可用而直接给出错误的贷款批准结果。</p>
+<h3>微服务与 SOA 到底有什么区别？</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>维度</th>
+  <th>SOA</th>
+  <th>微服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>核心诉求</td>
+  <td>企业能力复用、异构集成</td>
+  <td>独立演进、快速交付</td>
+</tr>
+<tr>
+  <td>服务粒度</td>
+  <td>通常偏业务能力级</td>
+  <td>通常更细，但不宜过度拆分</td>
+</tr>
+<tr>
+  <td>通信</td>
+  <td>企业集成、服务调用</td>
+  <td>轻量 API、事件通信等</td>
+</tr>
+<tr>
+  <td>部署</td>
+  <td>可采用集中或独立部署</td>
+  <td>强调独立部署</td>
+</tr>
+<tr>
+  <td>数据</td>
+  <td>可能共享企业数据资源</td>
+  <td>强调数据所有权与自治</td>
+</tr>
+<tr>
+  <td>治理</td>
+  <td>集中治理常见</td>
+  <td>集中平台能力与服务自治结合</td>
+</tr>
+</tbody>
+</table></div>
+<p>微服务不是越多越好。</p>
+<p>如果只有三个人维护的小型业务系统，强行拆成几十个微服务，可能使运维成本和跨服务事务成本远大于收益。</p>
+<p><strong>论文写法：</strong> 本资料建议微服务复用 SOA 的四条论点，但实践部分要重点换成“服务独立部署、API 网关、服务发现、熔断降级、异步消息和容器化治理”。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-07" data-title="边云协同架构（5.1）"><div class="chapter-tools"><span class="chapter-num">专题 07 / 14</span><button class="complete-btn" type="button" data-id="07" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-07">07. 边云协同架构（5.1）</h2>
+<blockquote>
+<p>核心：边缘实时处理、云端全局决策、边云模块化、版本与数据一致性</p>
+</blockquote>
+<p><strong>一句话理解：需要立即处理的事情在现场解决，需要全局分析和统一管理的事情交给云端。</strong></p>
+<h3>实际场景：智能工厂有 500 台生产设备</h3>
+<p>假设工厂部署大量温度、压力、振动传感器，设备通过 MQTT 网关发送数据。</p>
+<p>当机器温度异常升高时，系统必须尽快报警或采取安全措施。</p>
+<p>如果所有传感器数据都先传到云平台，等待云端计算结果后再下发控制指令，会遇到：</p>
+<ul>
+<li>网络往返延迟。</li>
+<li>云平台通信带宽压力。</li>
+<li>断网期间无法获取云端决策。</li>
+<li>大量原始传感器数据传输成本高。</li>
+</ul>
+<h3>边云协同如何设计？</h3>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>工业物联网边云协同</div><div class="diagram-body"><div class="flow-col"><div class="flow-node blue"><b>云平台：全局决策</b><small>设备集中管理 / 模型训练 / 历史趋势分析 / 策略与版本下发</small></div><div class="flow-arrow">↓</div><div class="arrow-description">⇅　事件汇总上报，策略与模型下发</div><div class="flow-node green"><b>边缘网关：现场实时处理</b><small>协议适配 / 数据过滤 / 异常检测 / 本地缓存 / 断网自治</small></div><div class="flow-arrow">↓</div><div class="arrow-description">⇅　MQTT / 工业现场协议</div><div class="flow-node "><b>现场设备与传感器</b><small>温度 / 压力 / 振动 / 设备运行状态</small></div></div></div></figure>
+<h3>论点一：明确业务分层</h3>
+<p><strong>边缘侧负责：</strong> 就近采集数据、执行实时异常检测、缓存离线数据、发出本地告警。</p>
+<p><strong>云端负责：</strong> 大规模历史数据分析、预测性维护、AI 模型训练、设备统一管理和跨工厂生产策略优化。</p>
+<p>例如，每秒采集一次温度时，边缘侧先进行阈值分析，只有异常事件和必要的汇总数据上传云端，而不是把所有原始数据始终完整上传。</p>
+<p>对于真正涉及人身安全的紧急停机，最终安全控制还需要由符合工业安全要求的现场控制器承担，不能仅依赖普通边缘应用。</p>
+<h3>论点二：采用模块化设计</h3>
+<p>假设不同工厂使用不同品牌的设备。</p>
+<p>如果每个工厂都写一套独立的采集、计算和同步程序，将来升级非常麻烦。</p>
+<p>可以利用 EdgeX Foundry 建立统一的设备接入和边缘服务结构，并通过 KubeEdge、OpenYurt 等技术管理适合容器化部署的边缘工作负载。</p>
+<p>这样算法模块与硬件适配模块相互隔离。</p>
+<h3>论点三：确保边云逻辑与数据一致</h3>
+<p>这是边云协同最容易忽略的部分。</p>
+<p>假设云端把异常温度阈值从 90℃ 调整为 85℃，但有一台边缘网关断网三天，仍然使用旧规则。</p>
+<p>此时同样的传感器数据，在两个节点上可能产生不同的判断。</p>
+<p>因此必须设计：</p>
+<ul>
+<li>规则与模型版本号。</li>
+<li>灰度下发和版本校验。</li>
+<li>断网期间的本地可靠缓存。</li>
+<li>恢复连接后的增量同步、去重与冲突处理。</li>
+</ul>
+<p><strong>论文关键句：</strong></p>
+<blockquote>
+<p>针对工业现场设备实时性要求高、网络环境不稳定的问题，我采用“云端集中治理、边缘就近计算”的分层协同架构，通过边缘节点承担实时处理与离线缓存，由云平台统一管理计算任务、算法模型和配置版本，并设计断点续传与数据校验机制，保证边云协同运行的稳定性。</p>
+</blockquote>
+<p><strong>记忆：边缘管实时，云端管全局，协同管版本和数据同步。</strong></p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-08" data-title="可观测架构（5.2）"><div class="chapter-tools"><span class="chapter-num">专题 08 / 14</span><button class="complete-btn" type="button" data-id="08" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-08">08. 可观测架构（5.2）</h2>
+<blockquote>
+<p>核心：指标 Metrics、链路 Traces、日志 Logs、OpenTelemetry</p>
+</blockquote>
+<p>你之前已经学过这个主题。我们再放进同一个消费金融场景中，就容易记住它与微服务、性能测试的关系。</p>
+<p><strong>一句话理解：监控告诉你系统异常了，链路告诉你慢在哪里，日志告诉你当时究竟发生了什么。</strong></p>
+<h3>实际场景：用户反映贷款申请一直失败</h3>
+<p>系统已经拆成五个微服务，客服反馈有用户申请失败。</p>
+<p>开发人员检查服务器：</p>
+<p>CPU 正常，数据库也正常，HTTP 接口甚至都返回了 200。</p>
+<p>问题出在哪里？</p>
+<h3>第一步：Prometheus 发现业务异常</h3>
+<p>我们不能只监控服务器 CPU、内存，还应该监控真正反映业务是否正常的指标。</p>
+<p>例如：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>业务指标</th>
+  <th>示例告警条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>贷款申请成功率</td>
+  <td>持续 5 分钟低于 95%</td>
+</tr>
+<tr>
+  <td>审批 P95 耗时</td>
+  <td>持续高于 3 秒</td>
+</tr>
+<tr>
+  <td>风控服务超时率</td>
+  <td>持续高于 5%</td>
+</tr>
+<tr>
+  <td>MQ 待处理任务数</td>
+  <td>持续超过容量阈值</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些数值是示例阈值，真实项目需要根据历史表现及业务目标确定。</p>
+<p>通过 Micrometer 暴露指标、Prometheus 采集、Grafana 展示，并利用 Alertmanager 触发告警。</p>
+<p>注意，接口 HTTP 200 不代表业务成功。因此要采集独立的业务成功、失败、拒绝等指标。</p>
+<h3>第二步：Jaeger 查找性能瓶颈</h3>
+<p>假设用户贷款审批整个请求耗时 8 秒。</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>模拟一次贷款审批的链路耗时</div><div class="diagram-body"><div class="trace-chart"><div class="trace-row"><span>贷款服务</span><div class="trace-bg"><div class="trace-bar " style="width:2.0%"></div></div><code>120ms</code></div><div class="trace-row"><span>身份认证</span><div class="trace-bg"><div class="trace-bar " style="width:2.0%"></div></div><code>80ms</code></div><div class="trace-row"><span>风控服务</span><div class="trace-bg"><div class="trace-bar hot" style="width:95.0%"></div></div><code>7600ms</code></div><div class="trace-row"><span>额度服务</span><div class="trace-bg"><div class="trace-bar " style="width:2.5%"></div></div><code>200ms</code></div></div></div><figcaption>示例数据：问题集中在风控服务，而非整条链路所有模块。</figcaption></figure>
+<p>通过 TraceId 和 Span，将一次请求在不同服务中的调用路径关联起来。</p>
+<p>Jaeger 会显示风控服务占用了绝大部分时间。</p>
+<p>进一步分析发现：风控服务等待第三方征信接口响应。</p>
+<p>这时我们就知道，优先要处理外部接口超时、隔离与降级，而不是盲目增加贷款服务的服务器。</p>
+<h3>第三步：ELK 还原业务决策</h3>
+<p>另一个用户反馈：“我明明满足申请条件，为什么系统拒绝了？”</p>
+<p>指标只能显示审批失败数量，链路只能显示调用是否正常。</p>
+<p>真正的业务拒绝原因，可能在规则执行过程中。</p>
+<p>可以记录经过脱敏的结构化审计日志，例如：</p>
+<pre><code class="language-json">{
+  &quot;requestId&quot;: &quot;loan-001&quot;,
+  &quot;ruleVersion&quot;: &quot;risk-v3&quot;,
+  &quot;decision&quot;: &quot;REJECT&quot;,
+  &quot;reasonCode&quot;: &quot;CREDIT_SCORE_LOW&quot;,
+  &quot;score&quot;: 620,
+  &quot;threshold&quot;: 650
+}
+</code></pre>
+<p>通过 Elasticsearch 检索、Kibana 关联查看，能够还原当时使用的规则版本和决策依据。</p>
+<p>日志需要做好敏感信息脱敏、访问权限和留存控制。</p>
+<h3>最后：OpenTelemetry 有什么作用？</h3>
+<p>假设贷款服务使用 Java，部分风控算法使用 Python。</p>
+<p>如果每个服务都采用不同的埋点规范，跨服务数据关联会很困难。</p>
+<p>OpenTelemetry 统一采集和导出遥测数据的规范，让指标、链路、日志更容易关联，并对接不同观测后端。</p>
+<p><strong>三条论文论点完全对应三个问题：</strong></p>
+<p><strong>Prometheus：</strong> 系统是否在正常运行？<br />
+<strong>Jaeger：</strong> 问题发生在哪条调用链？<br />
+<strong>ELK：</strong> 这次业务为什么做出这样的决定？</p>
+<p>考试时不必把工具写得很多，但一定要把这三者的职责区别讲清楚。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-09" data-title="系统测试（6.1）"><div class="chapter-tools"><span class="chapter-num">专题 09 / 14</span><button class="complete-btn" type="button" data-id="09" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-09">09. 系统测试（6.1）</h2>
+<blockquote>
+<p>核心：系统整体性、需求验证、真实环境、恢复测试、安全测试、压力测试</p>
+</blockquote>
+<p><strong>一句话理解：每个零件单独检测合格，不代表整辆汽车开上高速公路就不会出问题。</strong></p>
+<h3>实际场景：软考阅卷系统上线前</h3>
+<p>这个场景与你上传的资料一致。</p>
+<p>系统包括试卷导入、试卷分配、教师阅卷、复核仲裁、成绩汇总和成绩发布。</p>
+<p>开发人员说：“每个模块的单元测试都通过了。”</p>
+<p>这能说明系统可以正式上线吗？</p>
+<p>不能。</p>
+<p>因为单元测试只能验证局部程序逻辑，无法证明软硬件、网络、数据库以及实际人员操作能正确协作。</p>
+<h3>论点一：从系统工程整体观进行测试</h3>
+<p>我们需要模拟完整阅卷业务：</p>
+<p><code>导入试卷 → 分配教师 → 评分 → 复核 → 成绩冻结 → 发布</code></p>
+<p>假设在开发环境中测试，一切正常。</p>
+<p>但上线前使用真实环境时，发现教师提交评分偶尔超时。</p>
+<p>原因可能是跨机房网络延迟、数据库连接池配置不足，或者反向代理的超时参数不合理。</p>
+<p>这些问题在只执行评分函数的单元测试时很难暴露。</p>
+<p>因此系统测试必须尽量模拟实际运行环境。</p>
+<h3>论点二：发现需求和设计阶段留下的问题</h3>
+<p>假设需求规定：“同一道主观题由两名教师独立评分，评分差异超过阈值时进入仲裁。”</p>
+<p>开发人员却只实现了第一位教师的评分保存，没有正确实现差异触发规则。</p>
+<p>每个评分函数可能都没有代码错误，但是整体阅卷流程违背了业务需求。</p>
+<p>系统测试通过完整流程发现这一问题，进而推动需求澄清与系统设计修改。</p>
+<p>这说明<strong>系统测试不仅检验代码是否正确，还检验整个系统是否真正满足业务需求</strong>。</p>
+<h3>论点三：用压力测试验证高并发场景</h3>
+<p>假设阅卷高峰期有 2,000 名教师同时在线。</p>
+<p>测试人员需要模拟教师登录、领取阅卷任务、保存评分、提交结果等业务操作。</p>
+<p>测试内容不能只是循环调用登录接口，而应覆盖真实的业务负载比例。</p>
+<p>可以使用 JMeter 生成压力，并结合 Prometheus 观察 CPU、数据库连接数、响应时间和失败率。</p>
+<p>另外，还应该设计三种故障场景：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>故障</th>
+  <th>需要验证什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>数据库主节点故障</td>
+  <td>是否能够恢复服务，已提交评分是否完整</td>
+</tr>
+<tr>
+  <td>阅卷教师权限异常</td>
+  <td>能否阻止越权查看和修改试卷</td>
+</tr>
+<tr>
+  <td>阅卷期间网络中断</td>
+  <td>提交结果是否明确，重试是否导致重复评分</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>论文落笔示例：</strong></p>
+<blockquote>
+<p>在系统测试阶段，我依据需求规格说明书，从系统工程整体性出发，构建与生产环境接近的测试环境，覆盖试卷导入、任务分配、在线评分、复核仲裁和成绩发布等完整业务流程，并通过恢复测试、安全测试和压力测试验证系统的可靠性、安全性及高并发承载能力。</p>
+</blockquote>
+<p>这里最容易混淆的两个概念：</p>
+<p><strong>集成测试</strong>侧重模块或子系统之间的接口协作是否正确；<strong>系统测试</strong>侧重完整系统是否满足总体业务与质量要求。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-10" data-title="动态测试（6.3）"><div class="chapter-tools"><span class="chapter-num">专题 10 / 14</span><button class="complete-btn" type="button" data-id="10" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-10">10. 动态测试（6.3）</h2>
+<blockquote>
+<p>核心：运行程序、黑盒测试、白盒测试、测试用例、执行结果比对</p>
+</blockquote>
+<p><strong>一句话理解：静态测试是检查菜谱有没有问题，动态测试是真正把菜做出来，看看结果是否符合预期。</strong></p>
+<h3>实际场景：阅卷系统评分错误</h3>
+<p>假设阅卷系统规定：</p>
+<p>一道题满分 20 分；低于 0 分或高于 20 分的评分必须被拒绝；已经冻结的成绩不得再次修改。</p>
+<p>如何确定这套规则实现正确？</p>
+<h3>论点一：黑盒动态测试保证需求一致性</h3>
+<p>黑盒测试不关心程序内部代码如何编写，只关心输入什么、应该输出什么。</p>
+<p>例如设计以下用例：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>输入场景</th>
+  <th>期望结果</th>
+  <th>测试方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>评分为 15</td>
+  <td>正常保存</td>
+  <td>等价类划分</td>
+</tr>
+<tr>
+  <td>评分为 0</td>
+  <td>正常保存</td>
+  <td>边界值分析</td>
+</tr>
+<tr>
+  <td>评分为 20</td>
+  <td>正常保存</td>
+  <td>边界值分析</td>
+</tr>
+<tr>
+  <td>评分为 21</td>
+  <td>拒绝保存</td>
+  <td>边界值分析</td>
+</tr>
+<tr>
+  <td>评分为 -1</td>
+  <td>拒绝保存</td>
+  <td>异常等价类</td>
+</tr>
+<tr>
+  <td>成绩已冻结后改分</td>
+  <td>拒绝修改</td>
+  <td>状态迁移测试</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里的重点是<strong>先根据需求确定预期结果，再运行程序进行验证</strong>，而不是看到程序输出什么就认为正确。</p>
+<h3>论点二：白盒动态测试保证内部执行路径正确</h3>
+<p>再来看一段示意代码：</p>
+<pre><code class="language-java">if (score &lt; 0 || score &gt; 20) {
+    throw new InvalidScoreException();
+}
+
+if (exam.isFrozen()) {
+    throw new ForbiddenException();
+}
+
+saveScore(score);
+</code></pre>
+<p>白盒测试要考虑程序内部条件和分支：</p>
+<ul>
+<li>分数非法时是否正确拒绝。</li>
+<li>分数合法且成绩已冻结时是否拒绝。</li>
+<li>分数合法且未冻结时是否保存。</li>
+<li>数据库保存失败时是否有正确的异常处理。</li>
+</ul>
+<p>可以通过 JUnit 设计测试，并通过 JaCoCo 查看代码覆盖率。</p>
+<p>但覆盖率达到 100%，也不代表一定没有错误。例如代码可能完整执行了所有分支，却使用了错误的评分规则。</p>
+<h3>它与系统测试有什么区别？</h3>
+<p>动态测试是<strong>测试方法</strong>，强调实际运行程序；系统测试是<strong>测试层级</strong>，强调验证完整系统。</p>
+<p>因此单元测试、集成测试、系统测试中都可以使用动态测试方法。</p>
+<p><strong>论文记忆：黑盒看输入输出对不对，白盒看内部路径走得对不对。</strong></p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-11" data-title="自动化测试（6.4）"><div class="chapter-tools"><span class="chapter-num">专题 11 / 14</span><button class="complete-btn" type="button" data-id="11" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-11">11. 自动化测试（6.4）</h2>
+<blockquote>
+<p>核心：机器执行、自动断言、测试金字塔、接口契约、持续集成</p>
+</blockquote>
+<p><strong>一句话理解：把每天重复检查系统的工作交给机器，形成一套能够长期重复使用的质量保障机制。</strong></p>
+<h3>实际场景：阅卷系统每周更新</h3>
+<p>假设阅卷系统每周都有小版本迭代。</p>
+<p>开发团队只修改了评分模块的一项功能，但上线前测试人员必须重新检查：</p>
+<p>登录、试卷导入、任务分配、评分、复核、汇总和发布。</p>
+<p>如果每次都依赖人工点击，不仅效率低，还容易遗漏。</p>
+<h3>论点一：接口自动化保证服务协作一致性</h3>
+<p>阅卷系统中存在评分服务和复核服务。</p>
+<p>评分服务提交的数据格式原本是：</p>
+<pre><code class="language-json">{
+  &quot;paperId&quot;: 101,
+  &quot;score&quot;: 15.5
+}
+</code></pre>
+<p>某次升级后，开发人员把 <code>score</code> 改成了 <code>finalScore</code>。</p>
+<p>如果复核服务尚未同步修改，就可能无法读取评分。</p>
+<p>通过接口契约测试，可以在代码合并阶段发现这种不兼容变更。</p>
+<p>常用工具包括 JUnit、Postman/Newman，以及 Pact 等契约测试工具。</p>
+<p>还应自动检查业务状态机：</p>
+<p><code>未分配 → 已分配 → 阅卷中 → 待复核 → 已冻结 → 已发布</code></p>
+<p>例如，系统不允许直接从“未分配”跳转到“已发布”。</p>
+<p>这类规则很适合自动化，因为其预期结果明确、重复验证频率高。</p>
+<h3>论点二：端到端自动化要少而精</h3>
+<p>为什么不把所有人工测试都变成 UI 自动化？</p>
+<p>因为完整的 UI 测试执行慢，容易受到页面变化、网络波动和异步操作影响。</p>
+<p>所以采用测试金字塔思想：</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>测试金字塔：反馈速度与覆盖范围的取舍</div><div class="diagram-body"><div class="pyramid"><div class="pyramid-level l1"><b>少量 E2E 测试</b><small>验证完整核心流程</small></div><div class="pyramid-level l2"><b>适量接口 / 契约测试</b><small>验证服务交互、字段和状态</small></div><div class="pyramid-level l3"><b>大量单元测试</b><small>验证计算规则、分支条件与异常逻辑</small></div></div></div><figcaption>越靠下执行越快、维护成本通常越低；越靠上验证范围越完整。</figcaption></figure>
+<p>例如，在阅卷系统中，只保留少量完整端到端路径：</p>
+<p>正常阅卷发布、异常退回重阅、评分复核仲裁、成绩冻结发布等。</p>
+<p>其中评分计算等核心逻辑用大量单元测试覆盖，服务字段和状态迁移通过接口测试覆盖。</p>
+<h3>与 DevOps 结合</h3>
+<p>当开发人员提交代码时，GitLab CI 或 Jenkins 自动执行：</p>
+<p><code>代码提交 → 单元测试 → 接口契约测试 → 构建 → 核心 E2E 测试 → 发布判定</code></p>
+<p>只要重要测试不通过，就阻止进入后续发布阶段。</p>
+<p>但要注意测试环境稳定性、测试数据隔离和偶发失败，避免测试流水线变成开发团队不信任的工具。</p>
+<p><strong>论文记忆：</strong> 自动化测试不是简单地用工具替代人工，而是把测试用例、数据、环境、断言和执行流程标准化，使质量验证成为可重复、可积累的工程资产。</p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-12" data-title="性能测试（6.5）"><div class="chapter-tools"><span class="chapter-num">专题 12 / 14</span><button class="complete-btn" type="button" data-id="12" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-12">12. 性能测试（6.5）</h2>
+<blockquote>
+<p>核心：负载测试、压力测试、容量测试、稳定性测试、性能瓶颈分析</p>
+</blockquote>
+<p><strong>一句话理解：不是证明系统能运行，而是弄清楚系统在多大压力下仍能正常运行，极限在哪里，瓶颈又在哪里。</strong></p>
+<h3>实际场景：阅卷平台能否支持 5,000 名教师同时使用？</h3>
+<p>开发团队说：“我们已经优化了系统，性能很好。”</p>
+<p>作为架构负责人，你不能只接受这样的主观结论。</p>
+<p>你需要回答：</p>
+<ul>
+<li>5,000 名教师同时在线时，评分提交需要多久？</li>
+<li>每秒能够处理多少次评分保存？</li>
+<li>数据库连接数是否会耗尽？</li>
+<li>某些服务过载后，能否恢复？</li>
+<li>系统连续运行三天会不会越来越慢？</li>
+</ul>
+<h3>四类性能测试分别回答什么？</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>类型</th>
+  <th>目的</th>
+  <th>阅卷系统中的例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>负载测试</td>
+  <td>正常预期负载下是否满足要求</td>
+  <td>模拟 3,000 名教师操作</td>
+</tr>
+<tr>
+  <td>压力测试</td>
+  <td>找到性能瓶颈和失效边界</td>
+  <td>逐步增加至 8,000 名并发用户</td>
+</tr>
+<tr>
+  <td>容量测试</td>
+  <td>确定特定配置可支撑的业务规模</td>
+  <td>确定最大稳定在线人数和吞吐能力</td>
+</tr>
+<tr>
+  <td>稳定性测试</td>
+  <td>验证长时间运行的可靠性</td>
+  <td>持续运行 72 小时</td>
+</tr>
+</tbody>
+</table></div>
+<p>以上规模均为模拟测试设计，不能直接当作真实项目的测试结果。</p>
+<h3>论点一：性能测试校准需求边界</h3>
+<p>不能只写“系统支持高并发”。</p>
+<p>应该与业务方共同确定可验证的性能目标。</p>
+<p>例如，假设业务目标为：</p>
+<ul>
+<li>高峰期支持 3,000 名活跃阅卷教师。</li>
+<li>评分提交接口 P95 响应时间不超过 1 秒。</li>
+<li>提交业务失败率低于 0.1%。</li>
+</ul>
+<p>这里的 P95 表示 95% 的请求响应时间不超过对应阈值。</p>
+<p>注意，在线人数、并发请求数与每秒请求数不是同一个概念。测试时必须明确用户操作频率和业务负载模型。</p>
+<h3>论点二：性能测试反向优化架构</h3>
+<p>假设 JMeter 压测发现，评分提交接口响应时间从 200ms 增加到 3 秒。</p>
+<p>结合 Prometheus、Grafana 的监控数据，发现：</p>
+<p>CPU 使用率只有 40%，但数据库慢查询数量急剧增加。</p>
+<p>进一步排查 SQL，发现每次保存评分时都同步更新复杂的成绩统计表，造成数据库锁竞争。</p>
+<p>架构师可以将非实时成绩统计调整为异步汇总，并优化 SQL、索引以及数据访问策略。</p>
+<p>重新压测，才能验证优化是否真正有效。</p>
+<p><strong>这体现：性能测试不只是检验实现，还能反向指导系统结构优化。</strong></p>
+<h3>论点三：验证系统极限和恢复能力</h3>
+<p>假设服务器在每秒处理 1,000 个评分请求时正常运行，增加到 1,500 个请求后开始大量超时。</p>
+<p>不能只记录“系统失败了”。</p>
+<p>还应该检查超出承载能力后：</p>
+<ul>
+<li>限流是否及时生效。</li>
+<li>队列是否持续积压。</li>
+<li>线程和连接资源能否释放。</li>
+<li>负载恢复正常后，系统是否能够恢复服务。</li>
+</ul>
+<h3>技术工具怎么选择？</h3>
+<p>JMeter 适合接口压测与常见并发场景模拟；Gatling 适合通过脚本构建复杂的用户行为场景；Prometheus 和 Grafana 则用于关联请求表现与系统资源指标。</p>
+<p><strong>论文记忆：需求定指标，压测找瓶颈，优化改架构，复测验效果。</strong></p>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-13" data-title="领域驱动设计 DDD（7.4）"><div class="chapter-tools"><span class="chapter-num">专题 13 / 14</span><button class="complete-btn" type="button" data-id="13" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-13">13. 领域驱动设计 DDD（7.4）</h2>
+<blockquote>
+<p>核心：通用语言、子领域、限界上下文、实体、值对象、聚合、领域事件</p>
+</blockquote>
+<p><strong>一句话理解：不是先想着怎么拆代码，而是先弄清楚业务世界到底由哪些概念、规则和边界组成，再让系统结构反映这些业务边界。</strong></p>
+<p>这是 14 个主题中比较抽象、但能够体现架构设计水平的一个。</p>
+<h3>实际场景：消费金融系统里的“额度”到底是什么？</h3>
+<p>假设贷款平台有三个团队：</p>
+<ul>
+<li>申请团队认为额度是用户申请的贷款金额。</li>
+<li>风控团队认为额度是用户经过审批后允许借款的最大金额。</li>
+<li>放款团队认为额度是当前还可以实际提取的金额。</li>
+</ul>
+<p>三个团队在需求文档中都使用“额度”二字，但实际上指的是不同概念。</p>
+<p>如果没有统一业务语言，就会出现接口字段含义混乱、计算口径冲突等问题。</p>
+<h3>论点一：通过领域划分统一需求理解</h3>
+<p>DDD 首先要求识别业务领域，再划分子领域。</p>
+<p>假设消费金融系统可以划分为：</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>消费金融领域划分示例</div><div class="diagram-body"><div class="domain-grid"><div class="domain-card"><b>授信领域</b><p>审批额度、授信有效期、授信规则</p></div><div class="domain-card"><b>贷款领域</b><p>贷款合同、借款本金、期限和利率</p></div><div class="domain-card"><b>还款领域</b><p>应还计划、已还金额、逾期状态</p></div><div class="domain-card"><b>客户领域</b><p>身份资料、客户信息、联系资料</p></div></div></div><figcaption>示例领域划分。实际核心域、支撑域与通用域需要根据企业竞争优势和业务复杂度确定。</figcaption></figure>
+<p>然后与业务专家共同建立通用语言。</p>
+<p>例如：</p>
+<p>授信额度、已使用额度、冻结额度、可用额度，分别定义准确含义及计算规则。</p>
+<p>这样业务人员、架构师和开发人员使用同一套概念。</p>
+<h3>论点二：限界上下文强化模块边界</h3>
+<p>这里有一个很关键的认知：</p>
+<p><strong>限界上下文并不只是代码目录，更重要的是规定某套业务模型在哪个边界内有效。</strong></p>
+<p>例如，“账户”在客户领域可能代表客户身份，在资金领域则可能代表资金余额与交易记录。</p>
+<p>即使名称相同，两个上下文也可以拥有不同的模型。</p>
+<p>跨上下文协作时通过明确的接口或领域事件交换信息，必要时使用防腐层（Anti-Corruption Layer），防止外部系统的概念直接污染本领域模型。</p>
+<h3>再深入理解聚合与聚合根</h3>
+<p>假设设计一个贷款合同聚合。</p>
+<p>贷款合同包含合同编号、借款本金、利率、期限、合同状态等信息。</p>
+<p>业务规则要求：</p>
+<ul>
+<li>合同生效后不能随意修改本金。</li>
+<li>已关闭的合同不能重新发起放款。</li>
+<li>合同状态变化需要遵循明确的迁移规则。</li>
+</ul>
+<p>这些约束可以由聚合根统一维护，避免外部代码随意修改内部状态。</p>
+<p>简化示意：</p>
+<pre><code class="language-java">class LoanContract {
+    Money principal;
+    ContractStatus status;
+
+    void activate() {
+        if (status != DRAFT) {
+            throw new DomainException();
+        }
+        status = ACTIVE;
+    }
+}
+</code></pre>
+<p>这段代码想表达的不是 Java 语法，而是：<strong>让业务约束成为领域模型的一部分，而不是分散在 Controller、Service 和数据库脚本里。</strong></p>
+<p>需要注意，DDD 的限界上下文与微服务并不一一对应。一个限界上下文可以先实现为模块化单体，之后再根据需要拆分部署。</p>
+<h3>DDD 与微服务怎样配合？</h3>
+<p>DDD 帮助决定“业务边界应该怎么划分”；微服务帮助实现“这些边界如何独立开发、部署和治理”。</p>
+<p>所以可以把二者理解为：</p>
+<p><strong>DDD 指导怎么拆，微服务解决拆开以后怎么运行。</strong></p>
+<p><strong>论文落笔示例：</strong></p>
+<blockquote>
+<p>在贷款业务需求分析阶段，我组织业务专家和开发团队建立统一的领域术语，并围绕授信、放款、还款等核心业务流程划分子领域和限界上下文。架构设计时采用业务边界驱动模块划分，通过聚合根约束关键业务状态变化，并使用明确的接口与领域事件实现上下文协作，降低了复杂业务规则的耦合程度。</p>
+</blockquote>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section>
+<section class="chapter prose" id="ch-14" data-title="DevOps（9.1）"><div class="chapter-tools"><span class="chapter-num">专题 14 / 14</span><button class="complete-btn" type="button" data-id="14" aria-pressed="false">○ 标记已掌握</button></div><h2 id="chapter-title-14">14. DevOps（9.1）</h2>
+<blockquote>
+<p>核心：开发运维一体化、CI/CD、IaC、配置管理、持续反馈、整体最优</p>
+</blockquote>
+<p><strong>一句话理解：软件开发不是把代码写完就结束，而是要一直负责到系统安全上线、稳定运行，并根据运行反馈持续改进。</strong></p>
+<h3>实际场景：阅卷系统上线出故障，开发和运维互相推诿</h3>
+<p>假设开发团队在测试环境成功部署系统。</p>
+<p>运维人员上线后却发现应用无法连接数据库。</p>
+<p>排查发现：测试环境使用一个配置文件，生产环境使用另一个文件，数据库连接池、超时和环境变量都靠人工配置。</p>
+<p>开发人员说：“我在本地运行没问题。”</p>
+<p>运维人员说：“代码是你们写的。”</p>
+<p>双方各自完成了自己的工作，但整个系统交付失败。</p>
+<p>这正是 DevOps 要解决的问题。</p>
+<h3>论点一：打破开发与运维割裂</h3>
+<p>架构负责人在项目早期，就要求开发、测试、运维共同定义交付标准：</p>
+<p>功能不仅要通过测试，还必须符合部署规范、监控要求、回滚要求和运行质量目标。</p>
+<p>例如，开发一个成绩发布接口时，除了编写业务代码，还需要同步设计：</p>
+<p>健康检查、错误指标、操作日志、发布策略和故障恢复流程。</p>
+<p>这些都是交付范围的一部分。</p>
+<h3>论点二：基础设施即代码 IaC</h3>
+<p>过去运维人员通过手工操作配置服务器。</p>
+<p>现在可以把部署配置、资源声明和环境参数纳入版本管理。</p>
+<p>例如：</p>
+<ul>
+<li>Docker 负责打包应用及其运行依赖。</li>
+<li>Kubernetes 负责声明式部署、健康检查和扩缩容。</li>
+<li>Helm 负责管理 Kubernetes 应用部署模板。</li>
+<li>Terraform 等 IaC 工具可用于管理云基础设施资源。</li>
+</ul>
+<p>不同环境使用经过审查的配置模板，同时将密钥、证书等敏感信息交给专门的密钥管理机制。</p>
+<p>这样环境配置的变化就能够被审核、追溯和回滚。</p>
+<h3>论点三：通过自动化形成全生命周期闭环</h3>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>DevOps 持续交付与反馈闭环</div><div class="diagram-body"><div class="devops-grid"><div class="devops-node"><em>01</em><b>代码提交</b><small>Git</small></div><div class="devops-node"><em>02</em><b>持续集成</b><small>Jenkins / GitLab CI</small></div><div class="devops-node"><em>03</em><b>自动化测试</b><small>JUnit / API / E2E</small></div><div class="devops-node"><em>04</em><b>镜像构建</b><small>Docker</small></div><div class="devops-node"><em>05</em><b>灰度部署</b><small>Helm / Kubernetes</small></div><div class="devops-node"><em>06</em><b>运行观测</b><small>Prometheus / Jaeger</small></div></div><p class="loop-caption">⟲ 根据运行指标和故障反馈持续改进下一版本</p></div></figure>
+<p>假设新版本上线后，Prometheus 监测到评分提交失败率显著增加。</p>
+<p>系统可以按照事先定义的发布策略停止扩大流量，并在满足回滚条件时恢复之前的稳定版本。</p>
+<p>之后开发团队根据日志与调用链排查缺陷，补充回归测试，再进行下一次发布。</p>
+<p>这就形成：</p>
+<p><code>开发 → 测试 → 发布 → 运行 → 反馈 → 改进</code></p>
+<h3>为什么叫整体最优？</h3>
+<p>假设开发团队为了每周发布十次而省略质量检查，表面上开发效率提高了，但故障率却大幅上升。</p>
+<p>这不是整体最优。</p>
+<p>DevOps 追求的是交付速度、变更质量、系统可靠性与业务价值之间的综合平衡。</p>
+<p><strong>论文落笔示例：</strong></p>
+<blockquote>
+<p>针对传统开发与运维分离所造成的环境不一致、部署效率低和故障反馈滞后等问题，我在项目中引入 DevOps 理念，将代码构建、自动化测试、镜像打包和容器部署纳入统一流水线，并通过基础设施即代码管理环境配置，结合灰度发布、持续监控和回滚机制，建立从开发到运行的全生命周期反馈闭环。</p>
+</blockquote>
+<hr />
+<div class="chapter-end"><span>这一章学习完成后，可以在顶部标记已掌握。</span><a href="#top">↑ 返回顶部</a></div></section><section class="summary prose" id="summary"><h2 id="summary-heading">15 分钟串联记忆：14 个主题到底是什么关系？</h2>
+<p>这部分非常重要，因为考试有时会把两个甚至多个主题放在同一道题里。</p>
+<p>你可以想象自己现在接手了一个大型消费金融平台，要从零完成架构设计、上线和运维。</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>14 个主题串成四个架构阶段</div><div class="diagram-body"><div class="stage-grid"><div class="stage s1"><b>第一阶段：理解业务、设计系统</b><span>01 架构风格 · 13 DDD · 05 SOA · 06 微服务</span><small>选择系统组织方式、划分业务边界、设计服务</small></div><div class="stage s2"><b>第二阶段：解决运行时难题</b><span>02 负载均衡 · 03 分布式事务 · 04 秒杀 · 07 边云协同</span><small>解决高并发、一致性、弹性与边缘实时处理</small></div><div class="stage s3"><b>第三阶段：保证系统可验证</b><span>09 系统测试 · 10 动态测试 · 11 自动化测试 · 12 性能测试</span><small>验证完整功能、内部路径、持续质量和性能边界</small></div><div class="stage s4"><b>第四阶段：运行、交付和改进</b><span>08 可观测架构 · 14 DevOps</span><small>发现问题、定位故障、反馈改进并安全发布</small></div></div></div></figure>
+<h3>最后，把每个主题压缩成一句记忆口诀</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>主题</th>
+  <th>记住一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>架构风格</td>
+  <td>根据业务场景与质量属性选择系统组织方式</td>
+</tr>
+<tr>
+  <td>负载均衡</td>
+  <td>分散请求、动态调度、故障转移</td>
+</tr>
+<tr>
+  <td>分布式事务</td>
+  <td>跨服务有状态，失败要补偿，重试要幂等</td>
+</tr>
+<tr>
+  <td>秒杀</td>
+  <td>入口限流、消息削峰、原子扣减、最终一致</td>
+</tr>
+<tr>
+  <td>SOA</td>
+  <td>标准契约、服务复用、异构集成、统一治理</td>
+</tr>
+<tr>
+  <td>微服务</td>
+  <td>业务拆分、独立部署、服务发现、容错治理</td>
+</tr>
+<tr>
+  <td>边云协同</td>
+  <td>边缘管实时、云端管全局、协同管一致</td>
+</tr>
+<tr>
+  <td>可观测</td>
+  <td>指标看状态、链路查瓶颈、日志找原因</td>
+</tr>
+<tr>
+  <td>系统测试</td>
+  <td>以需求为依据，验证真实环境下的整体系统</td>
+</tr>
+<tr>
+  <td>动态测试</td>
+  <td>黑盒验需求、白盒验路径</td>
+</tr>
+<tr>
+  <td>自动化测试</td>
+  <td>单测打基础、契约保协作、少量 E2E 守入口</td>
+</tr>
+<tr>
+  <td>性能测试</td>
+  <td>指标定边界、压测找瓶颈、复测证优化</td>
+</tr>
+<tr>
+  <td>DDD</td>
+  <td>统一业务语言、划分限界上下文、封装业务规则</td>
+</tr>
+<tr>
+  <td>DevOps</td>
+  <td>开发运维一体化、自动交付、持续反馈</td>
+</tr>
+</tbody>
+</table></div>
+<h3>从理解走向论文写作</h3>
+<p>这 14 个主题中，最值得统一背诵的，其实不是工具名称，而是一个通用的工程论证结构：</p>
+<figure class="diagram"><div class="diagram-title"><span class="diagram-icon">◈</span>论文万能论证框架</div><div class="diagram-body"><div class="essay-grid"><div class="essay-step"><i>1</i><span><b>项目问题</b><small>什么业务场景暴露了什么质量问题？</small></span></div><div class="essay-step"><i>2</i><span><b>理论依据</b><small>运用了哪种架构理论、设计原则？</small></span></div><div class="essay-step"><i>3</i><span><b>架构措施</b><small>如何拆分组件、组织调用、治理故障？</small></span></div><div class="essay-step"><i>4</i><span><b>关键难点</b><small>并发、超时、一致性、异常如何处理？</small></span></div><div class="essay-step"><i>5</i><span><b>验证结果</b><small>通过哪些测试与指标证明设计有效？</small></span></div></div></div></figure>
+<p>例如，不要仅仅写“采用 Redis 提高了性能”，而应该写成：</p>
+<blockquote>
+<p>在系统高峰访问期间，数据库频繁查询用户额度，导致热点数据访问集中、接口响应时间增加。为降低核心数据库的读取压力，我在架构设计中引入 Redis 缓存层，对适合缓存的额度展示数据进行缓存，并结合合理的失效策略、数据更新机制和监控指标控制一致性风险。最后通过性能测试对比优化前后的响应时间、数据库查询量与缓存命中率，验证方案效果。</p>
+</blockquote>
+<p>这才是架构师视角的完整分析，而不是技术名词堆砌。</p>
+<p><strong>考试时尤其要注意：</strong> 论文中可以参考这些模拟案例的分析方法，但项目规模、具体职责、架构实施过程和改善数据，必须与你实际选用的项目案例保持一致。不要把示例指标当成已经取得的项目成果。</p>
+<p>你上传的资料按背诵优先级将架构风格、负载均衡、系统测试、性能测试列为第一档。建议优先把这四个主题练到能够不看资料，完整说出“<strong>问题—理论—设计—取舍—验证</strong>”的程度，再用同样方法迁移到其他十个主题。</p>
+</section><details class="source-panel prose" id="source"><summary>原始附件 · 14 个主题专项整理（完整原文）</summary><p class="source-desc">补充阅读资料：保留原始 Markdown 附件中的速查表、全部理论基础、论点、实践落点、可展开方向、落笔角度、可引用工具、题干组合建议和背诵优先级。与上面的通俗场景讲解分开，避免混淆。</p><div class="source-content"><h1>系统架构设计师论文 · 14 个重点主题专项整理</h1>
+<blockquote>
+<p><strong>来源</strong>：ima 知识库「架构论文」/《系统架构设计师论文必背.pdf》（芝士架构·凯恩 编，适用 2026 年 5 月，v1.0.0）
+<strong>范围</strong>：从原书 10 章 33 个主题中抽取以下 14 个，逐主题还原「理论基础 → 论点 → 实践落点 → 可展开方向 → 角度 → 可引用工具」六级结构。
+<strong>说明</strong>：原 PDF 由文本层导出，理论基础段落在页边处有截断，故理论基础采用精炼重写；论点、实践落点、方向与角度均按原文逐条还原，未做增删。</p>
+</blockquote>
+<p><strong>规模：14 个主题 · 39 条论点 · 68 个可展开方向 · 191 个落笔角度 · 31 个可引用工具</strong></p>
+<hr />
+<h2>一、速查表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>主题</th>
+  <th>原书</th>
+  <th>论点</th>
+  <th>方向</th>
+  <th>角度</th>
+  <th>理论关键词</th>
+  <th>论文归类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01</td>
+  <td>软件架构风格</td>
+  <td>2.1</td>
+  <td>4</td>
+  <td>5</td>
+  <td>10</td>
+  <td>Garlan &amp; Shaw 五类风格 / 系统家族 / 风格混合</td>
+  <td>风格选型</td>
+</tr>
+<tr>
+  <td>02</td>
+  <td>负载均衡设计技术</td>
+  <td>3.1</td>
+  <td>5</td>
+  <td>10</td>
+  <td>30</td>
+  <td>分布式 / 性能工程 / 请求调度 / 高可用 / 分层解耦</td>
+  <td>性能与可用性</td>
+</tr>
+<tr>
+  <td>03</td>
+  <td>分布式事务</td>
+  <td>3.2</td>
+  <td>3</td>
+  <td>6</td>
+  <td>18</td>
+  <td>ACID→CAP→2PC→TCC→SAGA→BASE</td>
+  <td>数据一致性</td>
+</tr>
+<tr>
+  <td>04</td>
+  <td>秒杀场景</td>
+  <td>3.3</td>
+  <td>2</td>
+  <td>4</td>
+  <td>12</td>
+  <td>排队论 / 削峰填谷 / 异步化 / 并发控制</td>
+  <td>高并发设计</td>
+</tr>
+<tr>
+  <td>05</td>
+  <td>面向服务架构</td>
+  <td>4.1</td>
+  <td>4</td>
+  <td>8</td>
+  <td>24</td>
+  <td>服务识别-设计-发布-治理 / 标准化契约</td>
+  <td>架构风格/集成</td>
+</tr>
+<tr>
+  <td>06</td>
+  <td>微服务架构</td>
+  <td>4.2</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>框架/注册中心/网关/容错/消息/缓存/容器</td>
+  <td>架构风格/云原生</td>
+</tr>
+<tr>
+  <td>07</td>
+  <td>边云协同架构</td>
+  <td>5.1</td>
+  <td>3</td>
+  <td>6</td>
+  <td>18</td>
+  <td>分布式计算/云计算/边缘计算/分层思想</td>
+  <td>云原生/物联网</td>
+</tr>
+<tr>
+  <td>08</td>
+  <td>可观测架构</td>
+  <td>5.2</td>
+  <td>3</td>
+  <td>6</td>
+  <td>18</td>
+  <td>日志-指标-链路三支柱 / OpenTelemetry 统一</td>
+  <td>云原生/运维</td>
+</tr>
+<tr>
+  <td>09</td>
+  <td>系统测试</td>
+  <td>6.1</td>
+  <td>3</td>
+  <td>6</td>
+  <td>15</td>
+  <td>系统工程整体观/需求验证/恢复-安全-压力</td>
+  <td>测试与质量</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>动态测试</td>
+  <td>6.3</td>
+  <td>2</td>
+  <td>2</td>
+  <td>7</td>
+  <td>黑盒-白盒协同 / 构造-执行-比对三步骤</td>
+  <td>测试与质量</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>自动化测试</td>
+  <td>6.4</td>
+  <td>2</td>
+  <td>3</td>
+  <td>8</td>
+  <td>机器执行+客观判定 / 测试金字塔分层</td>
+  <td>测试与质量</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>性能测试</td>
+  <td>6.5</td>
+  <td>3</td>
+  <td>3</td>
+  <td>8</td>
+  <td>软件质量模型/非功能测试/负载-压力-容量-稳定</td>
+  <td>性能与可用性</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>领域驱动设计</td>
+  <td>7.4</td>
+  <td>2</td>
+  <td>4</td>
+  <td>10</td>
+  <td>通用语言/限界上下文/子领域/聚合</td>
+  <td>需求与建模</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>DevOps（开发与运维一体化）</td>
+  <td>9.1</td>
+  <td>3</td>
+  <td>5</td>
+  <td>13</td>
+  <td>全生命周期价值/敏捷深化/IaC/整体最优</td>
+  <td>运维与交付</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>4.2 微服务在原书中未单列论点，明确说明“与 4.1 面向服务架构论点展开基本一致”，写作时直接复用 4.1 的四条论点。</p>
+</blockquote>
+<hr />
+<h2>二、主题详解</h2>
+<h3>01　软件架构风格　<code>2.1</code></h3>
+<p><strong>定位</strong>　回答“系统为什么这样组织”的概念坐标系；风格没有唯一最优，选择依据是「架构风格—应用场景—质量诉求」的匹配。</p>
+<p><strong>理论基础</strong>　架构风格＝针对特定领域的“惯用模式”，由词汇表（构件/连接件类型）＋组合约束构成，描述的是“系统家族”，是体系结构级复用的抓手；教材引 Garlan &amp; Shaw 谱系：数据流（批处理、管道/过滤器）、调用返回（主程序/子程序、面向对象、层次型）、独立构件（事件驱动/隐式调用）、虚拟机（解释器、规则系统）、仓库（黑板）；现代系统多为风格混合。核心论断：风格无唯一最优，选择依据是“架构风格—应用场景—质量诉求”的匹配，需结合项目权衡。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：数据流风格适合链式加工场景</strong></p>
+<ul>
+<li>实践落点：系统业务呈现“多步骤顺序处理、上一步输出是下一步输入”时，用数据流风格能把链路拆清楚、把数据契约说清楚，链路改造也更容易分段扩展。</li>
+<li>可展开方向 1：步骤边界按输入输出切开<ul>
+<li>角度 1：链式业务的限制是步骤多、口径多、一步出错影响全链</li>
+<li>角度 2：用过滤器定义处理职责，用管道定义数据传递，明确每步输入/输出/校验/幂等/失败处理</li>
+<li>角度 3：忽视会出现步骤耦合、重复加工、链路问题难定位</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：调用/返回风格适合流程编排场景</strong></p>
+<ul>
+<li>实践落点：系统业务需要清晰的“发起——执行——返回”闭环，且流程分支复杂、异常处理多时，调用/返回风格能把编排与子功能分开，调用链更可控，责任边界更清晰。</li>
+<li>可展开方向 1：编排与子功能责任分离<ul>
+<li>角度 1：流程型业务的限制是分支多、补偿多、链路长</li>
+<li>角度 2：主控负责流程与状态机，子程序负责单一能力，统一返回语义与异常传播规则</li>
+<li>角度 3：忽视会出现流程逻辑散落、异常口径不一、改动率一发动全身</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：独立构件风格适合多变扩展场景</strong></p>
+<ul>
+<li>实践落点：系统业务经常新增渠道、策略、算法、第三方适配时，独立构件风格把变化点做成可替换构件，新增能力靠“装配”而不是“改主干”，迭代风险显著降低。</li>
+<li>可展开方向 1：变化点做成可插拔构件<ul>
+<li>角度 1：业务挑战是需求频繁、灰度复杂、回滚压力大</li>
+<li>角度 2：定义构件接口与注册发现机制，策略/适配/校验做成独立构件，装配形成业务能力</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 4：虚拟机风格适合规则解释场景</strong></p>
+<ul>
+<li>实践落点：系统业务规则多、变更快、需要配置化生效且必须可追溯时，虚拟机风格用解释执行统一规则语义，让规则更新更快、口径更一致、审计更清楚。</li>
+<li>可展开方向 1：规则表达统一成可执行语言<ul>
+<li>角度 1：规则散落的限制是口径不一致、审计困难、重复实现多</li>
+</ul>
+</li>
+<li>可展开方向 2：运行时安全与性能可控<ul>
+<li>角度 1：动态执行的难点是超时、资源消耗、越权访问与稳定性风险</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>02　负载均衡设计技术　<code>3.1</code></h3>
+<p><strong>定位</strong>　把单机能力变成集群能力的第一层基础设施，同时承担性能、高可用与解耦三项职责。</p>
+<p><strong>理论基础</strong>　分布式系统理论（多节点协同、消除单点瓶颈）；性能工程理论（既定硬件下最优响应时间与吞吐，“横向扩展优于纵向扩展”）；请求调度与流量控制理论（按节点负载、网络延迟、健康状态动态分配）；高可用系统理论（冗余部署、故障隔离、快速切换）；分层与解耦理论（把流量管理从业务逻辑中独立出来）。工具：四层 LB / 七层 LB / 客户端 LB / 算法与策略组合。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：高并发能力必须依赖负载均衡支撑</strong></p>
+<ul>
+<li>实践落点：在大型 Web 系统中，单节点处理能力天然有限，高并发访问一旦集中到少数节点，系统性能就会迅速下降。负载均衡通过将请求分散到多个节点并行处理，使系统整体吞吐能力随节点数量提升，是支撑高并发场景的基础设计。</li>
+<li>可展开方向 1：并发压力的结构性分散<ul>
+<li>角度 1：高并发场景下，请求集中会导致哪些性能瓶颈</li>
+<li>角度 2：负载均衡如何将访问压力分散到多个节点</li>
+<li>角度 3：没有负载均衡时，系统在高峰期会出现什么问题</li>
+</ul>
+</li>
+<li>可展开方向 2：系统处理能力的横向扩展<ul>
+<li>角度 1：业务增长对系统处理能力提出了什么要求</li>
+<li>角度 2：负载均衡如何支持通过增加节点提升整体能力</li>
+<li>角度 3：横向扩展能力对系统长期演进有什么价值</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：系统性能优化必须依托负载均衡实现</strong></p>
+<ul>
+<li>实践落点：性能设计不仅是提升单点性能，更重要的是通过合理调度资源提升整体效率。负载均衡通过均匀分配请求，使各节点资源得到充分利用，从系统层面改善响应时间和吞吐能力。</li>
+<li>可展开方向 1：节点资源利用率的整体提升<ul>
+<li>角度 1：节点负载不均会带来哪些性能浪费</li>
+<li>角度 2：负载均衡如何避免部分节点空闲、部分节点过载</li>
+<li>角度 3：资源利用率提升对系统性能的直接影响是什么</li>
+</ul>
+</li>
+<li>可展开方向 2：响应时间与吞吐能力的平衡<ul>
+<li>角度 1：性能设计中响应时间和吞吐量的矛盾点在哪里</li>
+<li>角度 2：负载均衡如何从系统层面进行调节</li>
+<li>角度 3：负载均衡对用户访问体验的改善体现在哪些方面</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：请求调度机制决定系统整体稳定性</strong></p>
+<ul>
+<li>实践落点：在分布式 Web 系统中，请求处理不再是简单的接收与执行，而是涉及多节点协同。负载均衡通过调度策略控制请求流向，直接影响系统在高负载下是否稳定运行。</li>
+<li>可展开方向 1：请求调度对节点负载的影响<ul>
+<li>角度 1：请求分配不合理会引发哪些稳定性问题</li>
+<li>角度 2：负载均衡如何根据节点状态进行调度</li>
+<li>角度 3：忽略调度策略可能导致哪些系统风险</li>
+</ul>
+</li>
+<li>可展开方向 2：访问高峰期的动态流量控制<ul>
+<li>角度 1：高峰访问对系统运行提出了哪些挑战</li>
+<li>角度 2：负载均衡如何在高峰期动态调节请求分配</li>
+<li>角度 3：动态调度对系统稳定运行的意义是什么</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 4：连续服务能力必须依靠负载均衡保障</strong></p>
+<ul>
+<li>实践落点：大型 Web 系统通常要求 7×24 小时连续运行，单点故障会直接影响整体服务。负载均衡通过多节点冗余与流量切换机制，为系统提供重要的高可用支撑。</li>
+<li>可展开方向 1：节点故障的快速隔离与切换<ul>
+<li>角度 1：单个节点失效会对系统产生哪些影响</li>
+<li>角度 2：负载均衡如何识别故障并调整流量</li>
+<li>角度 3：故障隔离对系统可用性的价值体现在哪里</li>
+</ul>
+</li>
+<li>可展开方向 2：高可用架构的整体支撑作用<ul>
+<li>角度 1：高可用系统对架构设计的基本要求是什么</li>
+<li>角度 2：负载均衡在高可用体系中承担什么角色</li>
+<li>角度 3：引入负载均衡后系统可靠性有哪些提升</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 5：架构解耦必须通过负载均衡实现</strong></p>
+<ul>
+<li>实践落点：在分层架构设计中，流量管理不应与业务逻辑混杂。负载均衡作为独立架构组件存在，使访问控制与业务处理解耦，提升系统整体的可维护性和扩展性。</li>
+<li>可展开方向 1：流量管理与业务逻辑的职责分离<ul>
+<li>角度 1：将流量控制耦合在业务层会带来哪些问题</li>
+<li>角度 2：负载均衡如何承担统一流量管理职责</li>
+<li>角度 3：职责分离后系统结构有哪些改进</li>
+</ul>
+</li>
+<li>可展开方向 2：分层架构下的系统可演进性<ul>
+<li>角度 1：大型系统在演进过程中面临哪些结构性挑战</li>
+<li>角度 2：负载均衡如何支持系统平滑扩展与调整</li>
+<li>角度 3：这种架构设计对后期维护有什么帮助</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>四层负载均衡组件</td>
+  <td>在实际项目里，四层负载均衡组件通常会由成熟的基础设施来承担，比如常见的有基于 Linux 内核的 LVS (Linux Virtual Server)…</td>
+</tr>
+<tr>
+  <td>七层负载均衡组件</td>
+  <td>七层负载均衡在工程里更偏向“工具框架”的角色，常见的实现包括 Nginx、Envoy，或者云原生体系里的 Ingress 网关，它们往往直接参与发布和流量治理流程。</td>
+</tr>
+<tr>
+  <td>客户端负载均衡机制</td>
+  <td>客户端负载均衡机制更多体现为框架能力，比如在 Java 体系里常见的是基于 Spring Cloud LoadBalancer 或类似机制，在其他语言里也会有对应的 SDK 或中间件。</td>
+</tr>
+<tr>
+  <td>负载均衡算法与策略组合</td>
+  <td>负载均衡算法和策略的选择更体现“经验型实践”，而不是套用某个固定模板。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>03　分布式事务　<code>3.2</code></h3>
+<p><strong>定位</strong>　在不可靠网络与并发写入下，把“跨多个服务的一次业务”收敛为可判定的唯一结果。</p>
+<p><strong>理论基础</strong>　理论演进链：ACID（原子性/一致性/隔离性/持久性）→ CAP（一致性、可用性、分区容错不可兼得，是根本矛盾）→ 2PC 两阶段提交（协调者＋准备/提交两阶段，强一致但阻塞、依赖协调者）→ TCC（Try-Confirm-Cancel，把一致性控制前移到业务层做资源预留）→ SAGA（长事务拆分为本地事务＋反向补偿，最终一致）→ BASE（基本可用、软状态、最终一致，为大规模分布式提供价值取向）。工具：Seata（AT/TCC/SAGA 多模式）。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：跨服务并发更新必须结果一致</strong></p>
+<ul>
+<li>实践落点：在分布式系统中，一个业务操作往往需要多个服务同时更新各自数据，并且存在并发执行的情况。没有统一事务控制时，很容易出现部分成功、部分失败的问题。</li>
+<li>可展开方向 1：并发场景下的数据冲突问题<ul>
+<li>角度 1：多服务同时写入带来的竞态条件</li>
+<li>角度 2：分布式事务如何统一提交或回滚</li>
+<li>角度 3：缺乏事务控制会导致数据相互覆盖</li>
+</ul>
+</li>
+<li>可展开方向 2：部分成功导致系统状态异常<ul>
+<li>角度 1：某些服务成功、某些失败的常见场景</li>
+<li>角度 2：事务机制如何避免“半完成状态”</li>
+<li>角度 3：系统状态统一后业务结果可信</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：网络不可靠场景必须可控执行</strong></p>
+<ul>
+<li>实践落点：分布式系统中网络不稳定是常态，服务调用随时可能失败。分布式事务的核心价值之一，就是在不可靠通信环境下，仍能保证系统行为可预测。</li>
+<li>可展开方向 1：调用超时引发的不确定结果<ul>
+<li>角度 1：超时并不等于执行失败</li>
+<li>角度 2：事务状态记录解决不确定性</li>
+<li>角度 3：无状态控制会造成重复执行</li>
+</ul>
+</li>
+<li>可展开方向 2：通信异常下的恢复问题<ul>
+<li>角度 1：网络恢复后的系统一致性风险</li>
+<li>角度 2：事务机制支持重试与回滚</li>
+<li>角度 3：系统具备自恢复能力</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：失败重试场景必须结果唯一</strong></p>
+<ul>
+<li>实践落点：在分布式系统中，失败重试是必然策略，但如果缺乏事务控制，重试往往会引发重复写入或状态错乱问题。</li>
+<li>可展开方向 1：重复请求带来的数据污染<ul>
+<li>角度 1：重试机制在分布式系统中的普遍性</li>
+<li>角度 2：事务上下文用于识别重复操作</li>
+<li>角度 3：无幂等保障会产生脏数据</li>
+</ul>
+</li>
+<li>可展开方向 2：事务状态驱动执行控制<ul>
+<li>角度 1：事务状态作为执行依据</li>
+<li>角度 2：避免重复提交或重复回滚</li>
+<li>角度 3：系统结果保持唯一性</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Seata（多模式事务能力）</td>
+  <td>Seata 把 AT（低侵入、重全局锁）、TCC（业务补偿）、Saga（长事务编排）、XA（兼容存量）四种模型收敛到一套协调体系，可按业务链路取舍。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>04　秒杀场景　<code>3.3</code></h3>
+<p><strong>定位</strong>　用“限流—削峰—原子扣减—最终一致”四段式，把瞬时洪峰挡在核心系统之外。</p>
+<p><strong>理论基础</strong>　排队论与负载控制理论（请求到达率超过处理能力必然拥塞，故限流是对服务能力边界的理性约束；削峰填谷用缓冲平滑瞬时流量）；并发与并行理论（异步化、非阻塞、任务分离，解耦请求接收与业务执行）；并发控制与一致性理论（原子操作、顺序化、最终一致，按业务可接受范围取舍）；性能优化与分层架构理论（热点数据前移缓存层，缩短关键路径）。工具：Nginx+Lua 限流、Redis+Stream/MQ、Canal+自研校验、Prometheus+Grafana。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：系统必须具备流量隔离能力</strong></p>
+<ul>
+<li>实践落点：秒杀系统通过在架构层引入限流与削峰组件，将突发流量阻断在核心系统之外，避免瞬时高压传导至数据库与核心业务模块。</li>
+<li>可展开方向 1：限流组件前置化<ul>
+<li>角度 1：入口层最适合承担流量控制职责</li>
+<li>角度 2：常用实现包括网关限流、令牌桶、漏桶算法</li>
+<li>角度 3：缺乏入口限流会导致后端资源被瞬间打满</li>
+</ul>
+</li>
+<li>可展开方向 2：削峰模块独立化<ul>
+<li>角度 1：削峰需要独立于核心业务模块运行</li>
+<li>角度 2：通过消息队列缓冲请求实现时间维度平滑</li>
+<li>角度 3：削峰后系统吞吐更稳定，故障范围更可控</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：库存规则必须原子可控</strong></p>
+<ul>
+<li>实践落点：秒杀库存是典型的并发争抢资源，系统必须在技术上保证库存扣减过程不可被并发破坏，而不是依赖事后修正。</li>
+<li>可展开方向 1：原子操作保证库存正确<ul>
+<li>角度 1：库存扣减是系统最关键的业务操作</li>
+<li>角度 2：通过原子指令、Lua 脚本或顺序化处理实现</li>
+<li>角度 3：缺乏原子性必然导致超卖问题</li>
+</ul>
+</li>
+<li>可展开方向 2：一致性策略按业务取舍<ul>
+<li>角度 1：秒杀不适合强一致的分布式事务</li>
+<li>角度 2：采用最终一致性配合补偿机制</li>
+<li>角度 3：在保证正确性的同时提升系统吞吐能力</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Nginx + Lua 动态限流组件</td>
+  <td>在秒杀系统中，入口层的限流是最关键的一道防线。Nginx 结合 Lua 脚本能够实现基于用户、商品、时间窗口等维度的动态限流策略。</td>
+</tr>
+<tr>
+  <td>Redis + Stream 或消息队列(Kafka/RabbitMQ)</td>
+  <td>秒杀的第二道关键防线是异步削峰。通过 Redis 的 Stream 结构或独立的消息队列，将用户下单请求从同步接口中解耦，转交异步消费者批量处理。这种方式能显著降低数据库瞬时写入压力。</td>
+</tr>
+<tr>
+  <td>MySQL+缓存一致性检测工具(如Canal+自研校验脚本)</td>
+  <td>秒杀中的库存扣减必须保证数据一致性。通常通过 Redis 缓存承担读流量，MySQL 负责最终存储。</td>
+</tr>
+<tr>
+  <td>Prometheus + Grafana 观测体系</td>
+  <td>在秒杀活动期间，观测体系的作用是发现异常而不是事后分析。Prometheus负责采集限流、请求耗时、库存变更、消息堆积等核心指标，Grafana 用于统一展示和告警。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>05　面向服务架构　<code>4.1</code></h3>
+<p><strong>定位</strong>　以服务契约替代接口直接依赖，使业务能力可复用、可编排、可治理。</p>
+<p><strong>理论基础</strong>　SOA 是以“服务”为基本构建单元的架构风格：功能高度抽象封装、标准化接口对外提供能力、业务能力与技术实现分离，解决异构集成难、扩展性差、复用低；方法体系为“服务识别—服务设计—服务发布—服务治理”（业务能力抽象为候选服务→定义契约与服务质量→注册发现与组合→生命周期/版本/性能/安全统一治理）；适用跨部门、跨系统、跨平台的企业级与政务系统，并为微服务、云原生演进奠定基础。工具：Spring Cloud、Kubernetes、Istio、Jaeger、ServiceMix、WSO2 EI。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：系统能力必须技术解耦</strong></p>
+<ul>
+<li>实践落点：在复杂系统中，需求最终必须落到技术实现上。若业务需求与技术实现强绑定，将导致需求一变、系统大改。SOA通过技术解耦，使系统能力在技术层面具备独立演化空间。</li>
+<li>可展开方向 1：接口隔离技术实现差异<ul>
+<li>角度 1：不同系统技术栈、开发语言差异明显</li>
+<li>角度 2：SOA 通过标准接口屏蔽底层实现差异</li>
+<li>角度 3：若缺乏接口隔离，系统集成将高度依赖具体实现</li>
+</ul>
+</li>
+<li>可展开方向 2：服务契约稳定技术边界<ul>
+<li>角度 1：技术人员频繁修改接口是系统不稳定根源</li>
+<li>角度 2：SOA 以服务契约约束接口变更</li>
+<li>角度 3：落实后，需求变化不再直接冲击底层代码</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：系统结构必须服务化拆分</strong></p>
+<ul>
+<li>实践落点：技术架构设计的核心问题是如何拆分系统。SOA以服务为最小可部署单元，使系统结构在技术上具备清晰边界，避免模块之间相互侵入。</li>
+<li>可展开方向 1：服务边界替代模块边界<ul>
+<li>角度 1：传统模块划分容易因调用便利而被破坏</li>
+<li>角度 2：SOA 以服务边界强制模块隔离</li>
+<li>角度 3：忽视服务边界，系统会逐渐退化为单体</li>
+</ul>
+</li>
+<li>可展开方向 2：通信机制解耦系统结构<ul>
+<li>角度 1：函数级、数据库级调用导致结构僵化</li>
+<li>角度 2：SOA 通过服务调用替代直接依赖</li>
+<li>角度 3：结构解耦后，系统扩展成本显著降低</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：业务逻辑必须服务内聚</strong></p>
+<ul>
+<li>实践落点：从技术实现看，业务逻辑分散是系统不可维护的主要原因。SOA要求业务逻辑高度内聚在服务内部，使逻辑实现具备清晰责任边界。</li>
+<li>可展开方向 1：逻辑集中减少代码耦合<ul>
+<li>角度 1：多个系统重复实现同一逻辑，修改风险大</li>
+<li>角度 2：SOA将完整业务逻辑封装在单一服务</li>
+<li>角度 3：若逻辑分散，系统一致性难以保障</li>
+</ul>
+</li>
+<li>可展开方向 2：服务复用降低技术复杂度<ul>
+<li>角度 1：重复开发导致技术债务持续累积</li>
+<li>角度 2：SOA 通过复用服务减少重复实现</li>
+<li>角度 3：落实后，系统复杂度随规模增长更可控</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 4：系统运行必须具备隔离性</strong></p>
+<ul>
+<li>实践落点：技术架构最终要接受运行环境检验。SOA 通过服务隔离与治理机制，使系统在运行层面具备更强的稳定性和容错能力。</li>
+<li>可展开方向 1：服务故障不扩散<ul>
+<li>角度 1：单点故障是复杂系统的主要风险</li>
+<li>角度 2：SOA 通过服务隔离限制故障传播</li>
+<li>角度 3：忽视隔离，局部异常会拖垮整体系统</li>
+</ul>
+</li>
+<li>可展开方向 2：服务级监控与治理<ul>
+<li>角度 1：整体监控难以精准定位问题</li>
+<li>角度 2：SOA 支持对服务进行独立监控和管理</li>
+<li>角度 3：落实后，系统问题可快速定位和恢复</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Spring Cloud</td>
+  <td>Spring Cloud 在微服务架构中最常用，它的价值在于帮助团队构建服务注册、配置管理、负载均衡和调用链路的统一基础设施。</td>
+</tr>
+<tr>
+  <td>Kubernetes</td>
+  <td>Kubernetes 是微服务架构运行阶段的核心平台，用于支撑服务的自动部署、扩缩容和健康探测。</td>
+</tr>
+<tr>
+  <td>Istio（服务网格）</td>
+  <td>当系统进入多团队、多语言、多集群阶段，Istio 这类服务网格成为微服务架构治理的重要支撑。它通过 Sidecar 模式接管服务间通信，实现零侵入的流量控制、熔断和安全认证。</td>
+</tr>
+<tr>
+  <td>Jaeger（分布式追踪）</td>
+  <td>Jaeger 在微服务架构中用于可观测性建设，它能在跨服务调用链中精确追踪请求路径与性能瓶颈。接入方式通常是在各服务内集成追踪 SDK，通过 Trace ID贯穿整个调用链。</td>
+</tr>
+<tr>
+  <td>Apache ServiceMix</td>
+  <td>Apache ServiceMix 是早期 SOA 架构中典型的企业服务总线（ESB）实现，用于统一管理服务通信与路由逻辑。</td>
+</tr>
+<tr>
+  <td>WSO2 Enterprise Integrator</td>
+  <td>WSO2 EI 是现代化的 SOA 集成平台，它在传统 ESB 基础上增加了服务编排、API 管理和安全治理能力。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>06　微服务架构　<code>4.2</code></h3>
+<p><strong>定位</strong>　SOA 思想的工程化落地形态，重点不在概念而在技术组件分层与治理机制。</p>
+<p><strong>理论基础</strong>　从技术架构视角立论：技术架构不只是应用结构，而是运行支撑环境＋通用技术组件＋治理机制的整体规划。按层次组织技术组件——服务框架（Spring Boot/Cloud：统一运行模型与开发规范）→ 注册中心（Eureka/Nacos/Consul：自动注册、心跳、动态发现，解除对实例地址的强依赖）→ API 网关（Gateway/Zuul：路由、协议转换、鉴权、限流，剥离横切关注点）→ 容错治理（Sentinel/Hystrix：熔断、限流、降级、隔离，防级联失败）→ 消息中间件（Kafka/RabbitMQ/RocketMQ：时间解耦与削峰）→ 缓存与数据访问（Redis：缓解 DB 压力、服务内数据自治）→ 容器与工具体系（Docker/K8s/CI-CD/监控日志：标准化、弹性、可观测）。注：本书未单列 4.2 论点，说明“与 4.1 面向服务架构论点展开基本一致”，可直接复用 4.1 四个论点。</p>
+<p><strong>论点</strong>　原书未单列，直接复用 4.1 的四条论点（系统能力必须技术解耦／系统结构必须服务化拆分／业务逻辑必须服务内聚／系统运行必须具备隔离性）。其中“系统运行必须具备隔离性”用在微服务上比用在 SOA 上更贴切，可换成熔断降级、故障不扩散的实例。</p>
+<hr />
+<h3>07　边云协同架构　<code>5.1</code></h3>
+<p><strong>定位</strong>　把“实时”下沉到边缘、把“全局”上收到云端，用分层与版本一致换取低时延与全局可控。</p>
+<p><strong>理论基础</strong>　四大理论支撑：分布式计算理论（任务分解、协同执行、结果汇聚，云侧集中全局管理＋边缘侧就近实时处理）；云计算理论（资源池化、虚拟化、按需服务，IaaS/PaaS/SaaS 分层在边云中延伸）；边缘计算理论（就近处理、分级协同，降时延、降带宽、本地自治）；分层架构与分层思想（感知层—边缘处理层—云平台层—应用服务层，标准接口交互，职责解耦）。工具：KubeEdge、OpenYurt。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：业务分层必须明确才能保障边云协同高效运行</strong></p>
+<ul>
+<li>实践落点：在工业物联网场景下，大量设备和传感器分布在生产现场。若业务未在需求阶段明确划分边缘与云端职责，将导致计算冗余、数据延迟及响应失效。</li>
+<li>可展开方向 1：边缘实时任务的分级识别机制<ul>
+<li>角度 1：哪些任务必须在毫秒级完成（如安全告警、温控调整）</li>
+<li>角度 2：通过任务特性（时延敏感度、数据密度）确定边缘执行范围</li>
+<li>角度 3：若分级不准，系统响应速度将受影响，决策链条混乱</li>
+</ul>
+</li>
+<li>可展开方向 2：云端全局业务决策的抽象规划<ul>
+<li>角度 1：云端需聚焦策略优化、模型训练等高层决策逻辑</li>
+<li>角度 2：通过标准化接口实现边缘上报与云端下发统一</li>
+<li>角度 3：分层清晰后，系统既能局部快速响应，又能保持全局一致性</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：系统架构必须模块化才能支撑多场景边云协同</strong></p>
+<ul>
+<li>实践落点：在智慧园区或智能交通系统中，不同场景边缘节点差异大，系统架构必须模块化设计，使边云协同具备灵活扩展与快速部署能力。</li>
+<li>可展开方向 1：边缘节点的容器化与独立运行设计<ul>
+<li>角度 1：如何实现不同硬件环境下的快速部署与启动</li>
+<li>角度 2：采用容器化技术保证各节点运行环境一致</li>
+<li>角度 3：若模块耦合过高，节点升级与迁移将极其困难</li>
+</ul>
+</li>
+<li>可展开方向 2：云端服务编排与集中治理体系<ul>
+<li>角度 1：如何实现跨节点的统一调度与任务编排</li>
+<li>角度 2：通过服务注册、配置中心与负载均衡机制实现动态管控</li>
+<li>角度 3：模块化编排后，系统能在多场站下保持稳定高效运行</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：边云逻辑一致性是保障业务稳定运行的前提</strong></p>
+<ul>
+<li>实践落点：在智能监控系统中，边缘节点负责实时识别，云端负责全局分析。若业务逻辑或模型版本不一致，将导致报警误判或数据冲突。</li>
+<li>可展开方向 1：统一规则与算法版本的集中管理机制<ul>
+<li>角度 1：如何保证边缘 AI 模型与云端算法逻辑一致</li>
+<li>角度 2：通过模型中心与规则引擎统一版本控制与动态分发</li>
+<li>角度 3：若版本不同步，将导致结果不一致、决策错误</li>
+</ul>
+</li>
+<li>可展开方向 2：边云数据一致性与回传校验机制<ul>
+<li>角度 1：如何保证边缘缓存数据与云端数据库状态同步</li>
+<li>角度 2：通过事件补偿、延迟同步与双向校验机制提高可靠性</li>
+<li>角度 3：逻辑统一后，系统数据闭环稳定、决策可信度提高</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>KubeEdge</td>
+  <td>KubeEdge 是目前最常见、也是最容易被团队接受的边云协同框架之一，因为它直接复用了 Kubernetes 的资源模型和生态体系。</td>
+</tr>
+<tr>
+  <td>OpenYurt</td>
+  <td>OpenYurt 是在 Kubernetes 之上进一步强化边侧自治能力的框架，工程上更加关注节点离线后的稳定运行能力。</td>
+</tr>
+<tr>
+  <td>EdgeX Foundry</td>
+  <td>EdgeX Foundry 更偏向边缘侧的平台型框架，而不是单纯解决应用编排问题的工具。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>08　可观测架构　<code>5.2</code></h3>
+<p><strong>定位</strong>　让系统的运行状态、调用路径与业务决策过程都变成可查询、可告警的数据。</p>
+<p><strong>理论基础</strong>　以“日志—指标—链路”三类观测职责分工立论：日志侧用 Logback/Log4j2 输出结构化日志，Filebeat/Fluentd 采集，Elasticsearch 汇聚、Kibana 检索（ELK/EFK），支撑故障定位与行为回溯；指标侧用 Micrometer 暴露指标、Prometheus 周期采集、Grafana 可视化，把性能与可用性变成可持续验证的时序数据（对应质量属性度量理论）；链路侧用 SkyWalking/Jaeger/Zipkin 以 TraceId+Span 还原跨服务调用链，解决“调用路径不可见”。再以 OpenTelemetry 统一三类数据标准，使可观测成为架构内建属性。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：Prometheus 指标监控解决业务状态不可感知问题</strong></p>
+<ul>
+<li>实践落点：系统在运行阶段引入 Prometheus 指标监控工具，将关键业务处理量、成功率和响应时间转化为可量化指标，解决业务运行状态只能依赖人工反馈的问题。</li>
+<li>可展开方向 1：用 Prometheus 量化业务结果<ul>
+<li>角度 1：系统中哪些业务指标直接反映业务是否正常运行</li>
+<li>角度 2：通过 Prometheus 持续采集核心业务指标</li>
+<li>角度 3：避免业务异常长期处于“不可见”状态</li>
+</ul>
+</li>
+<li>可展开方向 2：结合 Alertmanager 触发业务告警<ul>
+<li>角度 1：业务异常往往不会直接导致系统报错</li>
+<li>角度 2：通过 Alertmanager 对关键指标设置告警规则</li>
+<li>角度 3：系统能够在业务受损前主动响应</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：Jaeger 链路追踪解决模块调用责任不清问题</strong></p>
+<ul>
+<li>实践落点：系统采用 Jaeger 链路追踪工具对跨模块请求进行跟踪，解决调用链路复杂、故障发生时模块责任难以界定的问题。</li>
+<li>可展开方向 1：用 Jaeger 还原完整调用路径<ul>
+<li>角度 1：一次业务请求往往跨越多个系统模块</li>
+<li>角度 2：Jaeger 记录请求在各模块间的调用顺序和耗时</li>
+<li>角度 3：避免故障定位只能依赖经验判断</li>
+</ul>
+</li>
+<li>可展开方向 2：定位性能瓶颈模块<ul>
+<li>角度 1：系统性能问题通常集中在局部模块</li>
+<li>角度 2：通过链路耗时分析快速识别瓶颈</li>
+<li>角度 3：系统结构优化更有针对性</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：ELK 日志平台解决业务决策不可解释问题</strong></p>
+<ul>
+<li>实践落点：系统在核心业务逻辑中引入 ELK 日志分析平台，对关键业务规则和判断结果进行结构化记录，解决业务结果异常但原因难以还原的问题。</li>
+<li>可展开方向 1：用 Logstash 规范业务日志<ul>
+<li>角度 1：零散日志难以支撑复杂问题分析</li>
+<li>角度 2：通过 Logstash 统一采集和解析业务日志</li>
+<li>角度 3：日志数据具备分析价值</li>
+</ul>
+</li>
+<li>可展开方向 2：用 Kibana 还原业务决策过程<ul>
+<li>角度 1：业务问题往往隐藏在规则判断过程中</li>
+<li>角度 2：通过 Kibana 查询和关联日志</li>
+<li>角度 3：业务执行过程具备可解释性</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Prometheus</td>
+  <td>在实际项目中，Prometheus 通常承担的是指标采集与存储的底座能力，用来回答系统当前是不是在健康区间内运行。</td>
+</tr>
+<tr>
+  <td>Grafana</td>
+  <td>Grafana 在可观测架构中更偏向结果呈现和分析视角，它解决的是如何让团队快速理解系统运行状态的问题。</td>
+</tr>
+<tr>
+  <td>OpenTelemetry</td>
+  <td>OpenTelemetry 更多解决的是链路级别的可观测问题，用来解释一次请求在系统内部究竟经历了什么。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>09　系统测试　<code>6.1</code></h3>
+<p><strong>定位</strong>　在真实环境中验证“软件＋硬件＋网络＋人员”的整体协同，而不是单点功能。</p>
+<p><strong>理论基础</strong>　三大来源：软件生命周期理论（集成测试之后、交付之前对整机系统做综合验证）；系统工程“整体性”思想（软件＋硬件＋操作系统＋网络＋人员共同构成系统，需在真实/近似真实环境验证协同）；需求验证理论（以需求规格说明为依据，黑盒视角验证功能与非功能质量属性）。测试类型体系：恢复测试（容错与可靠性设计思想）、安全测试（信息安全防护理论，提高非法访问成本）、压力测试（性能与负载理论，超负荷下探性能边界）；并配合回归、冒烟与安装配置/可用性测试覆盖运行环境。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：基于系统工程整体观开展系统测试</strong></p>
+<ul>
+<li>实践落点：在系统测试阶段，将阅卷系统作为由软件、服务器、网络、数据库及人员共同构成的整体系统，在真实或近似真实运行环境中进行综合测试。</li>
+<li>可展开方向 1：系统工程思想的引入<ul>
+<li>角度 1：从系统工程“整体性”理论阐述阅卷系统的复杂构成</li>
+<li>角度 2：说明系统测试区别于单元测试和集成测试的根本特征</li>
+<li>角度 3：分析仅测试软件功能而忽略运行环境的风险</li>
+</ul>
+</li>
+<li>可展开方向 2：真实运行环境下的综合验证<ul>
+<li>角度 1：描述在系统测试中引入真实服务器、网络带宽和并发用户模拟</li>
+<li>角度 2：举例说明环境差异可能引发的系统问题，如网络延迟导致阅卷超时</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：通过系统测试发现系统分析与设计阶段遗留问题，降低软考阅卷系</strong></p>
+<ul>
+<li>实践落点：系统测试不仅验证实现正确性，还重点暴露需求分析不充分、系统设计不合理等早期阶段遗留缺陷。</li>
+<li>可展开方向 1：问题发现的层级与来源<ul>
+<li>角度 1：从系统分析阶段需求理解偏差谈起</li>
+<li>角度 2：从系统设计阶段接口、流程设计不合理展开</li>
+<li>角度 3：说明这些问题往往在系统级测试中才会集中暴露</li>
+</ul>
+</li>
+<li>可展开方向 2：测试反馈对系统改进的促进作用<ul>
+<li>角度 1：描述通过系统测试反馈推动需求澄清和设计调整</li>
+<li>角度 2：结合阅卷流程示例，说明测试驱动系统优化的过程</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：通过压力测试评估软考阅卷系统在高并发场景下的性能边界</strong></p>
+<ul>
+<li>实践落点：在系统测试阶段，结合考试集中阅卷的业务特点，通过压力测试验证系统在高负载条件下的稳定性。</li>
+<li>可展开方向 1：高并发业务场景分析<ul>
+<li>角度 1：描述阅卷高峰期大量教师同时登录系统的场景</li>
+<li>角度 2：分析并发访问对系统性能的挑战</li>
+</ul>
+</li>
+<li>可展开方向 2：压力测试设计与评估<ul>
+<li>角度 1：说明如何逐步增加访问量、数据规模进行测试</li>
+<li>角度 2：分析系统响应时间、失败率等关键指标</li>
+<li>角度 3：总结压力测试对系统容量规划的指导价值</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Postman / Newman</td>
+  <td>Postman 在系统测试里更像一个“接口统一验收台”，它负责把对外接口、跨子系统接口都按需求规格说明书（SRS）的约定跑一遍，确认输入输出和业务约束是不是对得上。</td>
+</tr>
+<tr>
+  <td>Selenium</td>
+  <td>Selenium 在系统测试里更像“关键业务链路的自动巡检员”，它的价值不是把人工点页面全替掉，而是用真实浏览器把端到端（End-to-End，E2E）的业务流程跑通…</td>
+</tr>
+<tr>
+  <td>JMeter</td>
+  <td>JMeter 在系统测试里更像“上线前的体检仪”，它主要验证方案说明书里写的性能与稳定性约束有没有达标，而不是一上来就追求极限压测把系统打到死。</td>
+</tr>
+<tr>
+  <td>Allure</td>
+  <td>Allure 更像系统测试的“成绩单汇总台”和“交付评估面板”，它本身不直接发现缺陷，但能把系统测试变成可管理、可追踪、可复盘的交付证据。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>10　动态测试　<code>6.3</code></h3>
+<p><strong>定位</strong>　通过真正运行程序，暴露静态检查看不见的功能偏差、接口交互与异常处理缺陷。</p>
+<p><strong>理论基础</strong>　以“运行验证行为”为核心，与静态测试互补：静态擅长规范性与结构性问题，动态暴露运行期功能偏差、接口交互、性能瓶颈与异常处理缺陷；三步骤方法论：构造测试实例（数据与场景）→ 执行被测程序 → 结果与预期比对并形成结论（可重复、可度量、可追踪）；设计上黑盒（依需求规格，验证外部可观察行为）与白盒（依内部逻辑结构，验证通路与覆盖度）协同；阶段上贯穿单元、集成、系统测试，分别对应模块级、接口与组装级、整体需求级验证。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：以黑盒动态测试保证“需求一致性”</strong></p>
+<ul>
+<li>实践落点：在系统测试阶段，以需求规格说明书为基准，把“评分规则差异（主观/客观/分步给分）”“缺考/零分/违规”“复核触发条件”等转成黑盒用例，运行系统核对输出与业务口径，确保功能偏差可被直接暴露。</li>
+<li>可展开方向 1：业务实体建模与管理<ul>
+<li>角度 1：以“评分标准/题型/分值段/仲裁规则”为核心实体，给出典型与极端样例数据（满分、临界分、非法分、空值）</li>
+<li>角度 2：用黑盒视角固化实体约束</li>
+<li>角度 3：强调异常实体的处理</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：以白盒动态测试保证“路径正确性”</strong></p>
+<ul>
+<li>实践落点：在单元测试与集成测试阶段，对评分计算、复核改分回写、汇总重算、权限判定等关键模块进行白盒用例设计，覆盖分支/条件/异常通路，并用覆盖率指标量化测试充分性。</li>
+<li>可展开方向 1：业务实体建模与管理<ul>
+<li>角度 1：围绕“评分结果对象”的构成</li>
+<li>角度 2：对“状态驱动逻辑”做路径覆盖</li>
+<li>角度 3：强调隐蔽缺陷来源</li>
+<li>角度 4：效果用覆盖率与通路证明</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>11　自动化测试　<code>6.4</code></h3>
+<p><strong>定位</strong>　把重复、规则明确的验证从一次性劳动变成可积累资产，用分层控制反馈速度与维护成本。</p>
+<p><strong>理论基础</strong>　本质是把“验证是否满足预期”从依赖人的临场判断转成依赖机器执行＋客观判定的工程过程（可编排的步骤、可复现的环境与数据、可自动判定的断言）；价值不在替代人工，而在把重复、稳定、规则明确的验证变成“可重复、可衡量、可持续”的生产能力（一次性劳动→可积累资产）；以测试金字塔分层控制“反馈速度—覆盖范围—维护成本”三者矛盾：底层单元/组件级做回归护城河，中层接口与契约验证协作一致性，上层少量关键路径端到端。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：用接口/契约自动化保证“服务协作一致性”</strong></p>
+<ul>
+<li>实践落点：在系统集成阶段，针对阅卷任务分配、试卷切分、评分提交、复核流转、成绩汇总等服务之间的交互，采用接口测试与契约测试确保字段、状态机与权限口径一致。</li>
+<li>可展开方向 1：关键服务契约与状态机验证<ul>
+<li>角度 1：识别关键接口：试卷导入、任务分配、获取待阅列表、提交评分、触发复核/仲裁、成绩冻结与发布</li>
+<li>角度 2：围绕状态机断言：未分配→已分配→阅卷中→待复核→已复核→已冻结→已发布，非法跳转必须拦截</li>
+<li>角度 3：校验口径一致：字段含义、分数精度、时间戳、幂等键、分页排序规则</li>
+</ul>
+</li>
+<li>可展开方向 2：跨团队协作与变更治理<ul>
+<li>角度 1：用契约测试把“接口变更”前置：改字段必须同步契约版本与兼容策略</li>
+<li>角度 2：在流水线设置门禁：契约不通过则禁止合并或发布</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：端到端自动化要“少而精”</strong></p>
+<ul>
+<li>实践落点：在验收与发布前阶段，针对主业务流程的通路性验证，采用少量稳定的端到端自动化（含 UI 或 API 串联）覆盖“导入→分配→阅卷→复核→汇总→发布”关键链路，作为发布门禁。</li>
+<li>可展开方向 1：关键路径选取与稳定策略<ul>
+<li>角度 1：说明为何测试需要“少而精”：阅卷端到端受网络、并发、异步、数据波动影响大，脚本多反而维护爆炸</li>
+<li>角度 2：挑选最关键的 3～5 条路径：正常阅卷、异常退回重阅、复核仲裁、冻结发布、发布后查询</li>
+<li>角度 3：优先 API 级串联减少 UI 脆弱点；必要 UI 只验证关键页面元素与按钮可用性</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>12　性能测试　<code>6.5</code></h3>
+<p><strong>定位</strong>　用可量化指标把“性能需求”变成可验证、可校准的边界，并反向校验结构设计。</p>
+<p><strong>理论基础</strong>　理论来源三层：软件质量模型（质量不止功能正确，还包括既定资源约束下提供服务的能力——响应时间、吞吐量、资源利用率）；非功能测试方法体系（关注“做得如何”，在模拟真实或极端负载下验证是否满足性能需求规格，且贯穿需求分析→设计建模→实现部署全周期）；运行特性分析理论（负载测试看预期负载表现、压力测试逐步加压找瓶颈与失效点、容量测试看可承载最大业务规模、稳定性测试看长时间运行的性能衰减）。工具：JMeter、Gatling、Prometheus+Grafana。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：性能测试校准系统需求边界</strong></p>
+<ul>
+<li>实践落点：性能指标以业务峰值和约束为基准设定，避免需求模糊导致系统能力预期失真，使需求可量化、可验证。</li>
+<li>可展开方向 1：性能指标量化与需求对齐<ul>
+<li>角度 1：系统并发量、响应时间、吞吐能力等成为核心约束条件</li>
+<li>角度 2：性能测试将业务高峰场景转化为明确指标并固化为需求基线</li>
+<li>角度 3：忽略指标量化易导致需求膨胀与系统能力不足风险</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：性能测试优化系统结构设计</strong></p>
+<ul>
+<li>实践落点：测试结果反向校验系统结构合理性，促使模块拆分与资源配置更加符合负载特征。</li>
+<li>可展开方向 1：高负载模块识别与解耦<ul>
+<li>角度 1：系统模块间存在调用密集与热点集中现象</li>
+<li>角度 2：性能测试定位瓶颈模块并指导结构拆分与隔离</li>
+<li>角度 3：忽略解耦易引发整体性能下降的连锁风险</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：性能测试保障系统运行稳定</strong></p>
+<ul>
+<li>实践落点：通过持续压测与监控，验证系统在极限条件下的可靠性与恢复能力。</li>
+<li>可展开方向 1：极限负载与稳定性验证<ul>
+<li>角度 1：系统需面对突发流量与资源耗尽风险</li>
+<li>角度 2：性能测试模拟极限负载检验系统稳定表现</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>JMeter 压力与容量测试工具</td>
+  <td>JMeter 在项目里通常扮演“压力体检和容量摸底”的角色，它不是为了把系统压到极限好看，而是用不同并发和不同数据规模去验证关键接口、核心链路能不能稳定扛住…</td>
+</tr>
+<tr>
+  <td>Gatling 场景化性能回放工具</td>
+  <td>Gatling 更像“业务节奏的场景回放器”，当系统交互比较复杂、单接口压测不足以解释整体承载能力时，它更适合用来模拟接近真实用户的路径和节奏，观察性能随着时间推进的变化趋势。</td>
+</tr>
+<tr>
+  <td>Prometheus 与 Grafana 性能观测工具</td>
+  <td>Prometheus 和 Grafana（Grafana）在性能测试里更像“解释压测结果的仪表盘和黑匣子”，它们把压测打出来的现象和系统资源状态连起来看，负责性能解释和瓶颈定位…</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>13　领域驱动设计　<code>7.4</code></h3>
+<p><strong>定位</strong>　用限界上下文和通用语言，让代码结构与业务边界对齐，控制复杂业务的理解成本。</p>
+<p><strong>理论基础</strong>　以业务领域为核心：系统是对现实业务领域的抽象映射，架构合理性取决于对领域知识理解的深度；核心主张“以领域为中心”＋通用语言（Ubiquitous Language，领域专家与开发人员用同一套精确业务语言贯穿需求、建模与代码）；方法体系：划分子领域，用限界上下文（Bounded Context）明确模型边界与适用范围（内部一致、跨上下文以清晰接口与上下文映射协作，控制模型复杂度）；领域内用实体、值对象、领域服务、聚合系统化建模；架构上常与分层架构结合，领域层为核心，应用层协调用例、基础设施层提供技术支撑，保持领域模型纯净。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：领域划分提升需求理解一致性</strong></p>
+<ul>
+<li>实践落点：系统在需求分析阶段以子领域为单位进行拆解，将复杂业务拆分为若干职责清晰的领域范围，使需求讨论始终围绕明确的业务语义展开，避免需求描述在不同模块间出现理解偏差。</li>
+<li>可展开方向 1：以子领域组织业务需求<ul>
+<li>角度 1：复杂系统中业务目标多、角色多，需求容易交叉混杂</li>
+<li>角度 2：通过核心域、支撑域等子领域划分，将需求归属到明确业务边界</li>
+</ul>
+</li>
+<li>可展开方向 2：限界上下文统一业务语言<ul>
+<li>角度 1：同一业务概念在不同场景下语义差异明显</li>
+<li>角度 2：在限界上下文内保持模型与语言一致，形成统一认知</li>
+<li>角度 3：减少需求评审和沟通成本，提高分析准确性</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：限界上下文强化系统模块边界</strong></p>
+<ul>
+<li>实践落点：系统架构设计阶段以限界上下文作为模块划分依据，使每个模块具备清晰职责范围，避免结构划分仅基于技术层次而忽视业务边界。</li>
+<li>可展开方向 1：业务边界驱动模块划分<ul>
+<li>角度 1：传统分层架构中模块边界容易模糊</li>
+<li>角度 2：以限界上下文作为模块天然边界，明确功能归属</li>
+<li>角度 3：防止模块职责膨胀和相互侵入</li>
+</ul>
+</li>
+<li>可展开方向 2：上下文间接口降低耦合<ul>
+<li>角度 1：跨模块调用频繁会导致系统耦合度升高</li>
+<li>角度 2：通过清晰接口和上下文映射进行协作</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>14　DevOps（开发与运维一体化）　<code>9.1</code></h3>
+<p><strong>定位</strong>　把运维纳入开发闭环，用自动化和基础设施即代码让交付过程本身成为质量保障。</p>
+<p><strong>理论基础</strong>　源于对“开发—运维割裂”的反思，本质是以全生命周期价值最大化为目标的工程方法论：①可视为敏捷的深化与扩展（敏捷重开发阶段，DevOps 把运维纳入统一过程，形成计划—开发—构建—测试—发布—运行—监控闭环）；②以可用性、可维护性、可演化性为价值导向，用自动化构建/测试/部署把质量控制前移；③扩展了软件配置管理的内涵（从版本控制与变更审批扩到环境、基础设施与运行参数，即“基础设施即代码”）；④体现系统工程“整体最优而非局部最优”（打破职能壁垒，以价值流协调人、流程、技术）。工具：GitLab CI/Jenkins、Docker、Helm/K8s。</p>
+<p><strong>论点</strong></p>
+<p><strong>论点 1：DevOps 通过打破开发与运维割裂，实现系统全生命周期目标一致</strong></p>
+<ul>
+<li>实践落点：在软考阅卷系统建设中，针对传统开发阶段只关注功能交付、运维阶段只关注系统稳定的问题，引入 DevOps 思想，将开发、测试、运维纳入统一的软件生命周期管理框架中。</li>
+<li>可展开方向 1：生命周期目标统一<ul>
+<li>角度 1：从软考阅卷系统【高峰期并发集中、运行稳定性要求高】的特点展开，说明开发与运维目标不一致带来的风险</li>
+<li>角度 2：从 DevOps 强调“端到端价值交付”的角度，说明如何在需求分析阶段就同步考虑运行与维护需求</li>
+<li>角度 3：从传统模式下开发完成即交付、问题滞后暴露的弊端展开</li>
+</ul>
+</li>
+<li>可展开方向 2：开发—运维一体化实践<ul>
+<li>角度 1：描述在阅卷系统中将部署脚本、运行监控指标纳入开发任务管理</li>
+<li>角度 2：说明开发人员参与运维问题分析，运维人员参与需求评审的协作方式</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 2：DevOps 扩展了软件配置管理的内涵</strong></p>
+<ul>
+<li>实践落点：在软考阅卷系统运行维护阶段，将 DevOps 的“基础设施即代码”思想引入配置管理，统一管理软件、环境和参数配置。</li>
+<li>可展开方向 1：传统配置管理问题<ul>
+<li>角度 1：从阅卷系统多环境部署的复杂性展开</li>
+<li>角度 2：说明人工配置带来的不一致和不可追溯问题</li>
+<li>角度 3：分析配置错误对系统稳定性的影响</li>
+</ul>
+</li>
+<li>可展开方向 2：DevOps 配置管理实践<ul>
+<li>角度 1：描述将环境配置、部署脚本纳入版本管理</li>
+<li>角度 2：说明变更可追溯、可回滚的实现方式</li>
+<li>角度 3：结合自动化执行减少人为操作风险</li>
+</ul>
+</li>
+</ul>
+<p><strong>论点 3：DevOps 体现系统工程“整体最优”思想</strong></p>
+<ul>
+<li>实践落点：在软考阅卷系统组织与管理层面，通过 DevOps 重塑协作模式，实现开发效率、运行稳定性和业务响应能力的整体提升。</li>
+<li>可展开方向 1：传统职能分割问题<ul>
+<li>角度 1：从开发、测试、运维各自为政的问题展开</li>
+<li>角度 2：分析局部最优导致整体效率低下的情况</li>
+</ul>
+</li>
+</ul>
+<p><strong>可引用工具</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>GitLab CI / Jenkins（持续集成流水线平台）</td>
+  <td>在项目中，这类工具主要承担“统一执行入口”的角色，把构建、测试、扫描、制品产出这些动作标准化，避免每个开发各跑一套脚本。</td>
+</tr>
+<tr>
+  <td>Docker（容器化与制品标准化）</td>
+  <td>Docker 在工程中的核心价值是把“能跑”变成“到哪都能跑”，解决环境不一致带来的隐性风险。</td>
+</tr>
+<tr>
+  <td>Helm / Kubernetes（部署与运行编排）</td>
+  <td>如果说 Docker 负责“把应用装进统一的盒子”，那 Kubernetes 负责“把这些盒子在一堆机器上安全稳定地跑起来”，而 Helm 则是“把部署配置模板化、参数化”的工具…</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>三、论文题干 → 主题组合建议</h2>
+<blockquote>
+<p>以下为备考建议，非原书内容。软考论文题干通常是“论×××的设计与应用”，一个题干往往需要 1 个主论点主题 + 1 个支撑主题。</p>
+</blockquote>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>可能题干（题型）</th>
+  <th>建议主主题</th>
+  <th>建议支撑主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>论软件架构风格的选择与应用</td>
+  <td>2.1 架构风格</td>
+  <td>2.2 架构评估（质量属性场景）</td>
+</tr>
+<tr>
+  <td>论负载均衡技术在系统中的应用</td>
+  <td>3.1 负载均衡</td>
+  <td>3.3 秒杀／9.2 运维监控</td>
+</tr>
+<tr>
+  <td>论分布式事务在系统中的应用</td>
+  <td>3.2 分布式事务</td>
+  <td>4.1 面向服务／3.3 秒杀库存</td>
+</tr>
+<tr>
+  <td>论高并发系统的设计与实现</td>
+  <td>3.3 秒杀场景</td>
+  <td>3.1 负载均衡／5.2 可观测</td>
+</tr>
+<tr>
+  <td>论面向服务架构（SOA）的应用</td>
+  <td>4.1 面向服务架构</td>
+  <td>3.2 分布式事务</td>
+</tr>
+<tr>
+  <td>论微服务架构的设计与应用</td>
+  <td>4.2 微服务（复用 4.1 论点）</td>
+  <td>5.2 可观测／4.1 服务治理</td>
+</tr>
+<tr>
+  <td>论云原生架构/边云协同的应用</td>
+  <td>5.1 边云协同</td>
+  <td>5.2 可观测／4.2 微服务</td>
+</tr>
+<tr>
+  <td>论系统可观测性的设计与实现</td>
+  <td>5.2 可观测架构</td>
+  <td>9.2 运维管理／3.3 高并发</td>
+</tr>
+<tr>
+  <td>论系统测试的方法与实践</td>
+  <td>6.1 系统测试</td>
+  <td>6.3 动态测试／6.5 性能测试</td>
+</tr>
+<tr>
+  <td>论自动化测试体系的设计</td>
+  <td>6.4 自动化测试</td>
+  <td>6.5 性能测试／9.1 DevOps</td>
+</tr>
+<tr>
+  <td>论性能测试与性能优化</td>
+  <td>6.5 性能测试</td>
+  <td>3.1 负载均衡／5.2 可观测</td>
+</tr>
+<tr>
+  <td>论领域驱动设计在复杂业务中的应用</td>
+  <td>7.4 DDD</td>
+  <td>4.1 面向服务／4.2 微服务</td>
+</tr>
+<tr>
+  <td>论 DevOps 在系统交付中的应用</td>
+  <td>9.1 DevOps</td>
+  <td>6.4 自动化测试／5.2 可观测</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>四、背诵优先级</h2>
+<p><strong>第一档（必须背，通用性最强）</strong>：6.1 系统测试、6.5 性能测试、3.1 负载均衡、2.1 架构风格。这四者的论点句式最“教材化”，几乎可以往任何题干上贴。</p>
+<p><strong>第二档（押题主力，最容易写出量化数据）</strong>：3.3 秒杀、3.2 分布式事务、5.1 边云协同、5.2 可观测、9.1 DevOps、6.4 自动化测试。这组主题天然带具体组件与指标，正文二容易写实。</p>
+<p><strong>第三档（区分度，写出来显水平）</strong>：4.1 SOA、4.2 微服务、7.4 DDD、6.3 动态测试。概念性强，容易被泛泛而谈，写的人少、写好的人更少。</p>
+<p><strong>记忆口诀（按“几段式”记理论）</strong>：</p>
+<ul>
+<li>架构风格 → 五类谱系（数据流／调用返回／独立构件／虚拟机／仓库）＋“风格—场景—质量”三角。</li>
+<li>分布式事务 → ACID→CAP→2PC→TCC→SAGA→BASE，一条链背完半个正文。</li>
+<li>秒杀 → 限流／削峰／原子扣减／最终一致，四段对应四个方向。</li>
+<li>可观测 → 日志／指标／链路，三支柱各配一个组件（ELK、Prometheus、Jaeger）。</li>
+<li>测试族 → 系统测试讲“整体环境”，动态测试讲“黑盒+白盒”，自动化讲“金字塔”，性能讲“负载-压力-容量-稳定”。</li>
+</ul>
+<hr />
+<h2>五、原书体例与两处勘误</h2>
+<p><strong>每个主题的固定体例</strong>（正好对应论文正文二的落笔顺序）：</p>
+<ol>
+<li><strong>理论基础</strong>：回答“这个主题依据哪条教材理论”，是可被阅卷人识别的专业信号。</li>
+<li><strong>论点 3–5 条</strong>：正文二的分段标题，多用“X 必须 Y”的绝对句式，便于开头点题。</li>
+<li><strong>实践落点</strong>：一句话说明“什么场景下该用这条论点”，决定你举什么项目例子。</li>
+<li><strong>可展开方向 + 角度</strong>：每条论点 1–2 个方向、每个方向 2–4 个角度；角度多以“限制是什么 → 怎么做 → 忽视会怎样”三段式排列，直接照抄就是段落结构。</li>
+<li><strong>相关技术工具</strong>：给组件名、给定位、给注意事项，是拉开专业度的地方。</li>
+</ol>
+<p><strong>勘误一：论点编号错乱。</strong>原书 3.3 节标题为“3.3.3 论点 2”，内容却写“论点 3”；6.2 节出现“6.2.4 论点 5”；6.4 节出现“6.4.2 论点 5”。本文档按出现顺序重编为论点 1、2、3，内容未删。</p>
+<p><strong>勘误二：方向标题重复。</strong>3.1 论点 3 下两个方向都编号为“方向 1”（实际应为方向 1、方向 2）；6.3 两个论点下的方向标题都写作“业务实体建模与管理”，但角度内容完全不同（黑盒看实体约束，白盒看状态路径）。本文档已按顺序重编方向号，标题保留原文。</p>
+<p><strong>一处需要自主补写</strong>：6.4 自动化测试在原书中没有“理论基础”小节，开篇三段即为理论正文（本质是机器执行＋客观判定、价值在于资产化、测试金字塔分层），本文档已将其并入理论基础。</p>
+</div></details><footer class="footnote">以上案例和指标为学习用模拟场景。用于论文时，请按实际项目核实架构措施与验证结果。<br>本网页在本地离线运行，除浏览器本地进度外不收集和上传数据。</footer></main></div><button class="bottom-top" id="to-top" title="返回顶部" aria-label="返回顶部">↑</button><script>(() => {
+  const $ = (q, root = document) => root.querySelector(q);
+  const $$ = (q, root = document) => [...root.querySelectorAll(q)];
+  const chapters = $$('.chapter');
+  const links = $$('.chapter-link');
+  const search = $('#global-search');
+  const themeButton = $('#theme-toggle');
+  const sidebar = $('#sidebar');
+  const storage = { read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }, write(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private browsing */ } } };
+  let mastered = new Set(storage.read('architect14-mastered-v1', []));
+  const preferred = storage.read('architect14-theme-v1', null);
+  if (preferred === 'dark' || preferred === 'light') document.documentElement.dataset.theme = preferred;
+  const syncProgress = () => {
+    $$('.complete-btn').forEach(b => {
+      const done = mastered.has(b.dataset.id);
+      b.classList.toggle('complete', done);
+      b.textContent = done ? '✓ 已掌握 · 取消标记' : '○ 标记已掌握';
+      b.setAttribute('aria-pressed', String(done));
+    });
+    links.forEach(a => a.classList.toggle('done', mastered.has(a.dataset.id)));
+    $('#mastered-num').textContent = mastered.size + ' / 14';
+    $('#mastered-percent').style.width = (mastered.size / 14 * 100) + '%';
+    $('#mastered-text').textContent = mastered.size ? `已标记 ${mastered.size} 个专题，可以继续复习未掌握的部分。` : '点击各章节的“标记已掌握”，建立你的复习进度。';
+  };
+  $$('.complete-btn').forEach(b => b.addEventListener('click', () => {
+    mastered.has(b.dataset.id) ? mastered.delete(b.dataset.id) : mastered.add(b.dataset.id);
+    storage.write('architect14-mastered-v1', [...mastered]); syncProgress();
+  }));
+  syncProgress();
+  themeButton.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = theme;
+    storage.write('architect14-theme-v1', theme);
+    themeButton.textContent = theme === 'dark' ? '☀' : '☾';
+    themeButton.title = theme === 'dark' ? '切换浅色模式' : '切换深色模式';
+  });
+  themeButton.textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
+  const menu = $('#menu-toggle');
+  menu.addEventListener('click', () => { sidebar.classList.toggle('open'); menu.setAttribute('aria-expanded',String(sidebar.classList.contains('open'))); });
+  links.forEach(a => a.addEventListener('click', () => { sidebar.classList.remove('open'); menu.setAttribute('aria-expanded','false'); }));
+  document.addEventListener('click', e => { if (window.innerWidth <= 760 && sidebar.classList.contains('open') && !sidebar.contains(e.target) && !menu.contains(e.target)) { sidebar.classList.remove('open'); menu.setAttribute('aria-expanded','false'); } });
+  const showSearch = () => {
+    const q = search.value.trim().toLocaleLowerCase();
+    let count = 0;
+    chapters.forEach(c => {
+      const matched = !q || c.textContent.toLocaleLowerCase().includes(q);
+      c.classList.toggle('hidden', !matched);
+      if (matched) count++;
+    });
+    links.forEach(l => l.classList.toggle('hidden', !!q && !$('#ch-' + l.dataset.id).textContent.toLocaleLowerCase().includes(q)));
+    $('#search-result').textContent = q ? `搜索“${search.value.trim()}”：匹配 ${count} / 14 个主题。清空关键词显示全部。` : '按章节阅读，或搜索关键技术、场景与论文写法。';
+    $('#search-empty').style.display = count ? 'none' : 'block';
+    $('#intro').classList.toggle('hidden', !!q);
+    $('#summary').classList.toggle('hidden', !!q);
+    $('#source').classList.toggle('hidden', !!q);
+  };
+  search.addEventListener('input', showSearch);
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); search.focus(); }
+    if (e.key === 'Escape' && document.activeElement === search) { search.value = ''; showSearch(); search.blur(); }
+  });
+  const activate = (id) => { links.forEach(a => a.classList.toggle('active',a.dataset.id === id)); };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      const visible = entries.filter(x => x.isIntersecting).sort((a,b) => a.boundingClientRect.top-b.boundingClientRect.top);
+      if (visible.length) activate(visible[0].target.id.slice(3));
+    }, {rootMargin:'-80px 0px -67% 0px',threshold:0});
+    chapters.forEach(ch => io.observe(ch));
+  }
+  function updateReading() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    $('#reading-progress').style.width = (max > 0 ? Math.max(0, Math.min(100, window.scrollY / max * 100)) : 0) + '%';
+    $('#to-top').style.opacity = window.scrollY > 250 ? '1' : '0';
+    $('#to-top').style.pointerEvents = window.scrollY > 250 ? 'auto' : 'none';
+  }
+  window.addEventListener('scroll',updateReading,{passive:true});
+  window.addEventListener('resize',updateReading);
+  updateReading();
+  $$('.prose pre').forEach(pre => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = '复制代码';
+    button.className = 'code-copy';
+    button.style.cssText = 'position:absolute;top:8px;right:8px;font-size:10px;border:1px solid #64748b;color:#d5e2fb;background:#28364d;padding:4px 8px;border-radius:6px';
+    button.addEventListener('click', async () => {
+      const code = pre.querySelector('code')?.innerText || '';
+      try { await navigator.clipboard.writeText(code); button.textContent = '已复制'; setTimeout(() => button.textContent = '复制代码',1500); }
+      catch { button.textContent = '选择代码手动复制'; }
+    });
+    pre.append(button);
+  });
+  $('#print-btn').addEventListener('click', () => window.print());
+  $('#to-top').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+})();
+</script></body></html>
